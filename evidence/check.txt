@@ -1,0 +1,6 @@
+Checked 31 upstream and 3 local modules for PrimeWindow.
+Compiler commit: 819816b2e0a3bf405af45ae5c7af2491d8f5bee6
+Kernel replay passed: DyadicArithmetic, DelayedPole, PrimeWindow
+Axioms for ThetaTransfer.rh_of_prime_sign_windows: propext, Classical.choice, Quot.sound
+Axioms for ThetaTransfer.zeroFree_of_prime_sign_windows: propext, Classical.choice, Quot.sound
+Axioms for ThetaTransfer.compactDifference_zeroFree: propext, Classical.choice, Quot.sound
