@@ -7,12 +7,12 @@ For real $y>0$, set
 $$
  W(t)=
  \begin{cases}
- 2(1-1/t) & 1<t\le2,\\
- 4/t-1 & 2<t<4,\\
+ 2(1-1/t) & 1 < t\le2,\\
+ 4/t-1 & 2 < t < 4,\\
  0 & \text{otherwise},
  \end{cases}
  \qquad
- P(y)=\sum_{y<p<4y}(\log p)W(p/y).
+ P(y)=\sum_{y < p < 4y}(\log p)W(p/y).
 $$
 
 Only actual primes enter $P$. A prime at $2y$ has weight one. Both exterior endpoints have weight zero. For example, using the primes from 101 through 397 gives $P(100)\approx131.3471$, compared with $200\log2\approx138.6294$. Write $A(y)=\sum_n\Lambda(n)W(n/y)$ when prime powers are included.
@@ -32,7 +32,7 @@ $$
   m(s)=(1-2^{-s})(2\cdot 2^{-s}-1).
 $$
 
-For $0<\Re s<1$, $1/2<|2^{-s}|<1$, so every pole survives. For real $s$ in that interval $m(s)>0$, as required by the original `PoleData` structure. An analytic, nonvanishing multiplier preserves a simple pole with residue multiplied by $m(\rho)$. A finite initial interval has no effect on the window hypothesis. These observations transfer the archive's criterion to each admissible positive-weight Dirichlet family. [Original pole data](https://github.com/Deicyde/riemann-hypothesis/blob/40e56bab026552e089d7afcfeff08d2defb9c005/src/Development/AutomorphicArithmetic/DedekindLFunctions/LandauZeroFreeCriterion.lean#L17) · [Transfer proof](DelayedPole.lean)
+For $0<\Re s<1$, $1/2<|2^{-s}|<1$, so every pole survives. For real $s$ in that interval $m(s)>0$, as required by the original `PoleData` structure. An analytic, nonvanishing multiplier preserves a simple pole with residue multiplied by $m(\rho)$. A finite initial interval has no effect on the window hypothesis. These observations transfer the archive's criterion to each admissible positive-weight Dirichlet family. [Original pole data](https://github.com/Deicyde/riemann-hypothesis/blob/40e56bab026552e089d7afcfeff08d2defb9c005/src/Development/AutomorphicArithmetic/DedekindLFunctions/LandauZeroFreeCriterion.lean#L15) · [Transfer proof](DelayedPole.lean)
 
 For the **converse** of the sign claim, apply the same lemma to the *surplus* $A(y)-2y\log2$. Zeta has no real zero in the open strip, so negating the residues preserves all its pole hypotheses. The weight lies between zero and one. Hence
 
@@ -44,7 +44,9 @@ On any whole window with $P(y)\le 2y\log2$, the surplus is at most $C\sqrt{4y}$.
 
 ## Related work
 
-Daniel R. Johnston proves an RH criterion using the sign of the integral of the Chebyshev error from 2 to $x$ (Theorem 1.2). Masatoshi Suzuki gives one-sided criteria for other weighted von Mangoldt sums. Dudek, Grenié and Molteni take an additive second difference of an integrated Chebyshev function to obtain a triangular weight in their work on prime gaps. The weight here uses a multiplicative interval $(y,b^2y)$. [Johnston](https://arxiv.org/abs/2201.06184) · [Suzuki](https://arxiv.org/abs/2411.07436) · [Dudek, Grenié and Molteni](https://sites.unimi.it/molteni/research/papers-pdf/36-molteni-Primes_in_explicit_short_intervals_on_RH.pdf) Pedro Caceres has also studied rigorous finite-range verification for a cumulative weighted sum over prime powers. [Caceres](https://hexagonmath.org/2610.00661v2)
+Daniel R. Johnston proves an RH criterion using the sign of the integral of the Chebyshev error from 2 to $x$ (Theorem 1.2). Masatoshi Suzuki gives one-sided criteria for other weighted von Mangoldt sums. Dudek, Grenié and Molteni take an additive second difference of an integrated Chebyshev function to obtain a triangular weight in their work on prime gaps. The weight here uses a multiplicative interval $(y,4y)$. [Johnston](https://arxiv.org/abs/2201.06184) · [Suzuki](https://arxiv.org/abs/2411.07436) · [Dudek, Grenié and Molteni](https://sites.unimi.it/molteni/research/papers-pdf/36-molteni-Primes_in_explicit_short_intervals_on_RH.pdf)
+
+Pedro Caceres has also studied rigorous finite-range verification for a cumulative weighted sum over prime powers. [Caceres](https://hexagonmath.org/2610.00661v2)
 
 ## Verification
 
