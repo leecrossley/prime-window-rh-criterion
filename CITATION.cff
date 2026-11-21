@@ -1,11 +1,11 @@
 cff-version: 1.2.0
 message: If you use this work, please cite it as below.
-title: "An ordinary-prime window criterion for the Riemann hypothesis"
-abstract: "A Lean proof that a one-sided moving prime-sum bound on arbitrarily late power windows implies RH."
+title: "Window criteria for the Riemann hypothesis"
+abstract: "Riemann hypothesis criteria from weighted prime windows, dyadic filters, Dirichlet-family transfer and sampling at perfect powers."
 authors:
   - family-names: Crossley
     given-names: Lee
-version: 1.0.4
+version: 1.1.0
 license: CC-BY-4.0
 repository-code: https://github.com/leecrossley/prime-window-rh-criterion
 type: software
