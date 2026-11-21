@@ -1,0 +1,12 @@
+{
+  "title": "A fourth-power criterion for the negative part of a Möbius sum",
+  "creators": [
+    {
+      "name": "Crossley, Lee"
+    }
+  ],
+  "description": "<p>A logarithmic bound for the negative part of a paired Möbius remainder on arbitrarily late fourth-power blocks is equivalent to RH. The paper includes finite certificates, signed cutoff estimates and local averages. The full-interval fixed lower bound in the signed-prefix problem remains open.</p><p><a href=\"https://github.com/leecrossley/prime-window-rh-criterion/blob/032c7a86a6246530503f4f9861c9bd64287a84d5/results/prime-window-power-samples/pairs/mobius/README.md\">Paper and verification</a>.</p>",
+  "license": "cc-by-4.0",
+  "upload_type": "software",
+  "version": "fourth-power-mobius-v1.0.0"
+}
