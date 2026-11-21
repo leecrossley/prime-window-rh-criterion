@@ -1,0 +1,6 @@
+Coprime positive pairs with a,b from 1 to 12
+    2 extra root on a strip boundary
+   67 extra root strictly outside the strip
+   22 has an interior blind frequency
+Total 91
+Exact coefficients agree for each integer y from 1 through 256.

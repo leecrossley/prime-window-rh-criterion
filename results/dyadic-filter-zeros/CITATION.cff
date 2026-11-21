@@ -1,0 +1,11 @@
+cff-version: 1.2.0
+message: If you use this work, please cite it as below.
+title: "Which positive dyadic filters can hide a frequency?"
+abstract: "Exact classification of the strip zeros of two-tap positive dyadic filters, with a finite enumeration."
+authors:
+  - family-names: Crossley
+    given-names: Lee
+version: 1.0.4
+license: CC-BY-4.0
+repository-code: https://github.com/leecrossley/dyadic-filter-zeros
+type: software
