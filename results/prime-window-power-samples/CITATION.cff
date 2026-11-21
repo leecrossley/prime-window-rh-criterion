@@ -5,7 +5,7 @@ abstract: "A fixed-power sampling criterion for the Riemann hypothesis with fini
 authors:
   - family-names: Crossley
     given-names: Lee
-version: 1.2.0
+version: 1.2.1
 license: CC-BY-4.0
 repository-code: https://github.com/leecrossley/prime-window-power-samples
 type: software
