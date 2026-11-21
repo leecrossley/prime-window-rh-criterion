@@ -43,7 +43,7 @@ For a fresh build on x86-64 Linux with Git, curl, tar, zstd and Python 3.9 or la
 bash verify-linux.sh
 ```
 
-This checks the [SHA-256 manifest](SHA256SUMS), downloads the pinned dependencies and compares the resulting kernel and axiom summary with the [recorded run](evidence/check.txt). The environment is fixed by Lean 4.33.1, a pinned Mathlib commit and a pinned source archive. Exact versions, hashes and the route for an existing installation are in [PROOF.md](PROOF.md#reproducing-the-lean-check). [Tagged publication](https://github.com/leecrossley/prime-window-rh-criterion/releases/tag/v1.0.1)
+This checks the [SHA-256 manifest](SHA256SUMS), downloads the pinned dependencies and compares the resulting kernel and axiom summary with the [recorded run](evidence/check.txt). The environment is fixed by Lean 4.33.1, a pinned Mathlib commit and a pinned source archive. Exact versions, hashes and the route for an existing installation are in [PROOF.md](PROOF.md#reproducing-the-lean-check). [Tagged publication](https://github.com/leecrossley/prime-window-rh-criterion/releases/tag/v1.0.2)
 
 ## Related work
 
