@@ -33,7 +33,7 @@ def main():
         if not path.is_file():
             return
         paths[module] = path
-        imported = re.findall(r"^import\s+([\w.]+)\s*$", path.read_text(), re.MULTILINE)
+        imported = re.findall(r"^import\s+([\w.]+)\s*$", path.read_text(encoding="utf-8"), re.MULTILINE)
         for dep in imported:
             visit(dep)
         imports[module] = [dep for dep in imported if dep in paths]

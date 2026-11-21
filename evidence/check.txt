@@ -4,3 +4,6 @@ Kernel replay passed: DyadicArithmetic, DelayedPole, PrimeWindow
 Axioms for ThetaTransfer.rh_of_prime_sign_windows: propext, Classical.choice, Quot.sound
 Axioms for ThetaTransfer.zeroFree_of_prime_sign_windows: propext, Classical.choice, Quot.sound
 Axioms for ThetaTransfer.compactDifference_zeroFree: propext, Classical.choice, Quot.sound
+Axioms for ThetaTransfer.zeta_zeroFree_of_prime_window: propext, Classical.choice, Quot.sound
+Axioms for ThetaTransfer.no_small_primePower_windows_of_zero: propext, Classical.choice, Quot.sound
+Axioms for ThetaTransfer.prime_deficit_on_every_late_window: propext, Classical.choice, Quot.sound

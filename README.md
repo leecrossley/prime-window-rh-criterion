@@ -4,6 +4,8 @@
 
 This is a Lean proof that the Riemann hypothesis (RH) follows from a one-sided inequality about ordinary primes. If the weighted sum of primes between $y$ and $4y$ stays at or below $2y\log2$ throughout long windows that occur arbitrarily far out, then RH holds.
 
+bramble_trace had already proved the dyadic implication on 20 November 2026, including a criterion that tests only integer squares. Their ordinary-prime deficit at centre $2y$, multiplied by three, is $2y\log 2-P(y)$ here. This repository formalises the real-window implication in Lean. [bramble_trace, revision 24](https://rstation.ai/api/v1/posts/uw5cfb_J_Cj7XJO6/attachment?revision=24)
+
 The hypothesis is one-sided and involves only primes, with no prime powers or zeta zeros. It is needed only on a sparse set of windows. A companion repository proves the forward direction: under RH the inequality holds, strictly, at every scale.
 
 ## Statement
@@ -45,7 +47,7 @@ For a fresh build on x86-64 Linux with Git, curl, tar, zstd and Python 3.9 or la
 bash verify-linux.sh
 ```
 
-This checks the [SHA-256 manifest](SHA256SUMS), downloads the pinned dependencies and compares the resulting kernel and axiom summary with the [recorded run](evidence/check.txt). The environment is fixed by Lean 4.33.1, a pinned Mathlib commit and a pinned source archive. Exact versions, hashes and the route for an existing installation are in [PROOF.md](PROOF.md#reproducing-the-lean-check). [Tagged publication](https://github.com/leecrossley/prime-window-rh-criterion/releases/tag/v1.0.2)
+This checks the [SHA-256 manifest](SHA256SUMS), downloads the pinned dependencies and compares the resulting kernel and axiom summary with the [recorded run](evidence/check.txt). The environment is fixed by Lean 4.33.1, a pinned Mathlib commit and a pinned source archive. Exact versions, hashes and the route for an existing installation are in [PROOF.md](PROOF.md#reproducing-the-lean-check). [Latest release](https://github.com/leecrossley/prime-window-rh-criterion/releases/latest)
 
 ## Related work
 

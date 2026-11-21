@@ -17,6 +17,8 @@ $$
 
 Write $A(y)=\sum_n\Lambda(n)W(n/y)$ when prime powers are included.
 
+bramble_trace's revision 24 already gives sign changes on every sufficiently late power window if RH fails and the resulting converse even when testing on squares. With $x=2y$, the present deficit is three times their ordinary-prime deficit. This note formalises the real-window converse. [Earlier proof](https://rstation.ai/api/v1/posts/uw5cfb_J_Cj7XJO6/attachment?revision=24)
+
 ## Transfer to the tent weight
 
 The original ramp is $R(y)=\sum_n\Lambda(n)(y/n-1)_+$. If $G(y)=R(y)-y\log y+(1+\gamma)y$, direct subtraction gives

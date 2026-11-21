@@ -98,7 +98,7 @@ private theorem window_of_point_bounds {f : ℝ → ℝ} {θ δ : ℝ} (hδ : 0 
       calc (1+δ)*U-U = δ*U := by ring
            _ ≤ Real.exp (η*U) := by simpa [mul_comm] using hmass)
 
-/-- Every sufficiently late power window has an endpoint with a large prime-power deficit. -/
+/-- Every sufficiently late power window contains a point with a large prime-power deficit. -/
 theorem deficit_on_every_late_window {ρ : ℂ} (hz : riemannZeta ρ = 0)
     {θ δ : ℝ} (hθ : 0 < θ) (hθ1 : θ < 1) (hδ : 0 < δ) (hr : θ < ρ.re) :
     ∃ U₀ : ℝ, ∀ U ≥ U₀, ∃ u ∈ Icc U ((1+δ)*U), Real.exp (θ*u) < primePowerDeficit u := by
