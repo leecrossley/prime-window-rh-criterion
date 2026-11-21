@@ -1,0 +1,9 @@
+[
+  {
+    "source": "DelayedPole.lean",
+    "copies": [
+      "results/dirichlet-window-transfer/DelayedPole.lean",
+      "results/prime-window-power-samples/lean/DelayedPole.lean"
+    ]
+  }
+]
