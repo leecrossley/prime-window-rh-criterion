@@ -7,12 +7,12 @@ For real $y>0$, set
 $$
  W(t)=
  \begin{cases}
- 2(1-1/t) & 1 < t\le2,\\
- 4/t-1 & 2 < t < 4,\\
+ 2(1-1/t) & 1 \lt t\le2,\\
+ 4/t-1 & 2 \lt t \lt 4,\\
  0 & \text{otherwise},
  \end{cases}
  \qquad
- P(y)=\sum_{y < p < 4y}(\log p)W(p/y).
+ P(y)=\sum_{y \lt p \lt 4y}(\log p)W(p/y).
 $$
 
 Write $A(y)=\sum_n\Lambda(n)W(n/y)$ when prime powers are included.

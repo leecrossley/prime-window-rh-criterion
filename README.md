@@ -19,12 +19,12 @@ For real $y>0$, set
 $$
  W(t)=
  \begin{cases}
- 2(1-1/t) & 1 < t\le2,\\
- 4/t-1 & 2 < t < 4,\\
+ 2(1-1/t) & 1 \lt t\le2,\\
+ 4/t-1 & 2 \lt t \lt 4,\\
  0 & \text{otherwise},
  \end{cases}
  \qquad
- P(y)=\sum_{y < p < 4y}(\log p)W(p/y).
+ P(y)=\sum_{y \lt p \lt 4y}(\log p)W(p/y).
 $$
 
 Only actual primes enter $P$. A prime at $2y$ has weight one. Both exterior endpoints have weight zero. For example, using the primes from 101 through 397 gives $P(100)\approx131.3471$, compared with $200\log2\approx138.6294$.
@@ -60,4 +60,4 @@ This checks the [SHA-256 manifest](SHA256SUMS), downloads the pinned dependencie
 
 ## Related result
 
-[The forward direction under RH, at this and every wider width](https://github.com/leecrossley/prime-window-all-widths/tree/v1.0.0)
+[The forward direction under RH, at this and every wider width](https://github.com/leecrossley/prime-window-all-widths#which-primes-count) · [v1.0.0 source](https://github.com/leecrossley/prime-window-all-widths/tree/v1.0.0)
