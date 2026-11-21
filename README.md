@@ -53,6 +53,7 @@ This checks the [SHA-256 manifest](SHA256SUMS), downloads the pinned dependencie
 
 ## Related work
 
+- In a later research note, Robert Polak tests the same inequality at the first prime $p_m$ at or above each fourth power $m^4$. His Theorem 1.1 gives an equivalence with RH when the inequality holds at every such sample in $[X,X\log X]$ for arbitrarily large $X$. [Polak’s Theorem 1.1](https://github.com/robopol/Riemann-hypothesis/blob/fc1ed5fe13cb1f93d68ebde25e763c5ff1ec88a4/papers/ordinary_prime_tent_windows.tex#L60-L81)
 - Daniel R. Johnston proves an RH criterion using the sign of the integral of the Chebyshev error from 2 to $x$ (Theorem 1.2). [Johnston](https://arxiv.org/abs/2201.06184)
 - Masatoshi Suzuki gives one-sided criteria for other weighted von Mangoldt sums. [Suzuki](https://arxiv.org/abs/2411.07436)
 - Dudek, Grenié and Molteni take an additive second difference of an integrated Chebyshev function to obtain a triangular weight in their work on prime gaps. The weight here uses a multiplicative interval $(y,4y)$. [Dudek, Grenié and Molteni](https://sites.unimi.it/molteni/research/papers-pdf/36-molteni-Primes_in_explicit_short_intervals_on_RH.pdf)
