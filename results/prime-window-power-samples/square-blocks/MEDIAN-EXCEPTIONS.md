@@ -2,7 +2,7 @@
 
 Lee Crossley · 21 November 2026
 
-Let $`E(t)=\pi(t^2)-\operatorname{li}(t^2)`$, $`E_n=E(n)`$, $`L=\log\log K`$, $`H=\lfloor K/L\rfloor`$, $`J_K=\{K,\ldots,K+H\}`$, $`N=H+1`$, and $`T_K=K(\log K)^2`$. A median $`m_K`$ has at least half the observations on either side, including equality. All conclusions apply to every possible median. Write $`B_K=\#\{n\in J_K:|E_n-m_K|>T_K\}`$.
+Let $`E(t)=\pi(t^2)-\mathrm{li}(t^2)`$, $`E_n=E(n)`$, $`L=\log\log K`$, $`H=\lfloor K/L\rfloor`$, $`J_K=\{K,\ldots,K+H\}`$, $`N=H+1`$, and $`T_K=K(\log K)^2`$. A median $`m_K`$ has at least half the observations on either side, including equality. All conclusions apply to every possible median. Write $`B_K=\#\{n\in J_K:|E_n-m_K|>T_K\}`$.
 
 The question is whether $`B_K=O(K^{1-\eta})`$ on some unbounded sequence for a fixed $`\eta>0`$, independently of the full Riemann hypothesis. The previous proof gives $`B_K=K^{1-o(1)}`$ on every sufficiently late block if even one zero has real part greater than $`1/2`$. Under RH the classical $`E_n=O(n\log n)`$ gives $`B_K=0`$ on every sufficiently late block. The independent upper bound for $`B_K`$ remains unresolved here. [Prior median criterion](SHORT-ARITHMETIC.md) · [Conditional prime-counting bound and its finite versions](https://arxiv.org/abs/2109.02249)
 
@@ -33,7 +33,7 @@ Uniformly for $`n,n+1\in J_K`$, the expected count in $`(n^2,(n+1)^2]`$ is $`(1+
 Use $`u=\log(t/K)`$ and $`x=t^2=K^2e^{2u}`$ for $`K\le t\le 3K`$. Take a common truncation height $`T\in[K^{9/8},K^{9/8}+1]`$ different from every zero ordinate. Uniformly in this range of real $`x`$,
 
 ```math
-\psi(x)-x=-\sum_{|\gamma|<T}\frac{x^\rho}{\rho}+O(K^{7/8}\log^2 K).
+\psi(x)-x=-\sum_{|\gamma|\lt T}\frac{x^\rho}{\rho}+O(K^{7/8}\log^2 K).
 \tag{1}
 ```
 
@@ -74,10 +74,10 @@ Finally one has
 4s-\tfrac78(2-p(s))\le \tfrac{203}{104},\qquad \tfrac12\le s\le\tfrac78 .
 ```
 
-For $`s\le3/4`$ it suffices to use $`p_I`$. For $`s\ge3/4`$ it suffices to use $`p_H`$, with equality for that bound at $`7/8`$. The lower half of the strip contributes at most exponent $`2-7/8`$. The two rational inequalities are checked in Lean. Take fixed strips of sufficiently small width, sum their root mean squares and the $`O(\log K)`$ dyadic groups by Minkowski, and then let the width and the exponent losses tend to zero. With $`\operatorname{osc}_I E`$ denoting the real range over the corresponding interval in $`t`$, the result is
+For $`s\le3/4`$ it suffices to use $`p_I`$. For $`s\ge3/4`$ it suffices to use $`p_H`$, with equality for that bound at $`7/8`$. The lower half of the strip contributes at most exponent $`2-7/8`$. The two rational inequalities are checked in Lean. Take fixed strips of sufficiently small width, sum their root mean squares and the $`O(\log K)`$ dyadic groups by Minkowski, and then let the width and the exponent losses tend to zero. With $`\mathrm{osc}_I E`$ denoting the real range over the corresponding interval in $`t`$, the result is
 
 ```math
-\frac dK\sum_I(\operatorname{osc}_I E)^2\ \ll_\epsilon K^{203/104+\epsilon}
+\frac dK\sum_I(\mathrm{osc}_I E)^2\ \ll_\epsilon K^{203/104+\epsilon}
 \quad\text{for every fixed }\epsilon>0 .
 \tag{3}
 ```
