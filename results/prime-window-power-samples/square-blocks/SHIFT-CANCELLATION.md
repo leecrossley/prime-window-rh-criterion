@@ -31,7 +31,7 @@ when $`U_K>0`$. The absolute values are taken separately at each square **before
 \tag{1}
 ```
 
-The classical prime number theorem gives $`\eta_K\ll\exp[-c(\log K)^{3/5}(\log\log K)^{-1/5}]`$ for some absolute $`c>0`$. Using the separate $`7/8`$ zero-free theorem gives $`\eta_K\ll K^{-1/4}`$ and the **absolute** upper bound $`G_K\ll K^{3/2}(\log K)^{3/4}`$. The absolute threshold in the question is $`2I\log K+O(\log\log K)`$.
+The prime number theorem with the Vinogradov–Korobov error term gives $`\eta_K\ll\exp[-c(\log K)^{3/5}(\log\log K)^{-1/5}]`$ for some absolute $`c>0`$. Using the separate $`7/8`$ zero-free theorem gives $`\eta_K\ll K^{-1/4}`$ and the **absolute** upper bound $`G_K\ll K^{3/2}(\log K)^{3/4}`$. The absolute threshold in the question is $`2I\log K+O(\log\log K)`$.
 
 ## What cancels at a single scale
 
