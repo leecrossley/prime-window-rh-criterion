@@ -8,4 +8,5 @@ authors:
 version: 1.0.4
 license: CC-BY-4.0
 repository-code: https://github.com/leecrossley/prime-window-rh-criterion/tree/main/results/dyadic-filter-zeros
+doi: 10.5281/zenodo.24412802
 type: software

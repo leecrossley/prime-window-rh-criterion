@@ -2,6 +2,8 @@
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.24410878.svg)](https://doi.org/10.5281/zenodo.24410878)
 
+Published edition 1.1.1 has DOI [10.5281/zenodo.24421600](https://doi.org/10.5281/zenodo.24421600). The [edition index](RESULTS.md#edition-dois) lists the other papers.
+
 **Research collection.** [Browse all results on window criteria for the Riemann hypothesis](RESULTS.md), including proofs, certificates and original citations.
 
 This is a Lean proof that the Riemann hypothesis (RH) follows from a one-sided inequality about ordinary primes. If the weighted sum of primes between $y$ and $4y$ stays at or below $2y\log2$ throughout long windows that occur arbitrarily far out, then RH holds.
