@@ -1,6 +1,6 @@
 # Exact positive averages near each cutoff
 
-Use $`Q,a,H,I_b,z_\rho`$ and $`A_b`$ from the [signed-prefix companion](CUTOFFS.md). Fix $`\xi>0`$. On every sufficiently late square block and each grid with $`g\le Q^{1-\xi}`$, prescribe all inner progressions. Every grid point $`b`$ belongs to an interval, inside $`[Q/\log Q,Q]`$, whose upper-to-lower endpoint ratio is
+Use $`Q,a,H,I_b,z_\rho`$ and $`A_b`$ from the [signed-prefix companion](CUTOFFS.md). Fix $`\xi\gt 0`$. On every sufficiently late square block and each grid with $`g\le Q^{1-\xi}`$, prescribe all inner progressions. Every grid point $`b`$ belongs to an interval, inside $`[Q/\log Q,Q]`$, whose upper-to-lower endpoint ratio is
 
 ```math
 F_Q=e^8 H^{1/20}(\log(2H))^{3/20}.
@@ -35,11 +35,11 @@ For $`\log a-1\le x\le Y+1`$, the forward displacement from $`y`$ is $`O(H)`$, t
 
 Set $`F=P+P'`$. The sample $`B_c=|I_c|^{-1}\sum_{n\in I_c}F(\log n)`$ is within $`Q^{-1/2+o(1)}Z`$ of $`P(\log c)`$, uniformly in the interval and all inner choices. In fact $`d[tP(\log t)]/dt=F(\log t)`$. Replacing $`h_c\sum_{I_c}F(\log n)`$ by $`\int_a^cF(\log t)\,dt`$ costs $`O(h_c(1+\log Q)K_QZ)`$ by the derivative bound and the two partial cells. Dividing by $`h_c|I_c|=c-a+O(h_c)`$ and using $`a,h_c\le\sqrt Q`$, $`c\ge Q/\log Q`$, proves the claim.
 
-Give $`\log c`$ the cell between adjacent log midpoints, with the two end cells bounded by the ends of the chosen interval. Its length is $`\ell_c`$, and the maximum length is $`O(g\log Q/Q)`$. Put $`p_c=\ell_c(W(\log c)+Q^{-1})>0`$. For $`WP`$ and $`|WP|`$, the Riemann-sum error is at most the largest cell length times $`\int|(WP)'|`$. The floor term is at most $`O(\log F_Q)Q^{-1}K_Q Z`$. It follows that
+Give $`\log c`$ the cell between adjacent log midpoints, with the two end cells bounded by the ends of the chosen interval. Its length is $`\ell_c`$, and the maximum length is $`O(g\log Q/Q)`$. Put $`p_c=\ell_c(W(\log c)+Q^{-1})\gt 0`$. For $`WP`$ and $`|WP|`$, the Riemann-sum error is at most the largest cell length times $`\int|(WP)'|`$. The floor term is at most $`O(\log F_Q)Q^{-1}K_Q Z`$. It follows that
 ```math
 \left|\sum_c p_c B_c\right|\le\eta_Q Z,\qquad
 \left|\sum_c p_c|B_c|-Z\right|\le\eta_Q Z
 ```
-with $`\eta_Q=o(1)`$ uniformly in $`b`$ and $`P`$ for every fixed $`\xi>0`$.
+with $`\eta_Q=o(1)`$ uniformly in $`b`$ and $`P`$ for every fixed $`\xi\gt 0`$.
 
-On the real space of sample vectors, $`v\mapsto\sum p_cv_c`$ therefore has norm at most $`\eta_Q/(1-\eta_Q)`$ under $`\|v\|=\sum p_c|v_c|`$. Extend it to all real vectors without increasing the norm. The coordinate coefficients $`d_c`$ of this extension satisfy $`|d_c|\le p_c\eta_Q/(1-\eta_Q)`$. Hence $`p_c-d_c>0`$ on every node eventually, and these weights annihilate the sample subspace. Normalize to total mass one. Since $`1+z_\rho\ne0`$, the real and imaginary components of every arithmetic mode are among the samples of $`F=P+P'`$. This proves simultaneous cancellation. [Lean weight correction and probability normalization](lean/BalancedCutoffs.lean) · [Exact rational example](check_cutoffs.py)
+On the real space of sample vectors, $`v\mapsto\sum p_cv_c`$ therefore has norm at most $`\eta_Q/(1-\eta_Q)`$ under $`\|v\|=\sum p_c|v_c|`$. Extend it to all real vectors without increasing the norm. The coordinate coefficients $`d_c`$ of this extension satisfy $`|d_c|\le p_c\eta_Q/(1-\eta_Q)`$. Hence $`p_c-d_c\gt 0`$ on every node eventually, and these weights annihilate the sample subspace. Normalize to total mass one. Since $`1+z_\rho\ne0`$, the real and imaginary components of every arithmetic mode are among the samples of $`F=P+P'`$. This proves simultaneous cancellation. [Lean weight correction and probability normalization](lean/BalancedCutoffs.lean) · [Exact rational example](check_cutoffs.py)

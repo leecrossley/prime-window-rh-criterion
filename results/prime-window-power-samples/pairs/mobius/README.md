@@ -6,7 +6,7 @@ For the paired Möbius remainder $`R(k)`$ defined below, add up the losses on on
 L_-(m)=\sum_{n=m}^{m^2}\frac{\max\{-R(n^2),0\}}{n^3}.
 ```
 
-**Theorem.** RH is equivalent to the existence of one $`C\ge0`$ such that $`L_-(m)\le C(1+2\log m)`$ for arbitrarily large integers $`m`$. Equivalently, for every $`\varepsilon>0`$ there are arbitrarily large $`m`$ with $`L_-(m)\le m^\varepsilon`$. The blocks in this last statement may depend on $`\varepsilon`$. Both endpoints of every block count. The tent corresponding to $`R(n^2)`$ is evaluated at the fourth power $`x=n^4`$. [Lean theorem](lean/FourthSignedCriterion.lean)
+**Theorem.** RH is equivalent to the existence of one $`C\ge0`$ such that $`L_-(m)\le C(1+2\log m)`$ for arbitrarily large integers $`m`$. Equivalently, for every $`\varepsilon\gt 0`$ there are arbitrarily large $`m`$ with $`L_-(m)\le m^\varepsilon`$. The blocks in this last statement may depend on $`\varepsilon`$. Both endpoints of every block count. The tent corresponding to $`R(n^2)`$ is evaluated at the fourth power $`x=n^4`$. [Lean theorem](lean/FourthSignedCriterion.lean)
 
 **Finite certificates.** For every integer $`10{,}000\le m\le2{,}000{,}000`$, the bound holds with $`C=2`$. The same constant works for the positive part. For the prime-power deficit $`D`$, every integer $`k\in[K,K^2]`$ satisfies $`D(k^2)\ge-100k`$ whenever $`32\le K\le5.7\cdot10^{12}`$. On the shorter range $`32\le K\le26\cdot10^9`$ the two-sided bound is $`|D(k^2)|\lt k/5`$. The estimates use Platt and Trudgian’s verified zero height. [Finite proof and certificates](FINITE.md)
 
@@ -18,9 +18,9 @@ Write $`\Lambda`$ for the von Mangoldt function, $`\mu`$ for the Möbius functio
 
 ```math
 W(t)=\begin{cases}
-2-1/(2t),&1/4\le t\le1/2,\\
-1/t-1,&1/2\lt t\le1,\\
-0,&\text{otherwise},
+2-1/(2t),&1/4\le t\le1/2,
+\\ 1/t-1,&1/2\lt t\le1,
+\\ 0,&\text{otherwise},
 \end{cases}
 \qquad
 D(x)=cx-\sum_{j\ge1}\Lambda(j)W(j/x),\qquad c=\tfrac12\log2 .
@@ -55,7 +55,7 @@ For $`s=-1`$ or $`+1`$ write $`L_s(m)=\sum_{m\le n\le m^2}\max(sR(n^2),0)/n^3`$.
 
 Conversely, suppose a nontrivial zero lies to the right of $`1/2`$. The signed excursion and interpolation estimates for $`D`$ give some $`0\lt \delta\le1/200`$ with the following property for both signs. For every sufficiently large $`m`$ there is an $`x`$ between $`m^{8-\delta}`$ and $`m^{8-\delta/2}`$ on which the excursion persists through $`[x,x+x^{1-\delta}]`$. In this interval the normalized signed deficit is at least $`x^{4\delta}`$. Take $`N=\lceil x^{1/4}\rceil`$ and $`w=\lfloor x^{1/4-2\delta}\rfloor`$. The fourth powers of all $`n`$ from $`N`$ through $`N+w`$ lie in the excursion and all these indices belong to $`[m,m^2]`$. Their number times $`x^{4\delta}`$ is at least $`m^{2+\delta}`$. [Excursion at fourth powers](lean/FourthSignExcursions.lean) · [Endpoint rounding](lean/FourthPowerSpacing.lean)
 
-After normalization by $`n^2`$ each of those samples has weight $`1/n\ge1/m^2`$. Their contribution to the clipped deficit sum is therefore at least $`m^\delta`$. Replacing $`D(n^4)`$ by $`R(n^2)`$ costs at most $`2(1+2\log m)`$ on the whole block, since taking the positive part is 1-Lipschitz. It follows that $`L_s(m)>m^{\delta/2}`$ for every sufficiently large $`m`$ and either sign. This contradicts the subpower estimate with $`\varepsilon=\delta/2`$. The functional equation excludes zeros to the left once zeros on the right are excluded. [Signed criterion and dependency audit](lean/FourthSignedAudit.lean)
+After normalization by $`n^2`$ each of those samples has weight $`1/n\ge1/m^2`$. Their contribution to the clipped deficit sum is therefore at least $`m^\delta`$. Replacing $`D(n^4)`$ by $`R(n^2)`$ costs at most $`2(1+2\log m)`$ on the whole block, since taking the positive part is 1-Lipschitz. It follows that $`L_s(m)\gt m^{\delta/2}`$ for every sufficiently large $`m`$ and either sign. This contradicts the subpower estimate with $`\varepsilon=\delta/2`$. The functional equation excludes zeros to the left once zeros on the right are excluded. [Signed criterion and dependency audit](lean/FourthSignedAudit.lean)
 
 ## Relation to earlier tests
 

@@ -12,7 +12,7 @@ For the [paired remainder](README.md) and its corresponding prime-power deficit,
 
 Let $`H=3\cdot10^{12}`$. Platt and Trudgian verified the zeta zeros through this height. We use the smoothed explicit formula and its unsmoothing inequality as stated in equations (1) and (3) of the family's finite tent proof. In that proof $`S`$ is the centered prime-power sum. Comparing the tent integral with its sum over lattice cells costs at most the total variation of $`W`$, which gives $`|D(x)+S(x)|\le2`$. [Finite tent inequalities](../FINITE.md#the-smoothed-estimate) · [Lattice-cell estimate](https://github.com/leecrossley/prime-window-rh-criterion/blob/a27adcdb6e5b65bdf41f4629d27e1ca3b4d116bd/results/prime-window-power-samples/pairs/FINITE.md#L27) · [Platt and Trudgian](https://arxiv.org/abs/2004.09765)
 
-Sanftenberg proves the sharper $`|D(x)+S(x)|\le\min(1,60/x)`$ for this same tent and every real $`x>0`$. The bounds below already follow from the total-variation estimate. [Uniform bound](https://github.com/dbsanfte/RiemannGaussian/blob/f04c60e9de9f6bbf7808b53b2edc946641b0aeb1/scripts/CheckAlpogeFixedPrimeBand.lean#L886) · [Inverse-scale bound](https://github.com/dbsanfte/RiemannGaussian/blob/f04c60e9de9f6bbf7808b53b2edc946641b0aeb1/scripts/CheckAlpogeFixedPrimeBandCentered.lean#L91)
+Sanftenberg proves the sharper $`|D(x)+S(x)|\le\min(1,60/x)`$ for this same tent and every real $`x\gt 0`$. The bounds below already follow from the total-variation estimate. [Uniform bound](https://github.com/dbsanfte/RiemannGaussian/blob/f04c60e9de9f6bbf7808b53b2edc946641b0aeb1/scripts/CheckAlpogeFixedPrimeBand.lean#L886) · [Inverse-scale bound](https://github.com/dbsanfte/RiemannGaussian/blob/f04c60e9de9f6bbf7808b53b2edc946641b0aeb1/scripts/CheckAlpogeFixedPrimeBandCentered.lean#L91)
 
 For $`32^2\le x\le10^{42}`$ the first row of the published table gives $`|S(x)|/\sqrt{x}\lt 0.293`$. Thus $`|D(k^2)|/k\lt 1`$ for $`32\le k\lt 10^8`$ and $`|D(k^2)|/k\lt 0.3`$ for $`10^8\le k\le10^{21}`$.
 
@@ -20,10 +20,10 @@ For $`a=10^{42}\le x\le b=10^{56}`$ set $`d=1/1000`$, $`v=12.1`$, $`r=4e^{2d}/a`
 
 ```math
 \begin{aligned}
-A_0={}&\frac3{\sqrt2}(B_2+4T)+\frac{r^2}{3\sqrt a(1-r^2)}\\
-&+3.001e^{2d}\,3(b^{1/6}+a^{-1/2})\frac{\sqrt v}{H}
- +\frac{4e^{5d/2}(\log b+d)^2}{\log2}\frac{\sqrt v}{H},\\
-B_0={}&73.2T+\tfrac34\,3.001e^{2d}v .
+A_0={}&\frac3{\sqrt2}(B_2+4T)+\frac{r^2}{3\sqrt a(1-r^2)}
+\\ &+3.001e^{2d}\,3(b^{1/6}+a^{-1/2})\frac{\sqrt v}{H}
+ +\frac{4e^{5d/2}(\log b+d)^2}{\log2}\frac{\sqrt v}{H},
+\\ B_0={}&73.2T+\tfrac34\,3.001e^{2d}v .
 \end{aligned}
 ```
 
