@@ -2,7 +2,7 @@
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.24411620.svg)](https://doi.org/10.5281/zenodo.24411620)
 
-**Signed Möbius losses.** Summing the negative part of one explicitly paired Möbius remainder at fourth powers gives a logarithmic-budget criterion for RH. The finite budget holds on every integer block with $10{,}000\le m\le2{,}000{,}000$. The companion gives a common nonnegative terminal interval for signed prefixes on arbitrarily late squares. Its direct full-interval estimate remains open. [Criterion and finite certificates](pairs/mobius/) · [Companion proof](pairs/mobius/CUTOFFS.md)
+**Signed Möbius losses.** Summing the negative part of one explicitly paired Möbius remainder at fourth powers gives a logarithmic-budget criterion for RH. The finite budget holds on every integer block with $10{,}000\le m\le2{,}000{,}000$. The companion gives a common nonnegative terminal interval for signed low-zero prefixes on arbitrarily late squares. Its direct full-interval estimate remains open. [Criterion and finite certificates](pairs/mobius/) · [Companion proof](pairs/mobius/CUTOFFS.md)
 
 **Ordinary prime counts at squares.** A fixed power saving for exceptions about the block median on arbitrarily late shrinking blocks is equivalent to RH. Every block with base from 16 through 1,290,008,597,927,572 has zero exceptions. An independent upper bound at unbounded height remains open here. The same supplement gives a sharp lower limit for weighted prime-pair discrepancies. [Proofs, prior work and replays](square-blocks/)
 

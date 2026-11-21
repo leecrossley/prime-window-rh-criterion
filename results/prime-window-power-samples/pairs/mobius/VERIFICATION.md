@@ -17,7 +17,7 @@ python3 -B check_finite_quartic.py
 python3 -B check_cutoffs.py
 ```
 
-The first script uses outward rounding at 160 and 256 bits. The last mass values below are upper estimates derived from the envelope. Lean proves coverage between the tested endpoints.
+The first script uses outward rounding at 160 and 256 bits. The mass values below are upper estimates derived from the envelope. Lean proves coverage between the tested endpoints.
 
 | Block parameter $`m`$ | Mass majorant, rounded up | Allowed $`2(1+2\log m)`$, rounded down |
 | --- | ---: | ---: |
