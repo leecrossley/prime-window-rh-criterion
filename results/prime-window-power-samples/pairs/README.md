@@ -11,6 +11,8 @@ $$
 
 Both orders of each unequal pair count. Under RH the finite bounds hold at every height, so $c_n<0$ for every $n\ge2$ and $C_K<0$ for every $K\ge2$. If RH fails, the short-block argument gives $C_K>0$ on every sufficiently late whole block. Thus $C_K\le0$ on an unbounded sequence of whole blocks is equivalent to RH, and so is $c_n<0$ for every $n\ge2$. An arithmetic proof of this sign would prove RH. The short-block theorem narrows the window to $[B,4B\sqrt{\log B}]$ and leaves the same sign open.
 
+A related fourth-power test sums the negative part of the paired Möbius remainder. It gives an equivalence on arbitrarily late blocks and an explicit logarithmic upper bound through block parameter $2{,}000{,}000$. The direct-cancellation companion studies signed prefixes over low zeros. [Möbius criterion and certificates](mobius/) · [Terminal interval and open full-interval bound](mobius/CUTOFFS.md)
+
 | Result obtained without assuming RH | Where to find the proof |
 | --- | --- |
 | On every complete block $[K,4K\sqrt{\log K}]$ with $2\le K\le4\cdot10^{24}$, the squared centred prime sum is strictly below eight ninths of the diagonal. This uses OpenAI's Lean theorem that $\zeta$ has no zeros with real part above $7/8$. | [Odd-shift mean square and certificate](ODD-MEAN-SQUARE.md) |
