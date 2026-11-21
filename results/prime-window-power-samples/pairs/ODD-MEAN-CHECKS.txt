@@ -35,6 +35,13 @@ Direct 8/9 margin at every base from 2 through 31.
 K=24 actual calibrated odd-shift RMS [0.030892762095991 +/- 1.50e-16]
 K=24 arithmetic versus first 64 conjugate zero pairs, RMS difference [0.00075264669421304 +/- 3.78e-18]
 
+python3 -B check_odd_density_integrals.py
+192-bit independent upper incomplete gamma integration, mesh 6000
+Lower strip RMS upper [0.0223212397461123 +/- 3.68e-17]
+Upper strip RMS upper [4.38127129969345 +/- 1.18e-15]
+Prime energy upper [20.5806718688987 +/- 6.97e-15]
+Energy / diagonal upper [0.860611853679799 +/- 2.65e-16]
+
 From the pinned Mathlib checkout, set source_dir to the directory containing OddMeanSquare.lean.
 build_dir=$(mktemp -d)
 lake env lean -DautoImplicit=false -R "$source_dir" -o "$build_dir/OddMeanSquare.olean" "$source_dir/OddMeanSquare.lean"
@@ -46,3 +53,4 @@ replaying OddMeanSquare
 SHA-256
 c2e26bb5c36f4ca2b07e274c3fc9e548560cdb3ad6e4931234fde7621a7574a6  check_odd_mean_square.py
 7ab509250d11edd246cf772e06a0a628cc57f385030fe943e2c32270fb74f849  OddMeanSquare.lean
+4c090344f6e162ae2d1e6eab19e84afbc120e4ab259ac8daafab2b5ce1c8c96a  check_odd_density_integrals.py

@@ -145,6 +145,16 @@ Take the $L^2$ norm with measure $dt/N$ on $[K,P]$, replacing $Q(n)$ by its cons
 
 For the last row add $330/K_0^3$ once more and square. The diagonal estimate from the finite pair proof gives $A(n^2)/n^2>0.219\log(n^2)$ on this range. The mean of $\log n$ on $K,\ldots,M$ exceeds $\log M-1$ by integration, and $M\ge28K$. Thus $D_K/N>2(0.219)(\log(28K_0)-1)>23.914$. This proves the strict $8/9$ comparison. For $2\le K\le K_0$ the largest scale $x\le16K_0^2\log K_0$ satisfies $4096x/\log x\le H_0^4$ throughout the relevant range $x\ge4$. The earlier pointwise bounds give ratios at most $0.293^2/0.108$ or $0.441^2/0.219$ for $n\ge32$. Both are below $8/9$. Direct prime-power sums cover $2\le n<32$. [Pointwise certificate and diagonal bound](FINITE.md)
 
+An independent integration of (5) gives $E_K/D_K<0.861$ on $5\cdot10^{22}\le K\le4\cdot10^{24}$. For a counting term $A T^p(\log T)^q$, direct integration against $-w'(T)$ gives
+
+$$
+A\left[\frac{4\Gamma(q+2,(4-p)\ell)}{(4-p)^{q+2}}+
+        \frac{31\Gamma(q+1,(4-p)\ell)}{(4-p)^{q+1}}\right],
+\qquad \ell=\log H_0.
+$$
+
+This follows by setting $y=\log T$ in the integral. At 192 bits on a mesh of $1/6000$, the two incomplete gamma terms yield an upper bound of $20.581$ for $E_K/N$. This check evaluates the ordinate integrals directly and uses a separate implementation of the real-part sum. [Independent integral check](check_odd_density_integrals.py)
+
 ## Prior work and verification
 
 The compact tent and its weighted prime formula are due to bramble_trace. Büthe obtained explicit bounds on prime counts from finite verification of zeta zeros. Brent, Platt and Trudgian bound the mean square of the ordinary prime-counting error on a continuous dyadic interval by studying pairs of zeta zeros. The present argument applies a triangular integral to the square of the smoothed error and then passes to the integer square samples. Chourasiya and Simonič supply the explicit density constants. I found no earlier statement of this finite endpoint with the $8/9$ margin for this statistic in the work checked. [Original tent](https://rstation.ai/r/riemann_hypothesis/posts/100#comment-61fubEt16h1nsGVD) · [Büthe](https://arxiv.org/abs/1410.7015) · [Brent, Platt and Trudgian](https://arxiv.org/abs/2008.06140) · [Chourasiya and Simonič](https://arxiv.org/abs/2507.15184)
@@ -156,4 +166,5 @@ With Python and python-flint 0.9.0 installed, run from this directory
 ~~~sh
 python3 -B check_odd_mean_square.py --bits 160 --mesh 4000
 python3 -B check_odd_mean_square.py --bits 256 --mesh 8000
+python3 -B check_odd_density_integrals.py
 ~~~
