@@ -1,0 +1,165 @@
+Square-sampled prime counts and pair discrepancies
+Lee Crossley, 21 November 2026
+Python 3.12.14, python-flint 0.9.0. Run from this directory with sh replay.sh.
+The following output is from a clean copy of the publication sources.
+
+Arb bits 160 midpoint cells 16384
+Integral of (I-F(u))/u [0.27982114 +/- 4.36e-9]
+Certified discrepancy constant [0.36160552 +/- 6.62e-9]
+Independent analytic lower bound [0.2822994628274946 +/- 3.44e-17]
+x=16  residual minus centered square [0.44733 +/- 8.08e-6]
+x=64  residual minus centered square [0.4397 +/- 6.29e-5]
+x=256  residual minus centered square [0.422 +/- 2.84e-4]
+x=1024  residual minus centered square [0.39 +/- 2.21e-3]
+Arb bits: 160
+Leading odd-shift square threshold: [0.05463021689944318 +/- 2.44e-18]
+Parity expansion uniform error coefficient: [54.27867219455575 +/- 3.44e-15]
+Exact rational dyadic partitions: 3988
+K=2 M=6 N=5 net=[0.349296 +/- 7.49e-7] unsigned-parity=[0.373264 +/- 9.53e-7] ratio=[0.93579 +/- 4.68e-6] threshold=[0.530333 +/- 9.35e-7] diagonal-minus-energy=[0.181036695 +/- 2.16e-11]
+K=3 M=12 N=10 net=[0.40842 +/- 6.88e-6] unsigned-parity=[0.46357 +/- 4.18e-6] ratio=[0.8810 +/- 3.64e-5] threshold=[0.84242 +/- 6.88e-6] diagonal-minus-energy=[0.433999992 +/- 3.31e-10]
+K=4 M=18 N=15 net=[0.4109 +/- 2.19e-5] unsigned-parity=[0.5269 +/- 1.49e-5] ratio=[0.7799 +/- 6.55e-5] threshold=[1.0202 +/- 4.24e-5] diagonal-minus-energy=[0.609320433 +/- 3.06e-10]
+K=8 M=46 N=39 net=[0.3917 +/- 8.55e-5] unsigned-parity=[0.698 +/- 1.98e-4] ratio=[0.561 +/- 4.57e-4] threshold=[1.4268 +/- 7.81e-5] diagonal-minus-energy=[1.03509263 +/- 3.74e-9]
+K=12 M=75 N=64 net=[0.384 +/- 2.75e-4] unsigned-parity=[0.915 +/- 2.47e-4] ratio=[0.420 +/- 6.38e-4] threshold=[1.642 +/- 2.16e-4] diagonal-minus-energy=[1.25805892 +/- 3.15e-9]
+K=16 M=106 N=91 net=[0.380 +/- 6.82e-4] unsigned-parity=[1.244 +/- 4.47e-4] ratio=[0.305 +/- 4.53e-4] threshold=[1.794 +/- 4.74e-4] diagonal-minus-energy=[1.41462674 +/- 4.68e-9]
+K=24 M=171 N=148 net=[0.37 +/- 5.18e-3] unsigned-parity=[1.807 +/- 9.25e-4] ratio=[0.207 +/- 7.27e-4] threshold=[2.01 +/- 5.01e-3] diagonal-minus-energy=[1.63118646 +/- 2.68e-9]
+K=24 odd-shift-only margin after the uniform error: [0.544230011240 +/- 1.47e-13]
+All odd lags checked by polynomial convolution on every tested scale.
+Direct nested-loop checks: 8 chosen scales and every square from 2^2 to 12^2.
+Arb bits 256 midpoint cells 16384
+Integral of (I-F(u))/u [0.27982114 +/- 4.36e-9]
+Certified discrepancy constant [0.36160552 +/- 6.62e-9]
+Independent analytic lower bound [0.2822994628274946 +/- 3.44e-17]
+x=16  residual minus centered square [0.44733 +/- 8.08e-6]
+x=64  residual minus centered square [0.4397 +/- 6.29e-5]
+x=256  residual minus centered square [0.422 +/- 2.84e-4]
+x=1024  residual minus centered square [0.39 +/- 2.21e-3]
+Arb bits: 256
+Leading odd-shift square threshold: [0.05463021689944318 +/- 2.44e-18]
+Parity expansion uniform error coefficient: [54.27867219455575 +/- 3.44e-15]
+Exact rational dyadic partitions: 3988
+K=2 M=6 N=5 net=[0.349296 +/- 7.49e-7] unsigned-parity=[0.373264 +/- 9.53e-7] ratio=[0.93579 +/- 4.68e-6] threshold=[0.530333 +/- 9.35e-7] diagonal-minus-energy=[0.181036695 +/- 2.16e-11]
+K=3 M=12 N=10 net=[0.40842 +/- 6.88e-6] unsigned-parity=[0.46357 +/- 4.18e-6] ratio=[0.8810 +/- 3.64e-5] threshold=[0.84242 +/- 6.88e-6] diagonal-minus-energy=[0.433999992 +/- 3.31e-10]
+K=4 M=18 N=15 net=[0.4109 +/- 2.19e-5] unsigned-parity=[0.5269 +/- 1.49e-5] ratio=[0.7799 +/- 6.55e-5] threshold=[1.0202 +/- 4.24e-5] diagonal-minus-energy=[0.609320433 +/- 3.06e-10]
+K=8 M=46 N=39 net=[0.3917 +/- 8.55e-5] unsigned-parity=[0.698 +/- 1.98e-4] ratio=[0.561 +/- 4.57e-4] threshold=[1.4268 +/- 7.81e-5] diagonal-minus-energy=[1.03509263 +/- 3.74e-9]
+K=12 M=75 N=64 net=[0.384 +/- 2.75e-4] unsigned-parity=[0.915 +/- 2.47e-4] ratio=[0.420 +/- 6.38e-4] threshold=[1.642 +/- 2.16e-4] diagonal-minus-energy=[1.25805892 +/- 3.15e-9]
+K=16 M=106 N=91 net=[0.380 +/- 6.82e-4] unsigned-parity=[1.244 +/- 4.47e-4] ratio=[0.305 +/- 4.53e-4] threshold=[1.794 +/- 4.74e-4] diagonal-minus-energy=[1.41462674 +/- 4.68e-9]
+K=24 M=171 N=148 net=[0.37 +/- 5.18e-3] unsigned-parity=[1.807 +/- 9.25e-4] ratio=[0.207 +/- 7.27e-4] threshold=[2.01 +/- 5.01e-3] diagonal-minus-energy=[1.63118646 +/- 2.68e-9]
+K=24 odd-shift-only margin after the uniform error: [0.544230011240 +/- 1.47e-13]
+All odd lags checked by polynomial convolution on every tested scale.
+Direct nested-loop checks: 8 chosen scales and every square from 2^2 to 12^2.
+Arb precision 160 bits
+Height 3000000000000, last n 26823596926786734367256795383179, last full block K 808089414277895400365656164229
+Height 3000175332800, last n 26827545931911598031596934378003, last full block K 808207524642627297477593017475
+Height 3000175337800, last n 26827546044531153620372387098063, last full block K 808207528010951574175194121439
+Extra 5000 height units, at most 21411 right-half terms, upper bound on whole-block energy/diagonal [0.508354983074 +/- 4.29e-13]
+Height 3000175377800, last n 26827546945487608593390633866604, last full block K 808207554957546091088863653250
+Extra 45000 height units, 180 bins, diagonal per sample > 30, upper ratio [0.463234571967 +/- 2.46e-13]
+Extra 45000 height units, 360 bins, diagonal per sample > 30, upper ratio [0.461315221327 +/- 4.51e-13]
+32-atom model, relative projection error < 1e-13, support width [0.02323733232 +/- 4.16e-13]
+650 two-endpoint variation bounds, 25 moving-edge cases
+Exact density-width inversion, cutoff exponent and height transfer verified
+Arb precision 224 bits
+Height 3000000000000, last n 26823596926786734367256795383179, last full block K 808089414277895400365656164229
+Height 3000175332800, last n 26827545931911598031596934378003, last full block K 808207524642627297477593017475
+Height 3000175337800, last n 26827546044531153620372387098063, last full block K 808207528010951574175194121439
+Extra 5000 height units, at most 21411 right-half terms, upper bound on whole-block energy/diagonal [0.508354983074 +/- 4.29e-13]
+Height 3000175377800, last n 26827546945487608593390633866604, last full block K 808207554957546091088863653250
+Extra 45000 height units, 180 bins, diagonal per sample > 30, upper ratio [0.463234571967 +/- 2.46e-13]
+Extra 45000 height units, 360 bins, diagonal per sample > 30, upper ratio [0.461315221327 +/- 4.51e-13]
+32-atom model, relative projection error < 1e-13, support width [0.02323733232 +/- 4.16e-13]
+650 two-endpoint variation bounds, 25 moving-edge cases
+Exact density-width inversion, cutoff exponent and height transfer verified
+Exact ramp at interior, exterior and endpoint knots; kernel grid and endpoint gaps passed.
+Finite filter retains its target and annihilates both chord modes and two competitors.
+K=24, H=20, interior primes=190, proper powers=9, mean F=[-0.00167910430 +/- 2.60e-12], mean F²=[0.000832285495 +/- 1.57e-13], mean T²=[0.00491387999 +/- 4.56e-12], repeated-prime term=[0.130403956 +/- 4.29e-10], count errors/K (rms=[0.0593051985 +/- 4.01e-11], mean distance from median=[0.0400065676 +/- 9.09e-12])
+K=25, H=21, interior primes=205, proper powers=9, mean F=[0.00154710710 +/- 3.18e-12], mean F²=[0.000907357474 +/- 1.85e-13], mean T²=[0.00707591454 +/- 4.22e-12], repeated-prime term=[0.134753141 +/- 5.62e-11], count errors/K (rms=[0.104763929 +/- 2.03e-10], mean distance from median=[0.0431433290 +/- 3.52e-11])
+K=48, H=35, interior primes=544, proper powers=13, mean F=[-0.00544208946 +/- 4.72e-12], mean F²=[0.00104719244 +/- 1.13e-12], mean T²=[0.00419297715 +/- 2.11e-12], repeated-prime term=[0.117314543 +/- 4.66e-10], count errors/K (rms=[0.0654772331 +/- 2.33e-11], mean distance from median=[0.0391520865 +/- 3.37e-11])
+K=120, H=76, interior primes=2366, proper powers=23, mean F=[-0.00463057348 +/- 1.92e-12], mean F²=[0.00104854553 +/- 1.28e-12], mean T²=[0.00258238675 +/- 4.17e-12], repeated-prime term=[0.104331946 +/- 2.32e-10], count errors/K (rms=[0.0389432701 +/- 3.83e-11], mean distance from median=[0.0281450598 +/- 4.31e-12])
+K=400, H=223, interior primes=18234, proper powers=45, mean F=[-0.000384304875 +/- 4.35e-13], mean F²=[0.000991433904 +/- 4.42e-13], mean T²=[0.000729438266 +/- 5.00e-13], repeated-prime term=[0.0958560241 +/- 2.59e-11], count errors/K (rms=[0.0413413210 +/- 3.82e-11], mean distance from median=[0.0200070459 +/- 4.52e-11])
+All finite cross-checks passed at 128 bits.
+Johnston last square roots 1471729207270810 and 16551346706300673.
+Last certified K 1290008597927572; H=363441218686476, upper sample 1653449816614048.
+Uniform threshold ratios on the three analytic ranges: [0.09469155660 +/- 3.07e-12], [0.4152134764 +/- 2.76e-11], [0.8343449016 +/- 2.51e-11].
+Every block 16 <= K <= 51 passed for both endpoints of its median interval.
+K=256, N=150, spacing=2, largest within-cell range [8.6525547 +/- 2.37e-8], full median exceptions=0.
+K=4096, N=1934, spacing=2, largest within-cell range [60.409562 +/- 4.77e-7], full median exceptions=0.
+K=6561, N=3019, spacing=3, largest within-cell range [99.019776 +/- 4.17e-7], full median exceptions=0.
+Continuous prime-count error range at [256, 258] from 94 prime jumps: [10.6048224 +/- 3.04e-8].
+Selected grid interval [65536, 65540] contains 23661 primes between its squared endpoints, integer-sample range [84.949997 +/- 4.32e-7].
+Selected grid interval [390625, 390630] contains 151782 primes between its squared endpoints, integer-sample range [145.34433 +/- 1.10e-6].
+Exhaustive majority and grid tests passed, including 225 strict-majority grids.
+Complex Gram integrals passed both local inequalities on 12 cells.
+All checks passed at 128 bits.
+Exact ramp at interior, exterior and endpoint knots; kernel grid and endpoint gaps passed.
+Finite filter retains its target and annihilates both chord modes and two competitors.
+K=24, H=20, interior primes=190, proper powers=9, mean F=[-0.00167910430 +/- 2.60e-12], mean F²=[0.000832285495 +/- 1.57e-13], mean T²=[0.00491387999 +/- 4.56e-12], repeated-prime term=[0.130403956 +/- 4.29e-10], count errors/K (rms=[0.0593051985 +/- 4.01e-11], mean distance from median=[0.0400065676 +/- 9.09e-12])
+K=25, H=21, interior primes=205, proper powers=9, mean F=[0.00154710710 +/- 3.18e-12], mean F²=[0.000907357474 +/- 1.85e-13], mean T²=[0.00707591454 +/- 4.22e-12], repeated-prime term=[0.134753141 +/- 5.62e-11], count errors/K (rms=[0.104763929 +/- 2.03e-10], mean distance from median=[0.0431433290 +/- 3.52e-11])
+K=48, H=35, interior primes=544, proper powers=13, mean F=[-0.00544208946 +/- 4.72e-12], mean F²=[0.00104719244 +/- 1.13e-12], mean T²=[0.00419297715 +/- 2.11e-12], repeated-prime term=[0.117314543 +/- 4.66e-10], count errors/K (rms=[0.0654772331 +/- 2.33e-11], mean distance from median=[0.0391520865 +/- 3.37e-11])
+K=120, H=76, interior primes=2366, proper powers=23, mean F=[-0.00463057348 +/- 1.92e-12], mean F²=[0.00104854553 +/- 1.28e-12], mean T²=[0.00258238675 +/- 4.17e-12], repeated-prime term=[0.104331946 +/- 2.32e-10], count errors/K (rms=[0.0389432701 +/- 3.83e-11], mean distance from median=[0.0281450598 +/- 4.31e-12])
+K=400, H=223, interior primes=18234, proper powers=45, mean F=[-0.000384304875 +/- 4.35e-13], mean F²=[0.000991433904 +/- 4.42e-13], mean T²=[0.000729438266 +/- 5.00e-13], repeated-prime term=[0.0958560241 +/- 2.59e-11], count errors/K (rms=[0.0413413210 +/- 3.82e-11], mean distance from median=[0.0200070459 +/- 4.52e-11])
+All finite cross-checks passed at 192 bits.
+Johnston last square roots 1471729207270810 and 16551346706300673.
+Last certified K 1290008597927572; H=363441218686476, upper sample 1653449816614048.
+Uniform threshold ratios on the three analytic ranges: [0.09469155660 +/- 3.07e-12], [0.4152134764 +/- 2.76e-11], [0.8343449016 +/- 2.51e-11].
+Every block 16 <= K <= 51 passed for both endpoints of its median interval.
+K=256, N=150, spacing=2, largest within-cell range [8.6525547 +/- 2.37e-8], full median exceptions=0.
+K=4096, N=1934, spacing=2, largest within-cell range [60.409562 +/- 4.77e-7], full median exceptions=0.
+K=6561, N=3019, spacing=3, largest within-cell range [99.019776 +/- 4.17e-7], full median exceptions=0.
+Continuous prime-count error range at [256, 258] from 94 prime jumps: [10.6048224 +/- 3.04e-8].
+Selected grid interval [65536, 65540] contains 23661 primes between its squared endpoints, integer-sample range [84.949997 +/- 4.32e-7].
+Selected grid interval [390625, 390630] contains 151782 primes between its squared endpoints, integer-sample range [145.34433 +/- 1.10e-6].
+Exhaustive majority and grid tests passed, including 225 strict-majority grids.
+Complex Gram integrals passed both local inequalities on 12 cells.
+All checks passed at 192 bits.
+
+Arithmetic replay exit code 0.
+
+Lean and kernel replay
+Use a built Mathlib checkout at revision 0df444a360eaa60ab8c11dca51a86af692955474, Lean 4.33.1
+(compiler 819816b2e0a3bf405af45ae5c7af2491d8f5bee6). From this result directory set
+  study=$(pwd)
+  build=$(mktemp -d)
+then change directory to that Mathlib checkout. For each module named below run
+  lake env lean -j1 -DautoImplicit=false -R "$study" -o "$build/$module.olean" "$study/$module.lean"
+  lake env sh -c 'export LEAN_PATH="$1:$LEAN_PATH"; exec leanchecker -v "$2"' sh "$build" "$module"
+Modules: ShiftParity, SurvivingZeros, ShortArithmetic, MedianExceptions.
+'ShortBlock.ShiftParity.adjacent_tent_weights' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ShortBlock.ShiftParity.ordered_cross_sum' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ShortBlock.ShiftParity.recover_linear_sum' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ShortBlock.ShiftParity.square_sum_of_relative_bound' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ShortBlock.ShiftParity.square_error_of_absolute_error' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ShortBlock.ShiftParity.proxy_square_error' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ShortBlock.ShiftParity.reciprocal_square_sum' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ShortBlock.ShiftParity.proxy_block_error' depends on axioms: [propext, Classical.choice, Quot.sound]
+replaying ShiftParity
+
+'ShortBlock.SurvivingZeros.finite_projection' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ShortBlock.SurvivingZeros.finite_shell_energy' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ShortBlock.SurvivingZeros.small_at_crossing' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ShortBlock.SurvivingZeros.density_width' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ShortBlock.SurvivingZeros.jump_exponents' depends on axioms: [propext, Classical.choice, Quot.sound]
+replaying SurvivingZeros
+
+'ShortArithmetic.ramp_chord' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ShortArithmetic.quadratic_chord' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ShortArithmetic.kernel_square_pieces' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ShortArithmetic.diagonal_constant' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ShortArithmetic.sum_variance' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ShortArithmetic.uncovered_endpoint' depends on axioms: [propext, Quot.sound]
+'ShortArithmetic.residual_bound' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ShortArithmetic.sum_le_threshold_add_tail' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ShortArithmetic.density_margin' depends on axioms: [propext, Classical.choice, Quot.sound]
+replaying ShortArithmetic
+
+'MedianExceptions.majority_traps_median' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MedianExceptions.transport_to_median' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MedianExceptions.prefix_majority' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MedianExceptions.huxley_exponent' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MedianExceptions.ingham_exponent' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MedianExceptions.power_margin' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MedianExceptions.longer_grid_margin' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MedianExceptions.ingham_survivors' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MedianExceptions.guth_maynard_survivors' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MedianExceptions.cutoff_margins' depends on axioms: [propext, Classical.choice, Quot.sound]
+replaying MedianExceptions
+All four compilations and independent kernel replays exited 0. The 32 named results cover finite algebra, inequalities and transfers. The number-theoretic asymptotics are written proofs.

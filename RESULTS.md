@@ -11,6 +11,8 @@ Open a result to read its statement, hypotheses and replay instructions. Run its
 
 The power-sampling result now also gives an $8/9$ upper bound for the mean square on every complete short block through $K=4\cdot10^{24}$, using OpenAI's Lean theorem for the zero-free half-plane $\Re s>7/8$. [Finite theorem and certificate](results/prime-window-power-samples/pairs/ODD-MEAN-SQUARE.md) [Release with both calibration checks](https://github.com/leecrossley/prime-window-rh-criterion/releases/tag/odd-shift-mean-square-v1.0.2)
 
+The [square-sample median and pair-discrepancy results](results/prime-window-power-samples/square-blocks/) give an RH equivalence on shrinking blocks, a finite zero-exception range and a sharp lower limit for a weighted pair statistic. [Release and verification](https://github.com/leecrossley/prime-window-rh-criterion/releases/tag/square-block-median-v1.0.0)
+
 ## Shared verification files
 
 Each entry in [the shared-file list](shared-files.json) names the source to edit and its replayable copies. After a change, run `python3 tools/shared_files.py --sync`, replay each affected result and update its manifest. Each result can still be checked from its own directory.
