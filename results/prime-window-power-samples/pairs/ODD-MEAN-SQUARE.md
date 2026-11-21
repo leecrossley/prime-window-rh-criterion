@@ -17,15 +17,15 @@ Expanding the square gives the contribution from ordered unequal pairs as $E_K-D
 
 The Hardy–Littlewood singular series vanishes at an odd displacement. Its centered value is $-1$. With $W_m=W(m/x)$, define the ordered odd-shift discrepancy and its raw centered mean square by
 
-$$
+```math
 R_o(x)=\frac{2}{x}\sum_{\substack{h\ge1\\h\ {\rm odd}}}\sum_{m\ge1}
 (b_mb_{m+h}+1)W_mW_{m+h},\qquad
 V_K=\frac1N\sum_{n=K}^M\frac{(R_o(n^2)-L^2)^2}{n^2}. \tag{1}
-$$
+```
 
 Let $T_e,T_o$ be the sums of $W_m$ on even and odd integers. For $x\ge4$ the weights on even prime powers add to one, since the two adjacent powers of two have weights $1/t-1$ and $2-1/t$ for $1/2<t\le1$. Hence the even centered sum is $u=L-T_e$. Each odd displacement joins opposite parities. Factoring the two ordered products gives $xR_o/2=u(S-u)+T_eT_o$. [The odd-gap prime-power observation in Chou, Haag, Huryn and Ledoan](https://arxiv.org/abs/2308.14888)
 
-For completeness write $T_e=\mu x/2+e$, $T_o=\mu x/2+o$. The trapezoid rule on either parity lattice gives $|e|,|o|\le6/x$. Its error on mesh $d$ for the integral is at most $d^2\operatorname{Var}(W')/8$, by integration against the cell kernel $(t-a)(b-t)/2$. Here $d=2/x$ and $\operatorname{Var}(W')=24$. Expanding the factored product gives
+For completeness write $T_e=\mu x/2+e$, $T_o=\mu x/2+o$. The trapezoid rule on either parity lattice gives $|e|,|o|\le6/x$. Its error on mesh $d$ for the integral is at most $d^2\mathrm{Var}(W')/8$, by integration against the cell kernel $(t-a)(b-t)/2$. Here $d=2/x$ and $\mathrm{Var}(W')=24$. Expanding the factored product gives
 
 $$
 |R_o+(\mu-2L/x)S-L^2|
@@ -51,7 +51,7 @@ $$
 
 Here the error has absolute value at most $3/t$. The lattice error is at most $2/t$ by variation and the trivial-zero sum is at most $r^2/(3t(1-r^2))$ with $r=4/t^2$. The nontrivial zeros are counted with multiplicity and both signs. The coefficients are absolutely summable. [Tent explicit formula, mass identity and trivial terms](../finite/QUARTIC.md)
 
-Consider a group of zeros $a\le\beta\le b$ with $a\ge1/2$. For $\lambda=7/5$, the nonnegative weight $(1-t/(\lambda P))_+/(1-1/\lambda)$ is at least one on $[K,P]$. Set $B=\lambda P$ and $v_\rho=d_\rho B^{2\rho-1}$. Integrating the squared sum against that weight, dividing by $N$, gives
+Consider a group of zeros $a\le\beta\le b$ with $a\ge1/2$. For $\lambda=7/5$, the nonnegative weight $`(1-t/(\lambda P))_+/(1-1/\lambda)`$ is at least one on $`[K,P]`$. Set $`B=\lambda P`$ and $`v_\rho=d_\rho B^{2\rho-1}`$. Integrating the squared sum against that weight, dividing by $N$, gives
 
 $$
 \frac PN\frac{\lambda^2}{\lambda-1}
@@ -59,12 +59,12 @@ $$
 z=2\beta+2\beta'-2+2i(\gamma-\gamma'). \tag{3}
 $$
 
-Indeed $\int_0^1 y^z(1-y)\,dy=1/((1+z)(2+z))$. Compact integration and absolute convergence justify passage from finite groups to the infinite sum. The absolute value of each kernel entry is at most $1/((4a-1)^2+4(\gamma-\gamma')^2)$. For a symmetric nonnegative matrix $w$, the inequality $2|v_i v_j|\le |v_i|^2+|v_j|^2$ bounds its quadratic form by $\sum_i |v_i|^2\sum_j w_{ij}$.
+Indeed $`\int_0^1 y^z(1-y)\,dy=1/((1+z)(2+z))`$. Compact integration and absolute convergence justify passage from finite groups to the infinite sum. The absolute value of each kernel entry is at most $1/((4a-1)^2+4(\gamma-\gamma')^2)$. For a symmetric nonnegative matrix $w$, the inequality $2|v_i v_j|\le |v_i|^2+|v_j|^2$ bounds its quadratic form by $\sum_i |v_i|^2\sum_j w_{ij}$.
 
 For $D=2-\beta'$, $\kappa=4a-1$ and $y=\gamma-\gamma'$, the row entry satisfies
 
 $$
-\frac1{\kappa^2+4y^2}\le c\,\frac{D}{D^2+y^2}
+\frac1{\kappa^2+4y^2}\le c\thinspace{}\frac{D}{D^2+y^2}
 \quad\text{if }D\le c\kappa^2,\quad 1\le4cD.
 $$
 
@@ -87,15 +87,15 @@ On a strip $a<\beta\le b$ write $|d_\rho|\le d/\gamma^2$. The two strips used fo
 
 By (3)–(4) the strip's normalized continuous mean square above $H_0$ is at most
 
-$$
-2\frac PN\frac{\lambda^2}{\lambda-1}\,d^2\frac c2
+```math
+2\frac PN\frac{\lambda^2}{\lambda-1}\thinspace{}d^2\frac c2
 \sum_{\substack{\gamma> H_0\\a<\beta\le b}}
 B^{4\beta-2}\frac{\log\gamma+8}{\gamma^4}. \tag{5}
-$$
+```
 
 The factor two restores the negative ordinates. The row bound in (4) already allows interactions between both signs.
 
-Write $w(T)=(\log T+8)/T^4$. For $N(s,T)$ counting positive ordinates at most $T$ with $\beta\ge s$, each upper bound by a sum of terms $A T^p(\log T)^q$ gives a bound for $\sum_{\gamma>H_0,\,\beta\ge s}w(\gamma)$ by the corresponding sum of
+Write $w(T)=(\log T+8)/T^4$. For $N(s,T)$ counting positive ordinates at most $T$ with $\beta\ge s$, each upper bound by a sum of terms $A T^p(\log T)^q$ gives a bound for $`\sum_{\gamma>H_0,\,\beta\ge s}w(\gamma)`$ by the corresponding sum of
 
 $$
 J(A,p,q)=\frac{4(\ell+8) A H_0^{p-4}\ell^q}
@@ -122,7 +122,7 @@ Each zero in a cell is therefore charged at its upper real-part endpoint. This c
 
 ## Finite endpoint and passage back to squares
 
-Put $K_0=5\cdot10^{22}$ and $K_*=4\cdot10^{24}$. For $K_0\le K\le K_*$ use $P/N\le28/27<1.05$ and $B\le(7/5)(4K_*\sqrt{\log K_*}+1)$. For the low zeros through $H_0$, let $T_0=(\log H_0+1)/(\pi H_0)$ and $B_2=\log3-(\gamma_{\rm E}+\log(4\pi))/3$. The verified critical-line coefficients give a uniform absolute bound $3(B_2+4T_0)/\sqrt2$. The remaining zeros with $\beta\le1/2$ contribute at most $12T_0$ since $\sum_{\gamma>H_0}\gamma^{-2}\le T_0$ and $t^{2\beta-1}\le1$ on $[K,P]$. [Zero mass and reciprocal-square bound](../finite/QUARTIC.md#averaging-the-prime-power-explicit-formula)
+Put $K_0=5\cdot10^{22}$ and $`K_*=4\cdot10^{24}`$. For $`K_0\le K\le K_*`$ use $P/N\le28/27<1.05$ and $`B\le(7/5)(4K_*\sqrt{\log K_*}+1)`$. For the low zeros through $H_0$, let $T_0=(\log H_0+1)/(\pi H_0)$ and $B_2=\log3-(\gamma_{\rm E}+\log(4\pi))/3$. The verified critical-line coefficients give a uniform absolute bound $3(B_2+4T_0)/\sqrt2$. The remaining zeros with $\beta\le1/2$ contribute at most $12T_0$ since $\sum_{\gamma>H_0}\gamma^{-2}\le T_0$ and $t^{2\beta-1}\le1$ on $`[K,P]`$. [Zero mass and reciprocal-square bound](../finite/QUARTIC.md#averaging-the-prime-power-explicit-formula)
 
 To interpolate only the full prime sum, put $V=K_0^2/4$. On $y\ge V$, $|\psi(y)-\lfloor y\rfloor|\le \delta y$ with
 
@@ -132,7 +132,7 @@ $$
 
 Use Dusart's bound for $\vartheta$, count higher powers by $\sqrt y(\log y)^2/\log2$, and note all normalized majorants decrease here. Partial summation gives $|S(x)|\le2\delta x$ for $x\ge K_0^2$. Off the knots $S'(x)$ is the sum of $b_m/m$ over $(x/2,x)$ minus half the sum over $(x/4,x/2)$. Each interval sum has absolute value at most $(2+\log2)\delta$. Therefore $|F'(t)|\le[3(2+\log2)+2]\delta$ through integration on smooth pieces. This bounds the error between $F(n)$ and $F(t)$ on every $[n,n+1]$. [Dusart, Theorem 5.2](https://arxiv.org/pdf/1002.0442)
 
-Take the $L^2$ norm with measure $dt/N$ on $[K,P]$, replacing $Q(n)$ by its constant value on each such cell. Minkowski's inequality bounds the sampled root mean square by the sum of the two square roots in (5), the low-zero and left-half bounds, the lattice and trivial error $3/K_0$, the rounding error above, and $330/K_0^3$. The coarser interval-arithmetic run gives the following outward bounds.
+Take the $L^2$ norm with measure $dt/N$ on $`[K,P]`$, replacing $Q(n)$ by its constant value on each such cell. Minkowski's inequality bounds the sampled root mean square by the sum of the two square roots in (5), the low-zero and left-half bounds, the lattice and trivial error $3/K_0$, the rounding error above, and $330/K_0^3$. The coarser interval-arithmetic run gives the following outward bounds.
 
 | Quantity | Bound |
 | --- | ---: |
