@@ -15,7 +15,7 @@ Under RH the count is eventually zero. If any zeta zero has real part above $`1/
 
 **A sharp lower limit for weighted pairs.** Put $`b_m=\Lambda(m)-1`$. Use the continuous tent $`W(t)=2-1/(2t)`$ for $`1/4\le t\le1/2`$, $`W(t)=1/t-1`$ for $`1/2<t\le1`$, and zero outside. Write $`S(x)=\sum_m b_m W(m/x)`$. Let $`R(x)`$ be the ordered unequal-pair sum with this weight after subtracting the centred Hardy–Littlewood singular series at each separation and dividing by $`x`$. Then $`R(x)=S(x)^2/x+B+o(1)`$ with $`0.36160550<B<0.36160555`$. Moreover $`\liminf R(n^2)=B`$. This is an unconditional result for the aggregate over all separations, including prime powers. The odd and even subtotals also give a measurable cancellation ratio with logarithmic exponent $`2\Theta-2`$, where $`\Theta=\sup_\rho\Re\rho`$. [Lower-limit proof and exact normalisation](PAIR-DISCREPANCY.md) · [Parity calculation](SHIFT-CANCELLATION.md)
 
-**Other consequences.** On every shrinking block in the off-line case the mean square of $`S(n^2)/n`$ has exponent $`4\Theta-2`$. On arbitrarily late shrinking blocks its signed mean is $`O(K^{-1/4})`$. On the longer $`[K,K^2]`$ blocks every fixed power has passing runs of length at least $`K^{2-\delta}`$ for each $`0<\delta<2`$ and all sufficiently large $`K`$. The last assertion follows by placing an excursion near the top of the earlier power-sampling window. [Shrinking-block proof](SURVIVING-ZEROS.md) · [Signed mean](SHORT-ARITHMETIC.md) · [Power runs and failure counts](POWER-RUNS.md)
+**Other consequences.** On every shrinking block in the off-line case the mean square of $`S(n^2)/n`$ has exponent $`4\Theta-2`$. Using the seven-eighths theorem, its signed mean is $`O(K^{-1/4})`$ on arbitrarily late shrinking blocks. On the longer $`[K,K^2]`$ blocks every fixed power has passing runs of length at least $`K^{2-\delta}`$ for each $`0<\delta<2`$ and all sufficiently large $`K`$. The last assertion follows by placing an excursion near the top of the earlier power-sampling window. [Shrinking-block proof](SURVIVING-ZEROS.md) · [Signed mean](SHORT-ARITHMETIC.md) · [Power runs and failure counts](POWER-RUNS.md)
 
 ## Prior work
 
@@ -29,4 +29,4 @@ From this directory run the following with Python 3.12 and python-flint 0.9.0.
 sh replay.sh
 ~~~
 
-The replay checks the finite margins, medians, square samples and singular-series quadrature. Four Lean modules check 32 supporting lemmas. The limiting assertions, zero isolation and zero-density estimates have written analytic proofs. The numerical checks cover finite inputs. [Replay transcript and Lean commands](CHECKS.txt)
+The replay checks the finite margins, medians, square samples and singular-series quadrature. Four Lean modules check 32 named supporting lemmas and two helper lemmas. The limiting assertions, zero isolation and zero-density estimates have written analytic proofs. The numerical checks cover finite inputs. [Replay transcript and Lean commands](CHECKS.txt)

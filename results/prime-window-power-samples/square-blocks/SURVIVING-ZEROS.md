@@ -14,7 +14,7 @@ For a finite integer interval $`J`$ write $`V_J=|J|^{-1}\sum_{n\in J}|Q(n)|^2`$.
 
 **Whole blocks at finite height.** For every integer
 $`2\le K\le808\,207\,554\,957\,546\,091\,088\,863\,653\,250`$,
-$`|J|V_J<0.462D(J)`$. The proof allows off-line zeros in the 45,000 height units immediately beyond Platt and Trudgian's exact verification endpoint. This bound concerns $`Q`$ alone.
+$`|J|V_J<0.462D(J)`$. The proof uses the separate seven-eighths zero-free theorem and allows off-line zeros in the 45,000 height units immediately beyond Platt and Trudgian's exact verification endpoint. This bound concerns $`Q`$ alone.
 
 **Short runs at arbitrarily large height.** Every sufficiently late $`[K,M]`$ contains at least $`\lfloor K^{1/4}\rfloor`$ consecutive integers on which $`|Q(n)|=O(1)`$ uniformly. On the run, the ratio of its energy to its diagonal is $`O(1/\log K)`$. A sufficiently small fixed $`c>0`$ gives a run of length $`\lfloor cK^{1/4}\sqrt{\log K}\rfloor`$ on which $`|Q(n)|^2\le A(n^2)/(2n^2)`$ at each sample. These estimates use the separate seven-eighths nonvanishing theorem.
 
