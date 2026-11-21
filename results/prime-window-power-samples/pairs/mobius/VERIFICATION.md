@@ -56,4 +56,4 @@ On 21 November 2026 a clean macOS arm64 run built 376 modules with Lean 4.33.1. 
 | Finite certificates | 8 | 43,255 |
 | Cutoff lemmas | 8 | 39,555 |
 
-After the audits, `leanchecker` replayed the result modules.
+After the audits, `leanchecker` successfully replayed all eleven result modules.
