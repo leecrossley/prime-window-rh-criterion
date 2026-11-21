@@ -1,0 +1,56 @@
+Finite odd-shift mean square on blocks of squares
+Lee Crossley · 21 November 2026
+
+CPython 3.12.14, python-flint 0.9.0
+Lean 4.33.1 (819816b2e0a3bf405af45ae5c7af2491d8f5bee6)
+Mathlib 0df444a360eaa60ab8c11dca51a86af692955474
+
+python3 -B check_odd_mean_square.py --bits 160 --mesh 4000
+Arb precision 160 bits; beta mesh 4000
+Normalized non-Gram RMS allowance [0.132840556528329 +/- 5.64e-17]
+Lower real-part strip RMS allowance [0.0224575558283330 +/- 1.17e-17]
+Upper real-part strip RMS allowance [4.40853871101005 +/- 1.82e-15]
+Calibrated odd-shift RMS upper bound [4.56383682336671 +/- 3.76e-15]
+Raw centered odd-shift mean square upper bound [2.50179169820417 +/- 3.94e-15]
+Prime mean square upper bound [20.8286065503180 +/- 2.33e-14]
+Mean diagonal lower bound [23.9141493371935 +/- 5.09e-16]
+Uniform energy/diagonal upper bound on the new range [0.870974177531099 +/- 3.24e-16]
+Triangular Gram integral overlaps its rational kernel at three frequencies.
+Direct 8/9 margin at every base from 2 through 31.
+K=24 actual calibrated odd-shift RMS [0.030892762095991 +/- 1.50e-16]
+K=24 arithmetic versus first 64 conjugate zero pairs, RMS difference [0.00075264669421304 +/- 3.78e-18]
+
+python3 -B check_odd_mean_square.py --bits 256 --mesh 8000
+Arb precision 256 bits; beta mesh 8000
+Normalized non-Gram RMS allowance [0.132840556528329 +/- 5.64e-17]
+Lower real-part strip RMS allowance [0.0224100807297017 +/- 2.44e-18]
+Upper real-part strip RMS allowance [4.39795677391855 +/- 2.65e-15]
+Calibrated odd-shift RMS upper bound [4.55320741117658 +/- 3.30e-15]
+Raw centered odd-shift mean square upper bound [2.49015166440802 +/- 1.01e-15]
+Prime mean square upper bound [20.7316977291934 +/- 3.64e-14]
+Mean diagonal lower bound [23.9141493371935 +/- 5.09e-16]
+Uniform energy/diagonal upper bound on the new range [0.866921814231105 +/- 8.84e-17]
+Triangular Gram integral overlaps its rational kernel at three frequencies.
+Direct 8/9 margin at every base from 2 through 31.
+K=24 actual calibrated odd-shift RMS [0.030892762095991 +/- 1.50e-16]
+K=24 arithmetic versus first 64 conjugate zero pairs, RMS difference [0.00075264669421304 +/- 3.78e-18]
+
+python3 -B check_odd_density_integrals.py
+192-bit independent upper incomplete gamma integration, mesh 6000
+Lower strip RMS upper [0.0223212397461123 +/- 3.68e-17]
+Upper strip RMS upper [4.38127129969345 +/- 1.18e-15]
+Prime energy upper [20.5806718688987 +/- 6.97e-15]
+Energy / diagonal upper [0.860611853679799 +/- 2.65e-16]
+
+From the pinned Mathlib checkout, set source_dir to the directory containing OddMeanSquare.lean.
+build_dir=$(mktemp -d)
+lake env lean -DautoImplicit=false -R "$source_dir" -o "$build_dir/OddMeanSquare.olean" "$source_dir/OddMeanSquare.lean"
+'ShortBlock.OddMeanSquare.symmetric_row_bound' depends on axioms: [propext, Classical.choice, Quot.sound]
+'ShortBlock.OddMeanSquare.strip_row_comparison' depends on axioms: [propext, Classical.choice, Quot.sound]
+lake env sh -c 'export LEAN_PATH="$1:$LEAN_PATH"; exec leanchecker -v OddMeanSquare' sh "$build_dir"
+replaying OddMeanSquare
+
+SHA-256
+c2e26bb5c36f4ca2b07e274c3fc9e548560cdb3ad6e4931234fde7621a7574a6  check_odd_mean_square.py
+7ab509250d11edd246cf772e06a0a628cc57f385030fe943e2c32270fb74f849  OddMeanSquare.lean
+4c090344f6e162ae2d1e6eab19e84afbc120e4ab259ac8daafab2b5ce1c8c96a  check_odd_density_integrals.py

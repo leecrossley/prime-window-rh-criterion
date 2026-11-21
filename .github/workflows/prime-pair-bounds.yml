@@ -34,3 +34,6 @@ jobs:
             "$python" -B check_theta.py --bits "$bits"
             "$python" -B check_filter.py --bits "$bits"
           done
+          "$python" -B check_odd_mean_square.py --bits 160 --mesh 4000
+          "$python" -B check_odd_mean_square.py --bits 256 --mesh 8000
+          "$python" -B check_odd_density_integrals.py
