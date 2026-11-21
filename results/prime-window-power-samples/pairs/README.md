@@ -13,7 +13,7 @@ Both orders of each unequal pair count. Under RH the finite bounds hold at every
 
 | Result obtained without assuming RH | Where to find the proof |
 | --- | --- |
-| On every complete block $[K,4K\sqrt{\log K}]$ with $2\le K\le4\cdot10^{24}$, the squared centred prime sum is strictly below eight ninths of the diagonal. | [Odd-shift mean square and certificate](ODD-MEAN-SQUARE.md) |
+| On every complete block $[K,4K\sqrt{\log K}]$ with $2\le K\le4\cdot10^{24}$, the squared centred prime sum is strictly below eight ninths of the diagonal. This uses OpenAI's Lean theorem that $\zeta$ has no zeros with real part above $7/8$. | [Odd-shift mean square and certificate](ODD-MEAN-SQUARE.md) |
 | Every individual $c_n$ is strictly negative on every block with $`2\le K\le1\,200\,000\,000\,000`$. A hypothetical first failure forces an off-line zero within an explicit height and real-part range. | [Finite bounds](FINITE.md) |
 | Every sufficiently late $[B,4B\sqrt{\log B}]$ contains a run of at least $\lfloor\exp((\log B)^{3/5}/(5(\log\log B)^{1/5}))\rfloor$ consecutive negative $c_n$. | [Theta identity and runs](THETA.md) |
 | Nonpositivity of the sum on arbitrarily late $[B,4B\sqrt{\log B}]$ is itself equivalent to RH. A filter for any one zero proves the converse directly, including for a zero of higher multiplicity. | [Short-block criterion](SHORT-BLOCKS.md) |

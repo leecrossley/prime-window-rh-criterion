@@ -9,7 +9,7 @@ S(x)=\sum_m b_mW(m/x),\quad A(x)=\sum_m b_m^2W(m/x)^2,\quad
 E_K=\sum_{n=K}^M S(n^2)^2/n^2,\quad D_K=\sum_{n=K}^M A(n^2)/n^2.
 $$
 
-**Finite theorem.** Every complete block of square samples satisfies $E_K<8D_K/9$ for $2\le K\le4\cdot10^{24}$. On $5\cdot10^{22}\le K\le4\cdot10^{24}$ the raw odd-shift mean square in (1) below is less than $2.502$, $E_K/N<20.83$ and $D_K/N>23.914$. This is a bound on the sum over all bases in each block. Its zero-location inputs are the finite verification through $3\cdot10^{12}$ and the separate zero-free half-plane $\Re s>7/8$. [Platt and Trudgian](https://arxiv.org/abs/2004.09765) · [Seven-eighths theorem](https://github.com/openai/math/blob/adc7f1241b42e322a6451854ab7e4b4c146bf78a/lean/OAI/NumberTheory/DirichletL/Nonvanishing.lean)
+**Finite theorem.** Every complete block of square samples satisfies $E_K<8D_K/9$ for $2\le K\le4\cdot10^{24}$. On $5\cdot10^{22}\le K\le4\cdot10^{24}$ the raw odd-shift mean square in (1) below is less than $2.502$, $E_K/N<20.83$ and $D_K/N>23.914$. This is a bound on the sum over all bases in each block. Its zero-location inputs are the finite verification through $3\cdot10^{12}$ and the separate zero-free half-plane $\Re s>7/8$. The half-plane is the Lean theorem `OAI.riemannZeta_ne_zero_of_seven_eighths_lt_re`, released by OpenAI in October 2026 in a repository of manuscripts and proofs produced by an internal OpenAI model. The finite theorem assumes it. [Platt and Trudgian](https://arxiv.org/abs/2004.09765) · [Seven-eighths theorem](https://github.com/openai/math/blob/adc7f1241b42e322a6451854ab7e4b4c146bf78a/lean/OAI/NumberTheory/DirichletL/Nonvanishing.lean)
 
 Expanding the square gives the contribution from ordered unequal pairs as $E_K-D_K$. The theorem puts that contribution strictly below $-D_K/9$ on each complete block. Proving its sign by this route for arbitrarily large $K$ remains open. [Short-block criterion](SHORT-BLOCKS.md)
 
@@ -23,7 +23,7 @@ R_o(x)=\frac{2}{x}\sum_{\substack{h\ge1\\h\ {\rm odd}}}\sum_{m\ge1}
 V_K=\frac1N\sum_{n=K}^M\frac{(R_o(n^2)-L^2)^2}{n^2}. \tag{1}
 ```
 
-Let $T_e,T_o$ be the sums of $W_m$ on even and odd integers. For $x\ge4$ the weights on even prime powers add to one, since the two adjacent powers of two have weights $1/t-1$ and $2-1/t$ for $1/2<t\le1$. Hence the even centered sum is $u=L-T_e$. Each odd displacement joins opposite parities. Factoring the two ordered products gives $xR_o/2=u(S-u)+T_eT_o$. [The odd-gap prime-power observation in Chou, Haag, Huryn and Ledoan](https://arxiv.org/abs/2308.14888)
+Let $T_e,T_o$ be the sums of $W_m$ on even and odd integers. For $x\ge4$ the weights on even prime powers add to one, since the two adjacent powers of two have weights $1/t-1$ and $2-1/t$ for $1/2\lt t\le1$. Hence the even centered sum is $u=L-T_e$. Each odd displacement joins opposite parities. Factoring the two ordered products gives $xR_o/2=u(S-u)+T_eT_o$. [The odd-gap prime-power observation in Chou, Haag, Huryn and Ledoan](https://arxiv.org/abs/2308.14888)
 
 For completeness write $T_e=\mu x/2+e$, $T_o=\mu x/2+o$. The trapezoid rule on either parity lattice gives $|e|,|o|\le6/x$. Its error on mesh $d$ for the integral is at most $d^2\mathrm{Var}(W')/8$, by integration against the cell kernel $(t-a)(b-t)/2$. Here $d=2/x$ and $\mathrm{Var}(W')=24$. Expanding the factored product gives
 
@@ -111,7 +111,7 @@ $$
 
 Both estimates apply for every $T\ge H_0$. [Chourasiya and Simonič, Corollary 1 and equation (11)](https://arxiv.org/pdf/2507.15184)
 
-Let $U(s)$ be the smaller available bound. On a grid $a=s_0<\cdots<s_J=b$, the sum in (5) is at most
+Let $U(s)$ be the smaller available bound. On a grid $a=s_0\lt\cdots\lt s_J=b$, the sum in (5) is at most
 
 $$
 B^{4a-2}U(a)+\sum_{j=0}^{J-1}
