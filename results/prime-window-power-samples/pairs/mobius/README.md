@@ -1,5 +1,7 @@
 # A fourth-power criterion for the negative part of a Möbius sum
 
+Published edition [10.5281/zenodo.24426583](https://doi.org/10.5281/zenodo.24426583).
+
 For the paired Möbius remainder $`R(k)`$ defined below, add up the losses on one complete block,
 
 ```math
