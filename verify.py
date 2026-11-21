@@ -9,7 +9,14 @@ import tempfile
 
 TARGET = 'PrimeWindow'
 MODULES = ['DyadicArithmetic', 'DelayedPole', 'PrimeWindow']
-THEOREMS = ['rh_of_prime_sign_windows', 'zeroFree_of_prime_sign_windows', 'compactDifference_zeroFree']
+THEOREMS = [
+    'rh_of_prime_sign_windows',
+    'zeroFree_of_prime_sign_windows',
+    'compactDifference_zeroFree',
+    'zeta_zeroFree_of_prime_window',
+    'no_small_primePower_windows_of_zero',
+    'prime_deficit_on_every_late_window',
+]
 LEAN_COMMIT = "819816b2e0a3bf405af45ae5c7af2491d8f5bee6"
 ALLOWED_AXIOMS = {"propext", "Classical.choice", "Quot.sound"}
 
@@ -47,7 +54,7 @@ def main():
     for theorem in THEOREMS:
         match = re.search(r"'ThetaTransfer\." + re.escape(theorem) +
                           r"' depends on axioms:\s*\[([^\]]*)\]", output)
-        if not match or set(match[1].replace(" ", "").split(",")) != ALLOWED_AXIOMS:
+        if not match or set("".join(match[1].split()).split(",")) != ALLOWED_AXIOMS:
             raise SystemExit("Axiom audit failed for " + theorem + "\n" + output)
     print("Compiler commit:", LEAN_COMMIT)
     print("Kernel replay passed:", ", ".join(MODULES))
