@@ -5,7 +5,7 @@ abstract: "A Lean proof that a one-sided moving prime-sum bound on arbitrarily l
 authors:
   - family-names: Crossley
     given-names: Lee
-version: 1.0.3
+version: 1.0.4
 license: CC-BY-4.0
 repository-code: https://github.com/leecrossley/prime-window-rh-criterion
 type: software
