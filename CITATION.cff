@@ -5,7 +5,7 @@ abstract: "Riemann hypothesis criteria from weighted prime windows, dyadic filte
 authors:
   - family-names: Crossley
     given-names: Lee
-version: 1.1.0
+version: 1.1.1
 license: CC-BY-4.0
 repository-code: https://github.com/leecrossley/prime-window-rh-criterion
 type: software
