@@ -1,0 +1,36 @@
+name: Verify prime-pair bounds
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'results/prime-window-power-samples/pairs/**'
+      - '.github/workflows/prime-pair-bounds.yml'
+  pull_request:
+    paths:
+      - 'results/prime-window-power-samples/pairs/**'
+      - '.github/workflows/prime-pair-bounds.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    name: Prime-pair bounds at 160 and 256 bits
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Reproduce the finite bounds and filter examples
+        working-directory: results/prime-window-power-samples/pairs
+        run: |
+          python3 -m venv "$RUNNER_TEMP/prime-pair-env"
+          python="$RUNNER_TEMP/prime-pair-env/bin/python"
+          "$python" -m pip install 'python-flint==0.9.0'
+          for bits in 160 256; do
+            "$python" -B check_pairs.py --bits "$bits"
+            "$python" -B check_theta.py --bits "$bits"
+            "$python" -B check_filter.py --bits "$bits"
+          done

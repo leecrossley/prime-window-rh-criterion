@@ -78,8 +78,8 @@ Choose $X=4B^2\sqrt{\log B}$. The lower and upper endpoints for $y$ in (4) are r
 Away from its knots the derivative of $S_W(t)$ is
 
 $$
-S_W'(t)=\sum_{t/2<m<t}\frac{b_m}{m}
-  -\tfrac12\sum_{t/4<m<t/2}\frac{b_m}{m}.
+S_W'(t)=\sum_{t/2\lt m\lt t}\frac{b_m}{m}
+  -\tfrac12\sum_{t/4\lt m\lt t/2}\frac{b_m}{m}.
 $$
 
 Since $\sum_{m\le u}b_m=\psi(u)-\lfloor u\rfloor$, partial summation on these two intervals and Johnston–Yang's estimate with exponential coefficient $0.1853$ give $|S_W'(t)|\ll \exp(-0.17\ell(t))$ for large $t$. The loss in the coefficient absorbs the logarithmic factor and the fixed change of scale. Continuity and piecewise linearity allow integration through the knots. [Johnston and Yang, Theorem 1.4](https://arxiv.org/pdf/2204.01980)

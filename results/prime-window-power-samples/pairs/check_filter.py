@@ -41,8 +41,10 @@ def check():
     g_hat = (arb.pi()**(-rho/2)*(rho/2).gamma()*
              (1-2**(-rho))*(1-2**(1-rho))/2)
     residue = -g_hat*derivative
-    print('Magnitude of unnormalized first-zero residue', abs(residue).str(14))
-    for x, relative_limit in [(32, '0.95'), (64, '0.17'), (128, '0.04')]:
+    magnitude = abs(residue)
+    assert arb('0.0000275384') < magnitude < arb('0.0000275385')
+    print('Magnitude of unnormalized first-zero residue', magnitude.str(14))
+    for x, relative_limit in [(32, '0.95'), (64, '0.17'), (128, '0.0275')]:
         moment = filtered_moment(x, rho)
         relative = abs(moment-residue)/abs(residue)
         assert relative < arb(relative_limit)
