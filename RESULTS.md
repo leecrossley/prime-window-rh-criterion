@@ -25,7 +25,7 @@ Run `sh verify-collection.sh` from the repository root to check the result manif
 
 ## Edition DOIs
 
-Each DOI identifies a fixed release. The final column identifies the archive with the proof files in this revision. A shared release can contain several papers. The fourth-power Möbius row gives both the original paper and the edition containing the separate kernel checks for all eleven Lean modules. The collection as archived on 21 November 2026 is available at [10.5281/zenodo.24426583](https://doi.org/10.5281/zenodo.24426583).
+Each DOI identifies a fixed release. The final column identifies the archive with the proof files in this revision. A shared release can contain several papers. The fourth-power Möbius row gives both the original paper and the edition containing the separate kernel checks for the eleven result modules. The collection as archived on 21 November 2026 is available at [10.5281/zenodo.24426583](https://doi.org/10.5281/zenodo.24426583).
 
 | Result | Published release | Version DOI | Current proof files |
 | --- | --- | --- | --- |
