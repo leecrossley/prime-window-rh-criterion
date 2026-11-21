@@ -10,3 +10,12 @@ license: CC-BY-4.0
 repository-code: https://github.com/leecrossley/prime-window-rh-criterion/tree/main/results/dyadic-filter-zeros
 doi: 10.5281/zenodo.24412802
 type: software
+references:
+  - type: software
+    title: "A fourth-power criterion for the negative part of a Möbius sum"
+    authors:
+      - family-names: Crossley
+        given-names: Lee
+    version: "fourth-power-mobius-v1.0.0"
+    doi: 10.5281/zenodo.24426583
+    url: https://github.com/leecrossley/prime-window-rh-criterion/releases/tag/fourth-power-mobius-v1.0.0
