@@ -106,7 +106,7 @@ There is a corresponding run for the directly observable prime sum. The family's
 \ll (u-t)t^{-1/4}+t^{-1/4}\log t .
 ```
 
-Start at $`t=t_0`$ and take successive integer $`u\ge t_0`$. This gives the same two run lengths for $`|S(n^2)/n|`$ and its prime diagonal. Its starting point can differ from the one chosen for $`Q`$. [Family theta theorem](https://github.com/leecrossley/prime-window-rh-criterion/blob/1bcb390d5876569539f106e7f0e21a79669ead73/results/prime-window-power-samples/pairs/THETA.md)
+Start at $`t=t_0`$ and take successive integer $`u\ge t_0`$. This gives the same two run lengths for $`|S(n^2)/n|`$ and its prime diagonal. Its starting point can differ from the one chosen for $`Q`$. [Family theta theorem](https://github.com/leecrossley/prime-window-rh-criterion/blob/1bcb390d5876569539f106e7f0e21a79669ead73/results/prime-window-power-samples/pairs/THETA.md) [Exact real zero](https://github.com/leecrossley/prime-window-rh-criterion/blob/1bcb390d5876569539f106e7f0e21a79669ead73/results/prime-window-power-samples/pairs/SHORT-BLOCKS.md#both-signs-on-real-scales)
 
 ## Isolating one zero in a shrinking interval
 
