@@ -1,0 +1,5 @@
+Checked 28 upstream and 1 local modules for DelayedPole.
+Compiler commit: 819816b2e0a3bf405af45ae5c7af2491d8f5bee6
+Kernel replay passed: DelayedPole
+Axioms for ThetaTransfer.compactDifference_poleData: propext, Classical.choice, Quot.sound
+Axioms for ThetaTransfer.compactDifference_zeroFree: propext, Classical.choice, Quot.sound
