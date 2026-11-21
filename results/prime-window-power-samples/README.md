@@ -2,6 +2,8 @@
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.24411620.svg)](https://doi.org/10.5281/zenodo.24411620)
 
+**Ordinary prime counts at squares.** A fixed power saving for exceptions about the block median on arbitrarily late shrinking blocks is equivalent to RH. Every block with base from 16 through 1,290,008,597,927,572 has zero exceptions. An independent upper bound at unbounded height remains open here. The same supplement gives a sharp lower limit for weighted prime-pair discrepancies. [Proofs, prior work and replays](square-blocks/)
+
 **Finite mean square.** On each complete block of square samples $K\le n\le4K\sqrt{\log K}$ with $2\le K\le4\cdot10^{24}$, the squared centred prime sum is strictly below eight ninths of the diagonal. The proof uses odd shifts and the zero-free half-plane $\Re s>7/8$, which comes from a Lean theorem in OpenAI's repository of model-produced mathematics. [Proof and verification](pairs/ODD-MEAN-SQUARE.md)
 
 **Unequal prime pairs.** For every integer $K$ from 2 through 1.2 trillion, the weighted sum over unequal pairs is negative at every square $n^2$ in the block of bases $K\le n\le K^2$. This finite result rests on Platt and Trudgian’s published zero check through height $3\cdot10^{12}$. Long runs of negative sums occur inside every sufficiently late block without assuming RH. Nonpositivity of the sum over arbitrarily late whole blocks is itself equivalent to RH. Shorter blocks of the form $K\le n\le4K\sqrt{\log K}$ narrow the window, and nonpositivity on arbitrarily late ones is also equivalent to RH. [Theorems and verification](pairs/README.md)
