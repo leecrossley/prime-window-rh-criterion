@@ -1,5 +1,7 @@
 # An ordinary-prime window criterion for the Riemann hypothesis
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.24410878.svg)](https://doi.org/10.5281/zenodo.24410878)
+
 This is a Lean proof that the Riemann hypothesis (RH) follows from a one-sided inequality about ordinary primes. If the weighted sum of primes between $y$ and $4y$ stays at or below $2y\log2$ throughout long windows that occur arbitrarily far out, then RH holds.
 
 The hypothesis is one-sided and involves only primes, with no prime powers or zeta zeros. It is needed only on a sparse set of windows. A companion repository proves the forward direction: under RH the inequality holds, strictly, at every scale.
