@@ -25,7 +25,7 @@ Run `sh verify-collection.sh` from the repository root to check the result manif
 
 ## Edition DOIs
 
-Each DOI identifies a fixed release. The final column identifies the archive with the proof files in this revision. A shared release can contain several papers. The Möbius archive contains the published proof. The current README adds its DOI, and the replay script checks each of the eleven Lean modules in a separate process. The collection as archived on 21 November 2026 is available at [10.5281/zenodo.24426583](https://doi.org/10.5281/zenodo.24426583).
+Each DOI identifies a fixed release. The final column identifies the archive with the proof files in this revision. A shared release can contain several papers. The fourth-power Möbius row gives both the original paper and the edition containing the separate kernel checks for the eleven result modules. The collection as archived on 21 November 2026 is available at [10.5281/zenodo.24426583](https://doi.org/10.5281/zenodo.24426583).
 
 | Result | Published release | Version DOI | Current proof files |
 | --- | --- | --- | --- |
@@ -35,4 +35,4 @@ Each DOI identifies a fixed release. The final column identifies the archive wit
 | [A prime-window criterion for RH on perfect powers](results/prime-window-power-samples/README.md) | [v1.2.1](https://github.com/leecrossley/prime-window-power-samples/releases/tag/v1.2.1) | [10.5281/zenodo.24414757](https://doi.org/10.5281/zenodo.24414757) | [10.5281/zenodo.24426583](https://doi.org/10.5281/zenodo.24426583) |
 | [Odd-shift mean square](results/prime-window-power-samples/pairs/ODD-MEAN-SQUARE.md) | [odd-shift-mean-square-v1.0.2](https://github.com/leecrossley/prime-window-rh-criterion/releases/tag/odd-shift-mean-square-v1.0.2) | [10.5281/zenodo.24417740](https://doi.org/10.5281/zenodo.24417740) | Same edition |
 | [Square-block median](results/prime-window-power-samples/square-blocks/README.md) | [square-block-median-v1.0.2](https://github.com/leecrossley/prime-window-rh-criterion/releases/tag/square-block-median-v1.0.2) | [10.5281/zenodo.24425367](https://doi.org/10.5281/zenodo.24425367) | [10.5281/zenodo.24426583](https://doi.org/10.5281/zenodo.24426583) |
-| [Fourth-power Möbius criterion](results/prime-window-power-samples/pairs/mobius/README.md) | [fourth-power-mobius-v1.0.0](https://github.com/leecrossley/prime-window-rh-criterion/releases/tag/fourth-power-mobius-v1.0.0) | [10.5281/zenodo.24426583](https://doi.org/10.5281/zenodo.24426583) | Same edition |
+| [Fourth-power Möbius criterion](results/prime-window-power-samples/pairs/mobius/README.md) | [fourth-power-mobius-v1.0.0](https://github.com/leecrossley/prime-window-rh-criterion/releases/tag/fourth-power-mobius-v1.0.0) | [10.5281/zenodo.24426583](https://doi.org/10.5281/zenodo.24426583) | [10.5281/zenodo.24428032](https://doi.org/10.5281/zenodo.24428032) |
