@@ -1,4 +1,5 @@
 import FiniteHundredBlocks
+import FiniteFifthBlocks
 import Lean.Util.FoldConsts
 open Lean Elab Command
 private partial def reachable (env : Environment) (todo : List Name) (seen : NameSet := {}) : NameSet :=
@@ -14,7 +15,9 @@ run_cmd do
     ``RiemannReduction.DivisorBand.early_deficit_error_explicit,
     ``RiemannReduction.DivisorBand.early_deficit_error_two,
     ``RiemannReduction.DivisorBand.FourthMass.finite_quartic_budget,
-    ``RiemannReduction.DivisorBand.FourthMass.finite_hundred_blocks]
+    ``RiemannReduction.DivisorBand.FourthMass.finite_hundred_blocks,
+    ``RiemannReduction.DivisorBand.FiniteFifth.all_real_of_majorant,
+    ``RiemannReduction.DivisorBand.FiniteFifth.integer_and_square_blocks]
   let e ← getEnv
   let used := reachable e roots
   for n in [`sorryAx,`RiemannHypothesis] do

@@ -16,7 +16,7 @@ COMPILER = "819816b2e0a3bf405af45ae5c7af2491d8f5bee6"
 AUDITS = ("FourthSignedAudit", "FiniteQuarticAudit", "CutoffAudit")
 KERNEL = ("FourthPowerSpacing", "FourthSignExcursions", "FourthSignedCriterion",
           "EarlyBandQuadrature", "EarlySmallDivisors", "EarlySquareError",
-          "FiniteQuarticBudget", "FiniteHundredBlocks", "CutoffVariation", "BalancedCutoffs")
+          "FiniteQuarticBudget", "FiniteHundredBlocks", "FiniteFifthBlocks", "CutoffVariation", "BalancedCutoffs")
 PACKAGES = {"Mathlib", "Lean", "Std", "Batteries", "Aesop", "Init", "Qq",
             "Lake", "Plausible", "ProofWidgets", "ImportGraph"}
 IMPORT = re.compile(r"^[ \t]*(?:(?:public|private|meta)\s+)*import[ \t]+([\w.]+(?:[ \t]+[\w.]+)*)", re.M)

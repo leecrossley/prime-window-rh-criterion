@@ -34,6 +34,19 @@ def check(bits):
     print(bits, "bits; constant", constant.str(21), "slope", slope.str(21),
           "middle", middle.str(15), "last square bound", last.str(18))
 
+    root_cap = 69 * 10**19
+    assert (26 * 10**9)**2 <= root_cap
+    s = arb(root_cap)
+    max_ratio = 4 * (2 * smoothing).exp() / 1024
+    assert 0 < max_ratio < 1
+    trivial_at_start = max_ratio**2 / (3 * 32 * (1 - max_ratio**2))
+    smooth_at_end = line + trivial_at_start + (arb(732) / 10) * tail * s / height**2
+    unsmooth_at_end = ((2 * smoothing).exp() * ((s**2).log() + smoothing)
+                       * (3 * s * root_variance**2 / 4 + 3 * root_variance))
+    fifth = smooth_at_end + unsmooth_at_end
+    assert fifth < arb(199554261606147) / 10**15 < arb(1) / 5
+    print("two-sided fifth majorant", fifth.str(26), "through x =", root_cap**2)
+
     for m in (arb(10**4), arb(10**6), arb(2 * 10**6)):
         majorant = arb(23) / 10 * (m.log() + 1 / m) + arb(55) / 4 * (m**4 + m**2) / height**2
         budget = 2 * (1 + 2 * m.log())
