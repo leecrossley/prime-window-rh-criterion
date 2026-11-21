@@ -2,6 +2,8 @@
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.24411620.svg)](https://doi.org/10.5281/zenodo.24411620)
 
+**Finite mean square.** On each complete block of square samples $K\le n\le4K\sqrt{\log K}$ with $2\le K\le4\cdot10^{24}$, the squared centred prime sum is strictly below eight ninths of the diagonal. The proof uses odd shifts and the seven-eighths zero-free half-plane. [Proof and verification](pairs/ODD-MEAN-SQUARE.md)
+
 **Unequal prime pairs.** For every integer $K$ from 2 through 1.2 trillion, the weighted sum over unequal pairs is negative at every square $n^2$ in the block of bases $K\le n\le K^2$. This finite result rests on Platt and Trudgian’s published zero check through height $3\cdot10^{12}$. Long runs of negative sums occur inside every sufficiently late block without assuming RH. Nonpositivity of the sum over arbitrarily late whole blocks is itself equivalent to RH. Shorter blocks of the form $K\le n\le4K\sqrt{\log K}$ narrow the window, and nonpositivity on arbitrarily late ones is also equivalent to RH. [Theorems and verification](pairs/README.md)
 
 **Finite result.** The weighted ordinary-prime sum is strictly below its main term at every real scale through $10^{45}$. With `bramble_trace`’s earlier finite certificate below $2\cdot10^{35}$, Platt and Trudgian’s published zero check through $3\cdot10^{12}$ suffices. This covers every square sample in every block $K\le n\le K^2$ for $1\le K\le177{,}827{,}941{,}003$. A sign failure at any larger scale $x$ forces a zero below height $17x^{1/4}$ with real part greater than $1/2+20/\log(x/2)$. The theorem for arbitrarily large blocks remains a separate target. [Proof and prior work](finite/QUARTIC.md) · [Verification](finite/CHECKS.txt)
