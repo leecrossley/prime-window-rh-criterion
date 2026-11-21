@@ -1,0 +1,11 @@
+cff-version: 1.2.0
+message: If you use this work, please cite it as below.
+title: "A prime-window criterion for RH on perfect powers"
+abstract: "A fixed-power sampling criterion for the Riemann hypothesis with finite bounds and unconditional runs for prime sums and ordered unequal pairs"
+authors:
+  - family-names: Crossley
+    given-names: Lee
+version: 1.2.0
+license: CC-BY-4.0
+repository-code: https://github.com/leecrossley/prime-window-power-samples
+type: software

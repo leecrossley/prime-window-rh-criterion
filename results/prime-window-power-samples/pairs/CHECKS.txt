@@ -1,0 +1,75 @@
+Weighted unequal pairs on square samples
+Lee Crossley | 21 November 2026
+Mathlib 0df444a360eaa60ab8c11dca51a86af692955474
+
+Python and python-flint
+3.12.14 0.9.0
+
+check_pairs.py --bits 160
+Arb precision 160 bits
+Thirty small bases passed. Largest individual sum [-0.005043243134874336 +/- 2.70e-19]
+Middle range |S| / sqrt(x) upper [0.2928619515035679 +/- 3.79e-17]
+Middle range diagonal / x lower [0.1088228263801094 +/- 1.89e-17]
+Large range |S| / sqrt(x log x) upper [0.4402690882211741 +/- 3.66e-17]
+Large range diagonal / (x log x) lower [0.2194058885507832 +/- 3.32e-17]
+Endpoint 4096 K^4 / (log(K^4) H0^4) [0.9425116681753380 +/- 4.51e-18]
+Extra allowance for middle zeros in witness test [0.01298596753591839 +/- 1.94e-18]
+
+check_theta.py --bits 160
+Arb precision 160 bits
+x = 8 scaled theta-weighted prime sum [-2.464379661576 +/- 1.54e-13]
+x = 16 scaled theta-weighted prime sum [-2.077953766662 +/- 3.89e-13]
+x = 32 scaled theta-weighted prime sum [-2.026906171108 +/- 2.31e-14]
+x = 64 scaled theta-weighted prime sum [-2.013276963847 +/- 3.11e-13]
+Upper bound for squared L2 error / squared tent norm [0.004095671769266771 +/- 1.46e-19]
+
+check_filter.py --bits 160
+Arb precision 160 bits
+Magnitude of unnormalized first-zero residue [2.7538467767870e-5 +/- 2.56e-20]
+x = 32 relative discrepancy [0.88486665718603 +/- 2.83e-16]
+x = 64 relative discrepancy [0.15541673480137 +/- 1.58e-15]
+x = 128 relative discrepancy [0.027429979670183 +/- 3.59e-16]
+
+check_pairs.py --bits 256
+Arb precision 256 bits
+Thirty small bases passed. Largest individual sum [-0.005043243134874336 +/- 2.70e-19]
+Middle range |S| / sqrt(x) upper [0.2928619515035679 +/- 3.79e-17]
+Middle range diagonal / x lower [0.1088228263801094 +/- 1.89e-17]
+Large range |S| / sqrt(x log x) upper [0.4402690882211741 +/- 3.66e-17]
+Large range diagonal / (x log x) lower [0.2194058885507832 +/- 3.32e-17]
+Endpoint 4096 K^4 / (log(K^4) H0^4) [0.9425116681753380 +/- 4.51e-18]
+Extra allowance for middle zeros in witness test [0.01298596753591839 +/- 1.94e-18]
+
+check_theta.py --bits 256
+Arb precision 256 bits
+x = 8 scaled theta-weighted prime sum [-2.464379661576 +/- 1.54e-13]
+x = 16 scaled theta-weighted prime sum [-2.077953766662 +/- 3.89e-13]
+x = 32 scaled theta-weighted prime sum [-2.026906171108 +/- 2.31e-14]
+x = 64 scaled theta-weighted prime sum [-2.013276963847 +/- 3.11e-13]
+Upper bound for squared L2 error / squared tent norm [0.004095671769279457 +/- 1.93e-20]
+
+check_filter.py --bits 256
+Arb precision 256 bits
+Magnitude of unnormalized first-zero residue [2.7538467767870e-5 +/- 2.56e-20]
+x = 32 relative discrepancy [0.88486665718603 +/- 2.83e-16]
+x = 64 relative discrepancy [0.15541673480137 +/- 1.58e-15]
+x = 128 relative discrepancy [0.027429979670183 +/- 3.59e-16]
+
+Compiler
+Lean (version 4.33.1, arm64-apple-darwin24.6.0, commit 819816b2e0a3bf405af45ae5c7af2491d8f5bee6, Release)
+
+Compile PairSignChecks with autoImplicit=false
+'PrimePairSign.unequal_pairs' depends on axioms: [propext, Classical.choice, Quot.sound]
+'PrimePairSign.centered_divisors' depends on axioms: [propext, Classical.choice, Quot.sound]
+'PrimePairSign.weighted_divisors' depends on axioms: [propext, Classical.choice, Quot.sound]
+'PrimePairSign.two_sided_corners' depends on axioms: [propext, Classical.choice, Quot.sound]
+'PrimePairSign.corner_moments' depends on axioms: [propext, Classical.choice, Quot.sound]
+'PrimePairSign.finite_sign' depends on axioms: [propext, Classical.choice, Quot.sound]
+'PrimePairSign.logarithmic_sign' depends on axioms: [propext, Classical.choice, Quot.sound]
+'PrimePairSign.residual_energy' depends on axioms: [propext, Classical.choice, Quot.sound]
+'PrimePairSign.cell_energy' depends on axioms: [propext, Classical.choice, Quot.sound]
+
+Independent invocation of leanchecker on the compiled module
+replaying PairSignChecks
+
+All commands exited successfully.

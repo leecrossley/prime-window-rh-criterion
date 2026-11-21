@@ -1,0 +1,48 @@
+A prime-window criterion for RH on perfect powers
+Clean local build and kernel replay completed 2026-11-21 03:58:43 UTC
+
+Lean 4.33.1, arm64 macOS
+Lean commit 819816b2e0a3bf405af45ae5c7af2491d8f5bee6
+Mathlib commit 0df444a360eaa60ab8c11dca51a86af692955474
+Upstream Lean source archive SHA-256
+9631b4f020199e580ba86178cb56c6e9b09f690c2369a80dc4334aa93f49c7fc
+
+31 upstream source files matched the digests in evidence/upstream.sha256.
+14 local modules were elaborated together with their upstream dependencies.
+Each of the 45 compiled modules was supplied to leanchecker.
+The original landauWindow.lean has Git blob ID 7915058f10b33a52652290cd887cbccdc00e676a.
+The public mirror at revision 40e56bab026552e089d7afcfeff08d2defb9c005
+and the extracted source archive independently gave this blob ID.
+
+Axiom reports and kernel result
+'RiemannReduction.PrimeGrid.rh_of_square_sqrt_windows' depends on axioms: [propext, Classical.choice, Quot.sound]
+'RiemannReduction.PrimeGrid.rh_of_doubled_prime_sqrt_windows' depends on axioms: [propext, Classical.choice, Quot.sound]
+'PowerSamples.right_edge' depends on axioms: [propext, Classical.choice, Quot.sound]
+'PowerSamples.window_excludes' depends on axioms: [propext, Classical.choice, Quot.sound]
+'PowerSamples.term_increment' depends on axioms: [propext, Classical.choice, Quot.sound]
+'PowerSamples.rh_of_power_samples_of_increment' depends on axioms: [propext, Classical.choice, Quot.sound]
+Kernel replay passed for 45 modules.
+Lean (version 4.33.1, arm64-apple-darwin24.6.0, commit 819816b2e0a3bf405af45ae5c7af2491d8f5bee6, Release)
+
+Scope of the Lean statements
+
+The square and doubled-prime theorems use just their stated arithmetic
+sample hypotheses. Their conclusions are Mathlib's RiemannHypothesis.
+The fixed-power transfer also assumes the increment envelope, the upper
+bound for zero real parts and the supremum property. The paper derives
+these for the actual prime sum and zeta zeros. It supplies a second
+interpolation argument via partial summation and proves the ordinary-prime
+forward implication. Those analytic steps and the quantitative
+every-block corollary and unconditional consecutive-run theorem have written proofs.
+
+Exact tent, signed-ramp and interval-slope checks passed for 33280 pairs.
+The finite test checks the arithmetic formulas at individual arguments
+and the slope on adjoining intervals. The infinite criterion follows
+from the analytic proof.
+
+The following constants were enclosed using python-flint 0.9.0, 160-bit Arb.
+Zero contribution bound    [0.1903696304220149129 +/- 9.69e-21]
+Prime square coefficient   [0.2426406871192851464 +/- 5.07e-21]
+Margin                     [0.05227105669727023350 +/- 4.63e-21]
+The constants are (4+3 sqrt(2))(2+EulerGamma-log(4 pi))/2,
+3 sqrt(2)-4, and their difference in the order prime squares minus zeros.

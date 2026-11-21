@@ -1,0 +1,75 @@
+Finite-height quartic transfer
+Run completed 2026-11-21T04:38:13+00:00
+
+Certificate runtime
+3.12.14 python-flint 0.9.0
+
+Python standard-library rational check
+Rational lower bound on the margin, rounded down to millionths: 13199 / 1000000
+Largest covered integer K for square samples: 177827941003
+Required zero weight > 0.00155; displacement exceeds 20/log(x/2).
+Four-uniform kernel support and variance identities verified.
+Exact one-sided hinge checks: 15096
+
+Arb interval calculation at 160 bits
+H² Var(U) upper bound: [12.02402401600800320107 +/- 3.03e-21]
+H² high transform upper bound: [6.012803797821862132303 +/- 3.71e-22]
+normalized square lower bound: [0.2420493117290022942334 +/- 3.82e-23]
+low-zero loss upper bound: [0.1326510784245094836137 +/- 3.09e-23]
+high-zero loss upper bound: [8.113103159993233888174e-13 +/- 1.35e-35]
+middle-corner loss upper bound: [0.09618106913483772729075 +/- 2.38e-24]
+normalized final lower bound: [0.01321716416884377301288 +/- 4.08e-24]
+middle-zero loss under displacement cap: [0.01298596753591839193974 +/- 1.97e-24]
+margin after middle-zero allowance: [0.0002311966329253810731421 +/- 1.24e-26]
+160 bits: all comparisons certified
+
+Arb interval calculation at 256 bits
+H² Var(U) upper bound: [12.02402401600800320107 +/- 3.03e-21]
+H² high transform upper bound: [6.012803797821862132303 +/- 3.71e-22]
+normalized square lower bound: [0.2420493117290022942334 +/- 3.82e-23]
+low-zero loss upper bound: [0.1326510784245094836137 +/- 3.09e-23]
+high-zero loss upper bound: [8.113103159993233888174e-13 +/- 1.35e-35]
+middle-corner loss upper bound: [0.09618106913483772729075 +/- 2.38e-24]
+normalized final lower bound: [0.01321716416884377301288 +/- 4.08e-24]
+middle-zero loss under displacement cap: [0.01298596753591839193974 +/- 1.97e-24]
+margin after middle-zero allowance: [0.0002311966329253810731421 +/- 1.24e-26]
+256 bits: all comparisons certified
+
+Lean 4.33.1, commit 819816b2e0a3bf405af45ae5c7af2491d8f5bee6.
+Mathlib commit 0df444a360eaa60ab8c11dca51a86af692955474.
+replaying QuarticCorners
+'QuarticCorners.tent_hinges' depends on axioms: [propext, Classical.choice, Quot.sound]
+'QuarticCorners.hinge_remainder' depends on axioms: [propext, Classical.choice, Quot.sound]
+'QuarticCorners.mean_hinge_gap' depends on axioms: [propext, Classical.choice, Quot.sound]
+'QuarticCorners.middle_corner' depends on axioms: [propext, Classical.choice, Quot.sound]
+Four corner theorems passed the kernel and axiom checks.
+
+Earlier finite range using bramble_trace, revision 38.
+Archive SHA-256 dd2903777ff1570da9b2ad414f4dd4cd6d47c95d526e23036005e0d2e46771ba
+https://rstation.ai/api/v1/posts/uw5cfb_J_Cj7XJO6/attachment?revision=38
+
+Prior finite sieve
+sieve: 148933 primes through 2000000
+certified: 78498 prime inputs and 2 endpoints
+nonpositive inputs: 0
+D_p(1) in [0.231049060186648436, 0.231049060186648437]
+D_p(2) in [0.108981028112414026, 0.108981028112414027]
+D_p(3) in [0.104122693414977835, 0.104122693414977836]
+D_p(1000000) in [142.279358022696120779, 142.279358022696170012]
+independent direct check: every integer from 1 through 100
+D_p minimum (primes and endpoints): x=3, [0.104122693414977835, 0.104122693414977836]
+D_p/sqrt(x) minimum (primes and endpoints): x=3, [0.060115265071886327, 0.060115265071886328]
+D_p minimum (small integers): x=3, [0.104122693414977835, 0.104122693414977836]
+D_p/sqrt(x) minimum (small integers): x=3, [0.060115265071886327, 0.060115265071886328]
+
+Prior finite spectral certificate
+H=3000000000000, Arb precision=128 bits, sharp S
+[10^6, 10^20]: E <= 0.000001100334020204, e(R) <= 0.046260703086500892
+[10^20, 10^34]: E <= 0.029483908474429622, e(R) <= 0.000156478255741830
+[10^34, 10^35]: E <= 0.070981552375344342, e(R) <= 0.000000142046587072
+32 certified zero pairs, 64 slabs, 4096 phase cells
+[10^34, 10^35]: D_p(x)/sqrt(x) > 0.004
+
+The written proof supplies the Fourier, explicit-formula, and prime-counting estimates.
+The local Lean replay covers four corner identities and inequalities.
+The finite zero verification by Platt and Trudgian is used as a published input.
