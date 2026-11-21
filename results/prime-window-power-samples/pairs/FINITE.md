@@ -7,7 +7,7 @@ Let $\Lambda$ be the von Mangoldt function, $b_m=\Lambda(m)-1$, and let $W$ be t
 $$
 W(t)=\begin{cases}
 2-1/(2t)&1/4\le t\le1/2,\\
-1/t-1&1/2<t\le1,\\
+1/t-1&1/2\lt t\le1,\\
 0&\text{otherwise}.
 \end{cases}
 $$
@@ -24,7 +24,7 @@ $$
 
 ## The smoothed estimate
 
-Set $d=1/1000$, $L=\log x$, $I=\int W^2=3-4\log2$ and $D(x)=x(\log2)/2-\sum_m\Lambda(m)W(m/x)$. Comparing each lattice cell with its integral costs at most the total variation, so $|S(x)+D(x)|\le2$. Use the previously constructed positive random dilation $U$, for which $\mathbb EU=1$, $e^{-2d}\le U\le e^d$, $\nu=\operatorname{Var}(U)<12.1/H^2$ and $|\mathbb EU^{\beta+i\gamma}|<6.1/H^2$ for $0\le\beta\le1$, $|\gamma|\ge H$. [Dilation, mass identity and explicit formula](https://github.com/leecrossley/prime-window-power-samples/blob/e4de5134777c660f14a6013ab192d41812d1eab2/finite/QUARTIC.md)
+Set $d=1/1000$, $L=\log x$, $I=\int W^2=3-4\log2$ and $D(x)=x(\log2)/2-\sum_m\Lambda(m)W(m/x)$. Comparing each lattice cell with its integral costs at most the total variation, so $|S(x)+D(x)|\le2$. Use the previously constructed positive random dilation $U$, for which $\mathbb EU=1$, $e^{-2d}\le U\le e^d$, $\nu=\mathrm{Var}(U)<12.1/H^2$ and $|\mathbb EU^{\beta+i\gamma}|<6.1/H^2$ for $0\le\beta\le1$, $|\gamma|\ge H$. [Dilation, mass identity and explicit formula](https://github.com/leecrossley/prime-window-power-samples/blob/e4de5134777c660f14a6013ab192d41812d1eab2/finite/QUARTIC.md)
 
 Put $T_0=(\log H_0+1)/(\pi H_0)$ and $B_2=\log3-(\gamma_E+\log(4\pi))/3$. For all $x\ge32^2$, with $r=4e^{2d}/x$,
 
@@ -37,9 +37,11 @@ $$
 
 Indeed the low zero coefficients $C(\rho)$ are positive on the critical line, have total mass at most $B_2+4T_0$ there up to height $H$, and $|\mathbb EU^\rho|\le1$ at those zeros. Above $H$, $|C(\rho)|\le2/\gamma^2$, the positive ordinates have reciprocal-square sum at most $T_0$, and the explicit formula counts both signs. These absolute bounds work on both sides. In the normalization at $y/4$, the trivial-zero coefficients are $(2^{-2j}-1)(2^{-2j}-2)/(2j(2j+1))\le1/3$. At $y=xU$ their sum is bounded by a geometric series. [Coefficient normalization](https://github.com/leecrossley/prime-window-power-samples/blob/e4de5134777c660f14a6013ab192d41812d1eab2/PROOF.md)
 
+The tent, its explicit formula and the exact value of $B_2$ are due to bramble_trace. [Fixed-tent formula and mass identity](https://rstation.ai/api/v1/posts/uw5cfb_J_Cj7XJO6/attachment?revision=24)
+
 ## Moving back to the original tent
 
-As a function of $x$, $`m W(m/x)=(x-m)_+-(3/2)(x-2m)_++(1/2)(x-4m)_+`$. Each mean hinge increment $`\mathbb E(xU-a)_+-(x-a)_+`$ is nonnegative by convexity. For $`h=x(U-1)`$ subtract $`h\mathbf1_{x>a}`$ from the displacement at fixed $h$ before averaging. The remainder is bounded by the integral from $0$ to $|h|$ of the indicator that $a$ is between $x$ and $x+\operatorname{sgn}(h)t$, endpoints included. For the hinge at $km$ this requires $1/m\le ke^{2d}/x$. At time $t$, eligible integers occupy an interval of length $t/k$. Both groups of coefficients, the positive one at $k=1,4$ and the absolute negative one at $k=2$, have $\sum|a_k|=3/2$ and $\sum k|a_k|=3$. Thus bounding either side costs the same.
+As a function of $x$, $`m W(m/x)=(x-m)_+-(3/2)(x-2m)_++(1/2)(x-4m)_+`$. Each mean hinge increment $`\mathbb E(xU-a)_+-(x-a)_+`$ is nonnegative by convexity. For $`h=x(U-1)`$ subtract $`h\mathbf1_{x>a}`$ from the displacement at fixed $h$ before averaging. The remainder is bounded by the integral from $0$ to $|h|$ of the indicator that $a$ is between $x$ and $x+\mathrm{sgn}(h)t$, endpoints included. For the hinge at $km$ this requires $1/m\le ke^{2d}/x$. At time $t$, eligible integers occupy an interval of length $t/k$. Both groups of coefficients, the positive one at $k=1,4$ and the absolute negative one at $k=2$, have $\sum|a_k|=3/2$ and $\sum k|a_k|=3$. Thus bounding either side costs the same.
 
 First allow every integer at weight at most $L+d$. There are at most $t/k+1$ crossings. Integrating in $t$ and using $\mathbb E h^2=x^2\nu$, $\mathbb E|h|\le x\sqrt\nu$ proves
 

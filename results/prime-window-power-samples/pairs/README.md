@@ -9,7 +9,7 @@ c_n=\frac{1}{n^2}\sum_{m\ne j} b_mb_jW(m/n^2)W(j/n^2),\qquad
 C_K=\sum_{K\le n\le K^2}c_n.
 $$
 
-Both orders of each unequal pair count. Under RH, the tent’s absolutely convergent explicit formula gives $C_K<0$ on every sufficiently late whole block. An arithmetic proof of $C_K\le0$ on an unbounded sequence of whole blocks remains open.
+Both orders of each unequal pair count. Under RH the finite bounds hold at every height, so $c_n<0$ for every $n\ge2$ and $C_K<0$ for every $K\ge2$. If RH fails, the short-block argument gives $C_K>0$ on every sufficiently late whole block. Thus $C_K\le0$ on an unbounded sequence of whole blocks is equivalent to RH, and so is $c_n<0$ for every $n\ge2$. An arithmetic proof of this sign would prove RH. The short-block theorem narrows the window to $[B,4B\sqrt{\log B}]$ and leaves the same sign open.
 
 | Result obtained without assuming RH | Where to find the proof |
 | --- | --- |
@@ -21,9 +21,9 @@ The exact divisor identity used here is $\sum_m(\Lambda(m)-1)G(m/x)=\sum_h(\log 
 
 ## Checks
 
-The analytic theorems are written proofs. Lean 4.33.1 checked nine finite identities and inequalities, including the ordered-pair expansion, the arithmetic divisor identity at finite cutoffs, both hinge bounds and the weighted square-cell inequality used to transfer the continuous detector to integer samples. The module lists its axiom dependencies. The separate kernel replay accepted it. [Lean source](PairSignChecks.lean) · [Check transcript](CHECKS.txt)
+The analytic theorems are written proofs. Lean 4.33.1 checked nine elementary algebraic lemmas. They are the ordered-pair expansion, the divisor identity $\sum_{m\mid n}(\Lambda(m)-1)=\log n-\tau(n)$ and its finite sums weighted by $g(n)$, a two-sided bound for a signed sum of three nonnegative terms, the arithmetic of the corner coefficients, the two closing sign comparisons, a squared-residual identity and the weighted square-cell inequality. None of them contains the hinge, expectation or explicit-formula estimates. The module lists its axiom dependencies. The separate kernel replay accepted it. [Lean source](PairSignChecks.lean) · [Check transcript](CHECKS.txt)
 
-The three certificates ran with CPython 3.12.14 and python-flint 0.9.0 at 160 and 256 bits. Both precisions gave the following outward bounds.
+The three numerical checks ran with CPython 3.12.14 and python-flint 0.9.0 at 160 and 256 bits. The first two check bounds used in the proofs. The third checks the first-zero filter at three specified scales. Both precisions gave the following outward bounds.
 
 | Check | Outcome |
 | --- | --- |
@@ -36,7 +36,7 @@ The three certificates ran with CPython 3.12.14 and python-flint 0.9.0 at 160 an
 
 For the last check the arithmetic quantity compared with the residue is $\int_0^X S_G(t)t^{-\rho-1}dt$. The program integrates each of the three Gaussians by the upper incomplete gamma function, bounds the omitted integer tail and uses a separately evaluated $\zeta'(\rho)$ for the residue. The finite examples test signs and normalizations. The asymptotic and its use on all late blocks follow from the proof.
 
-From this directory with python-flint installed, use
+To reproduce the numerical checks, run these commands from this directory with Python 3.10 or later and python-flint 0.9.0 installed.
 
 ~~~sh
 for bits in 160 256
@@ -63,4 +63,4 @@ Büthe transfers finite zero verification to explicit bounds for prime counts. C
 
 The positive theta kernel for $\xi$ is classical. Convolution methods for mean-periodic functions associated to zeta functions are established. Pintz, Schlage-Puchta and Révész studied localization of prime-number-theorem oscillations from individual zeros, including effective tradeoffs between the size and the localization. Kaczorowski studied local sign changes for classical prime remainders. The Montgomery–Vorhauer factor $2.02$ for $\psi(x)-x$ assumes RH. The earlier 547/727 calculation uses a selected Dirichlet zero, compact averages and a different prime-ideal score. [Rodgers and Tao, equations (1)–(3)](https://arxiv.org/pdf/1801.05914) · [Fesenko, Ricotta and Suzuki](https://arxiv.org/abs/0803.2821) · [Schlage-Puchta, including Pintz's theorem](https://arxiv.org/pdf/1912.00853) · [Révész](https://arxiv.org/abs/2202.01837) · [Kaczorowski](https://matwbn.icm.edu.pl/ksiazki/aa/aa45/aa4517.pdf) · [Montgomery and Vorhauer](https://doi.org/10.7169/facm/1229442626) · [547/727 result](https://github.com/leecrossley/theta-race-waiting-bound/blob/9193ef9459374da9f68156ad6a1aa8db088882b0/PROOF.md)
 
-The literature search covered the centred dyadic tent, finite-height bounds, squared prime sums on integer powers and localisation using the completed zeta function. It found no earlier statement of the explicit finite pair bound, the quantitative negative runs for this statistic or the short-block pair criterion. The whole-block sign follows under RH. Alpöge announced a Lean proof of RH on 20 November 2026, and Sutherland records the independent checks of that formal proof. [Alpöge’s announcement](https://alpo.ge/remark.pdf) [Sutherland’s verification record](https://math.mit.edu/~drew/grh/)
+The literature search covered the centred dyadic tent, finite-height bounds, squared prime sums on integer powers and localisation using the completed zeta function. It found no earlier statement of the explicit finite pair bound, the quantitative negative runs for this statistic or the short-block pair criterion. The whole-block sign follows under RH. Alpöge announced a Lean proof of RH on 20 November 2026. The announcement has not yet been refereed. Sutherland records the independent checks of that formal proof. [Alpöge’s announcement](https://alpo.ge/remark.pdf) [Sutherland’s verification record](https://math.mit.edu/~drew/grh/)
