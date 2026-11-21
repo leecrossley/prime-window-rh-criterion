@@ -54,4 +54,4 @@ This checks the [SHA-256 manifest](SHA256SUMS), downloads the pinned dependencie
 
 ## Related result
 
-[The forward direction under RH, with finite certificates](https://github.com/leecrossley/dyadic-prime-deficit/tree/v1.0.1)
+[The forward direction under RH, at this and every wider width](https://github.com/leecrossley/prime-window-all-widths/tree/v1.0.0)
