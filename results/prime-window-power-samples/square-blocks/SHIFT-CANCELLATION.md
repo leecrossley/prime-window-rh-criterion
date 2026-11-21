@@ -89,8 +89,7 @@ For every integer $`K\ge3`$, with $`N=M-K+1`$ and $`E_K=\sum_{n=K}^M S(n^2)^2/n^
 
 Thus a comparison of the odd-shift estimate with the observed mean diagonal, by more than this tolerance on the appropriate side, certifies either sign on the entire block. The tolerance decreases as $`O(1/(K^2\sqrt{\log K}))`$. This is an elementary finite inequality.
 
-For its proof, the full-mesh trapezoid rule on a lattice of spacing $`d`$ obeys
-$`|d\sum f-\int f|\le d^2\operatorname{Var}(f')/8`$. On each cell $`[a,b]`$ the quadrature error is, up to sign, the integral of $`(t-a)(b-t)/2`$ against $`df'(t)`$, whose kernel is bounded by $`d^2/8`$. The bound includes the jumps of $`W'`$ at the corners. Since $`\operatorname{Var}(W')=8+6+6+3+1=24`$, write $`T_e=\mu x/2+e`$ and $`T_o=\mu x/2+o`$ with $`|e|,|o|\le6/x`$. Expanding (3) now gives
+For its proof, the full-mesh trapezoid rule on a lattice of spacing $`d`$ obeys $`|d\sum f-\int f|\le d^2\mathrm{Var}(f')/8`$. On each cell $`[a,b]`$ the quadrature error is, up to sign, the integral of $`(t-a)(b-t)/2`$ against $`df'(t)`$, whose kernel is bounded by $`d^2/8`$. The bound includes the jumps of $`W'`$ at the corners. Since $`\mathrm{Var}(W')=8+6+6+3+1=24`$, write $`T_e=\mu x/2+e`$ and $`T_o=\mu x/2+o`$ with $`|e|,|o|\le6/x`$. Expanding (3) now gives
 
 ```math
 \left|R_o+\left(\mu-\frac{2L}{x}\right)S-L^2\right|

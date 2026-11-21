@@ -18,7 +18,7 @@ The unconditional seven-eighths theorem gives $`\beta=\Re\rho\le7/8`$ for every 
 
 The partial sums of $`b_m=\Lambda(m)-1`$ are therefore $`O(x^{7/8})`$. The tent has bounded variation, so $`S(x)=O(x^{7/8})`$. Away from the knots its derivative is
 ```math
-S'(x)=\sum_{x/2<m<x} b_m/m-\tfrac12\sum_{x/4<m<x/2}b_m/m.
+S'(x)=\sum_{x/2\lt m\lt x} b_m/m-\tfrac12\sum_{x/4\lt m\lt x/2}b_m/m.
 ```
 Partial summation gives $`S'(x)=O(x^{-1/8})`$. Continuity and the piecewise derivative bound give $`|F(t)|\ll t^{3/4}`$ and $`|F'(t)|\ll t^{-1/4}`$ off knots, and hence the corresponding increment bound across knots.
 
@@ -46,7 +46,7 @@ G(x,t)=\frac{(\min(x,t)-a)(b-\max(x,t))}{D}.
 ```
 Extend it by zero for $`t`$ outside $`[a,b]`$. Define
 ```math
-T_K(n)=\frac{1}{n^3}\left\{\sum_{a<p<b}(\log p)G(n^2,p)-
+T_K(n)=\frac{1}{n^3}\left\{\sum_{a\lt p\lt b}(\log p)G(n^2,p)-
                            \frac{(n^2-a)(b-n^2)}2\right\}.
 ```
 The sum uses ordinary primes only. Let $`V(x)=\sum_{m\le x}\Lambda(m)(x-m)-x^2/2`$, and let $`\ell`$ be the affine function interpolating $`V(a),V(b)`$. The chord of $`(x-m)_+`$ less its value at $`x`$ is exactly $`G(x,m)`$, including its zero value for exterior knots. The chord of $`x^2/2`$ less its value is $`(x-a)(b-x)/2=\int_a^bG(x,t)dt`$. Thus $`\ell(x)-V(x)`$ gives the numerator of $`T_K`$ with $`\Lambda(m)`$ in place of ordinary primes. [Integrated explicit formula and triangular prime weight, p. 2](https://arxiv.org/pdf/1503.05403)
@@ -83,13 +83,13 @@ Taking $`\beta_0`$ arbitrarily close to $`\Theta`$ gives the lower exponent on e
 
 Write $`\mu=d\vartheta-dt`$ on $`[a,b]`$. After squaring $`\int G\,d\mu`$, the mass on the diagonal comes only from repeated primes. Its normalized average is
 ```math
-\mathcal D_K=\frac1N\sum_{n\in J_K}\frac1{n^6}\sum_{a<p<b}(\log p)^2G(n^2,p)^2
+\mathcal D_K=\frac1N\sum_{n\in J_K}\frac1{n^6}\sum_{a\lt p\lt b}(\log p)^2G(n^2,p)^2
   \sim \frac{8}{45}\frac{\log K}{L^3}.
 \tag{3}
 ```
 To compute it, use $`y=(n^2-a)/D`$, $`z=(p-a)/D`$, $`g(y,z)=\min(y,z)-yz`$. Then $`G=Dg`$. Uniformly for $`0\le y\le1`$, partial summation and the prime number theorem give
 ```math
-\sum_{a<p<b}(\log p)^2g(y,(p-a)/D)^2
+\sum_{a\lt p\lt b}(\log p)^2g(y,(p-a)/D)^2
 =D\log a\left(\int_0^1g(y,z)^2dz+o(1)\right).
 ```
 The error is absolute inside the parentheses. The variation of $`g^2`$ is bounded uniformly, $`\log p/\log a=1+o(1)`$ throughout, and the normalized prime number theorem error $`O_A(a/(D\log^A a))`$ tends to zero. The integral is $`y^2(1-y)^2/3`$. Its mean over the samples tends to $`1/90`$ since $`y=(n-K)/H+O(1/L)`$ uniformly. Also $`n/K=1+O(1/L)`$ and $`D^3\log a/K^6\sim16\log K/L^3`$. This proves (3).
@@ -110,11 +110,11 @@ for every real constant $`c`$, because $`G(n^2,t)\log t`$ vanishes at both endpo
        \left(K+\frac1N\sum_{j\in J_K}|U_K(j)-m_K|\right).
 \tag{4}
 ```
-If $`\Theta>1/2`$, the lower bound for $`T_K`$ forces the mean absolute deviation from the median to be at least $`K^{2\Theta-o(1)}`$. This also bounds the uncentered root mean square from below since the median minimizes absolute deviations and the mean absolute value is at most the root mean square. The ordinary truncated explicit formula gives $`\psi(x)-x=O_\epsilon(x^{\Theta+\epsilon})`$ and partial summation gives the same upper exponent for $`\pi(x)-\operatorname{li}(x)`$. This gives $`\max_j|U_K(j)|\le K^{2\Theta+o(1)}`$ and the matching upper exponents. Under RH the usual $`O(\sqrt{x}\log x)`$ bound for $`\pi(x)-\operatorname{li}(x)`$ bounds each $`U_K(j)`$ on the block. [Explicit formula](https://arxiv.org/abs/1401.4233) · [Prime-counting bounds under RH](https://www.sciencedirect.com/science/article/abs/pii/S0022314X26000090)
+If $`\Theta>1/2`$, the lower bound for $`T_K`$ forces the mean absolute deviation from the median to be at least $`K^{2\Theta-o(1)}`$. This also bounds the uncentered root mean square from below since the median minimizes absolute deviations and the mean absolute value is at most the root mean square. The ordinary truncated explicit formula gives $`\psi(x)-x=O_\epsilon(x^{\Theta+\epsilon})`$ and partial summation gives the same upper exponent for $`\pi(x)-\mathrm{li}(x)`$. This gives $`\max_j|U_K(j)|\le K^{2\Theta+o(1)}`$ and the matching upper exponents. Under RH the usual $`O(\sqrt{x}\log x)`$ bound for $`\pi(x)-\mathrm{li}(x)`$ bounds each $`U_K(j)`$ on the block. [Explicit formula](https://arxiv.org/abs/1401.4233) · [Prime-counting bounds under RH](https://www.sciencedirect.com/science/article/abs/pii/S0022314X26000090)
 
 Put $`B_K=\#\{j\in J_K:|U_K(j)-m_K|>K(\log K)^2\}`$. In the off-line case the mean absolute deviation is at most $`K(\log K)^2+(B_K/N)K^{2\Theta+o(1)}`$. Its matching lower exponent therefore forces $`B_K=K^{1-o(1)}`$ on every sufficiently late block, in the sense that $`\log B_K/\log K\to1`$. Under RH the count is eventually zero. Thus showing $`B_K=O(K^{1-\eta})`$ for any fixed $`\eta>0`$ on some unbounded sequence would suffice. This test needs an upper bound on the number of exceptional cumulative counts and allows a free common offset on each block.
 
-Equivalently, compute the median of $`E_j=\pi(j^2)-\operatorname{li}(j^2)`$ over the block and count the same deviations about that median. Subtracting $`E_K`$ from every observation gives exactly $`U_K(j)`$ and shifts the median by the same amount.
+Equivalently, compute the median of $`E_j=\pi(j^2)-\mathrm{li}(j^2)`$ over the block and count the same deviations about that median. Subtracting $`E_K`$ from every observation gives exactly $`U_K(j)`$ and shifts the median by the same amount.
 
 One can also replay the triangular sum from the ordinary counts $`c_j=\pi((j+1)^2)-\pi(j^2)`$. In $`T_K(n)`$ replace the weighted prime and continuous measures in each gap by a single mass $`2c_j\log j-(2j+1)`$ at $`j^2`$. This changes the normalized statistic by $`O(1/L)`$ uniformly. Moving the mass by $`O(K)`$ costs $`O(KD/n^3)`$ by the Lipschitz bound for $`G`$ and the prime number theorem. Replacing each $`\log p`$ by $`2\log j`$ costs a further $`O(D^2/(K^4\log K))`$, since $`|\log p-2\log j|\le2/K`$ and the number of primes in the whole block is $`O(D/\log K)`$.
 

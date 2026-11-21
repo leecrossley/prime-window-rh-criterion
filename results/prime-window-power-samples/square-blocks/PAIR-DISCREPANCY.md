@@ -24,7 +24,7 @@ Consequently $`R(x)>0.36`$ for all sufficiently large real $`x`$. Every sufficie
 
 Put $`I=\int W^2=3-4\log2`$, $`a=3/4`$, and $`F(u)=\int_{\mathbb R} W(t)W(t+u)\,dt`$. Then $`F(0)=I`$, $`F`$ is even, and its support is $`[-a,a]`$. The function $`F`$ is twice continuously differentiable, with $`F''(u)=-\int W'(t)W'(t+u)\,dt`$. This follows by differentiating in the sense of distributions, followed by continuity of translation in $`L^2`$. Thus $`F(a)=F'(a)=F'(0)=0`$.
 
-For any $`u`$, the derivative of $`W(t)W(t+u)`$ has uniformly bounded variation. Indeed $`\|W\|_\infty=1`$, $`\operatorname{Var}(W)=2`$, $`\|W'\|_\infty=8`$, and $`\operatorname{Var}(W')=24`$. The trapezoidal rule on the full mesh of spacing $`1/x`$ then gives, uniformly in $`h`$,
+For any $`u`$, the derivative of $`W(t)W(t+u)`$ has uniformly bounded variation. Indeed $`\|W\|_\infty=1`$, $`\mathrm{Var}(W)=2`$, $`\|W'\|_\infty=8`$, and $`\mathrm{Var}(W')=24`$. The trapezoidal rule on the full mesh of spacing $`1/x`$ then gives, uniformly in $`h`$,
 
 ```math
 \frac1x\sum_m W(m/x)W((m+h)/x)=F(h/x)+O(x^{-2}).
@@ -90,7 +90,7 @@ Off its knots, $`S'(x)=\sum_{x/2<m<x}b_m/m-\tfrac12\sum_{x/4<m<x/2}b_m/m=o(1)`$ 
 
 Since $`I-F(u)=\tfrac12\int(W(t+u)-W(t))^2\,dt`$ and $`W\ge0`$, it is bounded above by $`\min(I,7u^2/2)`$. Here $`\int |W'|^2=7`$. Integrating this elementary majorant split at $`\sqrt{2I/7}<a`$ yields $`H_W\le I/2+I\log(a\sqrt{7/(2I)})`$. This alone gives $`B>0.2822`$.
 
-For a narrower interval let $`G(u)=(I-F(u))/u`$, continuously extended to zero. One has $`G'(u)=-\int_0^1 tF''(tu)\,dt`$. Translation of a function of bounded variation in $`L^1`$ gives $`|F''(u)-F''(v)|\le\|W'\|_\infty\operatorname{Var}(W')|u-v|\le192|u-v|`$. Therefore $`G'`$ is Lipschitz with constant at most $`64`$. The composite midpoint rule over $`N`$ cells has absolute error at most $`64a^3/(24N^2)`$. On each overlap of branches, the two tent values multiply to $`(c+d/t)(e+f/(t+u))`$. Its integral requires only rational operations and real logarithms. Arb enclosed the integral on 16,384 midpoint cells at 160 and 256 bits. Direct enumeration by lag at $`x=16,64,256`$ checks the ordered-pair convention independently of diagonal subtraction. [Certificate](check_discrepancy.py) · [Transcript](CHECKS.txt)
+For a narrower interval let $`G(u)=(I-F(u))/u`$, continuously extended to zero. One has $`G'(u)=-\int_0^1 tF''(tu)\,dt`$. Translation of a function of bounded variation in $`L^1`$ gives $`|F''(u)-F''(v)|\le\|W'\|_\infty\mathrm{Var}(W')|u-v|\le192|u-v|`$. Therefore $`G'`$ is Lipschitz with constant at most $`64`$. The composite midpoint rule over $`N`$ cells has absolute error at most $`64a^3/(24N^2)`$. On each overlap of branches, the two tent values multiply to $`(c+d/t)(e+f/(t+u))`$. Its integral requires only rational operations and real logarithms. Arb enclosed the integral on 16,384 midpoint cells at 160 and 256 bits. Direct enumeration by lag at $`x=16,64,256`$ checks the ordered-pair convention independently of diagonal subtraction. [Certificate](check_discrepancy.py) [Transcript](CHECKS.txt)
 
 ## The missing estimate and earlier work
 
