@@ -48,10 +48,12 @@ def main():
             out.parent.mkdir(parents=True, exist_ok=True)
             base = local if src.is_relative_to(local) else source
             print("Checking", name, flush=True)
-            subprocess.run(["lean","-j2","--tstack=400000","-DautoImplicit=false",
+            subprocess.run(["lean","-j1","--tstack=400000","-DautoImplicit=false",
                             "-DrelaxedAutoImplicit=false","-DmaxHeartbeats=4000000",
                             "-R",str(base),"-o",str(out),str(src)], env=env, check=True)
-        subprocess.run(["leanchecker", "-v", *sources], env=env, check=True)
+        for name in sources:
+            print("Kernel replay:", name, flush=True)
+            subprocess.run(["leanchecker", "-v", name], env=env, check=True)
         names = ["RiemannReduction.PrimeGrid.rh_of_square_sqrt_windows",
                  "RiemannReduction.PrimeGrid.rh_of_doubled_prime_sqrt_windows",
                  "PowerSamples.right_edge", "PowerSamples.window_excludes",
@@ -59,7 +61,8 @@ def main():
         audit = build/"Audit.lean"
         audit.write_text("import FifthWindows\nimport PowerSamples\n"+
                          "".join(f"#print axioms {name}\n" for name in names))
-        output = subprocess.check_output(["lean",str(audit)],env=env,text=True)
+        print("Checking the axioms of six theorems", flush=True)
+        output = subprocess.check_output(["lean","-j1",str(audit)],env=env,text=True)
         for name in names:
             matched = re.search(r"'"+re.escape(name)+r"' depends on axioms:\s*\[([^\]]*)\]", output)
             if not matched or set(matched[1].replace(" ","").split(",")) - {"propext","Classical.choice","Quot.sound"}:

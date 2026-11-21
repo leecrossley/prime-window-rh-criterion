@@ -4,11 +4,11 @@ on:
   push:
     branches: [main]
     paths:
-      - 'results/prime-window-power-samples/pairs/**'
+      - 'results/prime-window-power-samples/**'
       - '.github/workflows/prime-pair-bounds.yml'
   pull_request:
     paths:
-      - 'results/prime-window-power-samples/pairs/**'
+      - 'results/prime-window-power-samples/**'
       - '.github/workflows/prime-pair-bounds.yml'
   workflow_dispatch:
 
@@ -37,3 +37,19 @@ jobs:
           "$python" -B check_odd_mean_square.py --bits 160 --mesh 4000
           "$python" -B check_odd_mean_square.py --bits 256 --mesh 8000
           "$python" -B check_odd_density_integrals.py
+
+  lean:
+    name: Replay the power-sampling Lean proofs
+    runs-on: ubuntu-24.04
+    timeout-minutes: 360
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Free disk space
+        run: |
+          sudo rm -rf /usr/share/dotnet /usr/local/lib/android /opt/ghc /opt/hostedtoolcache/CodeQL
+          df -h /
+      - name: Run the pinned Linux replay
+        working-directory: results/prime-window-power-samples
+        run: bash verify-linux.sh

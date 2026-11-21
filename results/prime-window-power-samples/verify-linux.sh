@@ -20,6 +20,7 @@ get_archive() {
 get_archive https://github.com/leanprover/lean4/releases/download/v4.33.1/lean-4.33.1-linux.tar.zst \
   lean.tar.zst 890afd185370f85666025b883914ab4f4b339136f8c96167b69cfb62aecaf235
 tar --zstd -xf lean.tar.zst
+rm -- lean.tar.zst
 export PATH="$scratch/lean-4.33.1-linux/bin:$PATH"
 
 mathlib_revision=0df444a360eaa60ab8c11dca51a86af692955474
@@ -31,6 +32,7 @@ test "$(git -C mathlib4 rev-parse HEAD)" = "$mathlib_revision"
 get_archive https://github.com/CocoSgt/riemann-hypothesis-lean/releases/download/v2026-11-20/lean.tar.gz \
   upstream.tar.gz 9631b4f020199e580ba86178cb56c6e9b09f690c2369a80dc4334aa93f49c7fc
 tar -xzf upstream.tar.gz
+rm -- upstream.tar.gz
 
 cd mathlib4
 lake exe cache get

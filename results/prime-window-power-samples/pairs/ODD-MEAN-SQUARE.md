@@ -153,7 +153,7 @@ A\left[\frac{4\Gamma(q+2,(4-p)\ell)}{(4-p)^{q+2}}+
 \qquad \ell=\log H_0.
 $$
 
-This follows by setting $y=\log T$ in the integral. At 192 bits on a mesh of $1/6000$, the two incomplete gamma terms yield an upper bound of $20.581$ for $E_K/N$. This check evaluates the ordinate integrals directly and uses a separate implementation of the real-part sum. [Independent integral check](check_odd_density_integrals.py)
+This follows by setting $y=\log T$ in the integral. At 192 bits on a mesh of $1/6000$, the two incomplete gamma terms yield an upper bound of $20.581$ for $E_K/N$. This check evaluates the ordinate integrals directly, sums the real-part strips separately and verifies at 192 bits that the remaining terms, including both calibration errors, total less than 0.133. [Independent integral check](check_odd_density_integrals.py)
 
 ## Prior work and verification
 

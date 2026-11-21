@@ -48,6 +48,8 @@ do
 done
 ~~~
 
+The GitHub workflow runs the full power-sampling Lean replay on Linux, including `PairSignChecks` and `OddMeanSquare`. [Workflow](../../../.github/workflows/prime-pair-bounds.yml)
+
 For the Lean replay, set **pair_source** to this directory and run the following from the Mathlib checkout at commit **0df444a360eaa60ab8c11dca51a86af692955474**, using Lean commit **819816b2e0a3bf405af45ae5c7af2491d8f5bee6**.
 
 ~~~sh

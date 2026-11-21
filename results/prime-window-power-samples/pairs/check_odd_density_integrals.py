@@ -43,7 +43,18 @@ def check():
 
     low = strip(grid//2, 4*grid//5, arb(21)/5, arb(3)/2)
     high = strip(4*grid//5, 7*grid//8, arb(17)/5, arb(1)/4)
-    # 0.133 encloses the low modes, interpolation and both calibration errors.
+    # Check the non-strip terms in the same precision as the gamma integrals.
+    start = arb(5 * 10**22)
+    log_two = arb(2).log()
+    endpoint = start**2 / 4
+    log_endpoint = endpoint.log()
+    tail = (log_h + 1) / (arb.pi() * height)
+    low_modes = (3 * arb(3).log() - arb.const_euler() - (4 * arb.pi()).log()) / arb(2).sqrt()
+    relative = (arb(1) / (5 * log_endpoint**2)
+                + log_endpoint**2 / (endpoint.sqrt() * log_two) + 1 / endpoint)
+    non_strip = (low_modes + (12 / arb(2).sqrt() + 12) * tail + 3 / start
+                 + (8 + 3 * log_two) * relative + 660 / start**3)
+    assert non_strip < arb('0.133')
     energy = (arb('0.133') + low + high)**2
     ratio = energy / arb('23.914')
     assert energy < arb('20.83') and ratio < arb(8)/9
