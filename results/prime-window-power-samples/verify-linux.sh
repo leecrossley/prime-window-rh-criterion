@@ -13,6 +13,11 @@ scratch=$(mktemp -d)
 trap 'rm -rf -- "$scratch"' EXIT
 cd "$scratch"
 
+python3 -m venv "$scratch/finite-env"
+"$scratch/finite-env/bin/python" -m pip install 'python-flint==0.9.0'
+"$scratch/finite-env/bin/python" -B "$repo/pairs/mobius/check_finite_quartic.py"
+"$scratch/finite-env/bin/python" -B "$repo/pairs/mobius/check_cutoffs.py"
+
 get_archive() {
   curl --fail --silent --show-error --location --retry 4 --output "$2" "$1"
   printf '%s  %s\n' "$3" "$2" | sha256sum --check -
@@ -42,3 +47,4 @@ lake env sh -c 'export LEAN_PATH="$1${LEAN_PATH:+:$LEAN_PATH}"; exec leanchecker
 lake env python3 "$repo/verify.py" "$scratch/lean/src"
 lake env lean -DautoImplicit=false -R "$repo/pairs" -o "$scratch/OddMeanSquare.olean" "$repo/pairs/OddMeanSquare.lean"
 lake env sh -c 'export LEAN_PATH="$1${LEAN_PATH:+:$LEAN_PATH}"; exec leanchecker -v OddMeanSquare' sh "$scratch"
+lake env python3 -B "$repo/pairs/mobius/replay.py" "$scratch/lean/src" "$scratch/mobius-build" --jobs 2
