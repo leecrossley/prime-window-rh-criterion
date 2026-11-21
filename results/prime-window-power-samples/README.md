@@ -49,7 +49,7 @@ On Linux x86-64, with Git, curl, zstd, tar and Python 3.9 or later, run
 bash verify-linux.sh
 ```
 
-On a system with the pinned Lean and Mathlib cache already installed, run the following from the Mathlib checkout. The command builds the local proofs and upstream dependencies in a fresh temporary directory and replays them with the Lean kernel.
+On a system with the pinned Lean and Mathlib cache already installed, run the following from the Mathlib checkout. The command compiles the local proofs and their pinned dependencies in a temporary directory with one compiler thread. It then starts a separate kernel replay for each module and checks the axioms of the six named theorems.
 
 ```sh
 lake env python3 /path/to/prime-window-power-samples/verify.py /path/to/upstream/lean/src
