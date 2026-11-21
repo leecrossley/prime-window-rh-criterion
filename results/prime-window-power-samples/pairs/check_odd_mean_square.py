@@ -136,8 +136,10 @@ def check(mesh):
     tail = (log_h+1)/(arb.pi()*height)
     B2 = arb(3).log()-(arb.const_euler()+(4*arb.pi()).log())/3
     low = 3*(B2+4*tail)/arb(2).sqrt()
-    base_error = low + 12*tail + 3/lower + rounding + 330/lower**3
-    assert base_error < arb('0.134')
+    calibration = 330/lower**3
+    base_error = low + 12*tail + 3/lower + rounding + calibration
+    assert base_error < arb('0.132841')
+    assert base_error + calibration < arb('0.133')
 
     # Row comparisons with Re(1/(2+it-rho)); the row sum itself is <= (log t+8)/2.
     for lo, hi, d_bound, row in (
@@ -154,7 +156,7 @@ def check(mesh):
     second = strip_bound(Fraction(4, 5), Fraction(7, 8), Fraction(17, 5),
                          Fraction(1, 8), mesh, log_scale, log_h, ratio)
     odd_rms = base_error + first + second
-    energy = (odd_rms+330/lower**3)**2
+    energy = (odd_rms+calibration)**2
     raw_odd_square = (mu*odd_rms)**2
     diagonal = 2*arb('0.219')*((28*lower).log()-1)
     assert energy < arb('20.829') and raw_odd_square < arb('2.502')
