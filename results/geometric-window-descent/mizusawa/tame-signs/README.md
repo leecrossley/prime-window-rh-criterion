@@ -1,6 +1,6 @@
 # Eight quadratic characters from three cyclotomic units
 
-Let $q\equiv3\pmod 8$ and $d\equiv7\pmod {16}$ be primes. In every field $K_n=\mathbb Q(\zeta_{2^n})$ with $n\ge4$, there are at most eight quadratic characters unramified outside the primes above $q$ and $d$. On the ordinary biquadratic host $\bigcup_{n\ge4}K_n(\sqrt{-q},\sqrt{-d})$, there are at most eight everywhere-unramified quadratic characters. The proof gives the three-generator upper bound used by the geometric window. It uses neither RH nor Mizusawa’s rank theorem. [Finite and infinite Lean statements](../../lean/CyclotomicEight.lean) · [Field identification](../../lean/MizusawaHostField.lean)
+Let $q\equiv3\pmod 8$ and $d\equiv7\pmod {16}$ be primes. In every field $K_n=\mathbb Q(\zeta_{2^n})$ with $n\ge4$, there are at most eight quadratic characters unramified outside the primes above $q$ and $d$. On the ordinary biquadratic host $\bigcup_{n\ge4}K_n(\sqrt{-q},\sqrt{-d})$, there are at most eight everywhere-unramified quadratic characters. The proof gives the three-generator upper bound used by the geometric window. Besides Mathlib, it uses the class field theory in the geometric archive, but not RH, Ferrero–Washington or Mizusawa’s rank theorem. [Finite and infinite Lean statements](../../lean/CyclotomicEight.lean) · [Field identification](../../lean/MizusawaHostField.lean)
 
 ## The sign rows
 
@@ -14,7 +14,7 @@ Put $z=\zeta_{2^n}$, $u=1+z+z^{-1}$ and $u_3=1+z^3+z^{-3}$. The Galois automorph
 
 The computation takes place in the residue fields. Write $U(x)=1+x+x^{-1}$. Then $U(x)x(1-x)=1-x^3$ and $U(x)U(x^3)x^4(1-x)=1-x^9$. Above $q$, some power of Frobenius sends $z$ to $z^3$. The factors $1-z$ and $1-z^3$ have the same quadratic sign, while $z$ is a nonsquare. The first identity gives the negative sign of $U(z)$. The same argument applies to the primitive root $z^3$. [Frobenius congruences](../../lean/RealUnitFrobenius.lean) · [Finite-field proof](../../lean/RealUnitResidueSigns.lean)
 
-Above $d$, a power of Frobenius sends $z$ to $z^{-9}$. The equality $1-z^{-9}=-z^{-9}(1-z^9)$ reverses the quadratic sign because $-1$ is a square and $z$ is a nonsquare. The second identity gives opposite signs for $U(z)$ and $U(z^3)$. The automorphism that cubes $z$ exchanges the two sign classes of prime ideals. Their total size is four, so each has size two. [Proof of the two pairs](../../lean/RealUnitSignRows.lean)
+Above $d$, a power of Frobenius sends $z$ to $z^{-9}$. The equality $1-z^{-9}=-z^{-9}(1-z^9)$ reverses the quadratic sign because $-1$ is a square and $z$ is a nonsquare, so $1-z^9$ and $1-z$ have opposite signs. The second identity gives opposite signs for $U(z)$ and $U(z^3)$. The automorphism that cubes $z$ exchanges the two sign classes of prime ideals. Their total size is four, so each has size two. [Proof of the two pairs](../../lean/RealUnitSignRows.lean)
 
 ## From the units to inertia
 
