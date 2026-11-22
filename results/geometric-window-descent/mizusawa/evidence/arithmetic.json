@@ -1,0 +1,19 @@
+{
+  "graphs": {
+    "arithmetic_three": {
+      "count": 44073,
+      "sorted_sha256": "7c132d555b27d1663351ebe39e0a65d6e16dbfa32c4701674e2002c7146372e2"
+    },
+    "arithmetic_nine": {
+      "count": 77321,
+      "sorted_sha256": "7ca75eb185bed517dd520ddb7fd1897906385c4ebb4773d7e0ba6477bce2a1ab"
+    }
+  },
+  "comparisons": {
+    "arithmetic_nine": {
+      "dropped": 33544,
+      "added": 296,
+      "net_fewer": 33248
+    }
+  }
+}

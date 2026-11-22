@@ -17,6 +17,8 @@ The [square-sample median and pair-discrepancy results](results/prime-window-pow
 
 ## Geometric proof-engineering note
 
+The rank-three companion identifies Mizusawa’s genus field with the auxiliary field in Lean. Given his 2010 rank theorem, the dyadic window has at most three exceptional indices and its dependence on inverse precision is cubic. The package includes the two endpoint types, their dependency differences and a control using the same theorem at nine. [Rank-three result and replay](results/geometric-window-descent/mizusawa/README.md)
+
 This note’s version of Sanftenberg’s ordinary-character specialisation of Alpöge’s announced Lean proof lowers the generator bound for the prime-two tower from 24 to nine. Mizusawa proved in 2010 that its ordinary class module is free of rank three over the 2-adic integers. The Lean proof also uses the second automorphy case directly in the rank-four count and reaches Mathlib’s RH through the geometric argument. A direct arithmetic bound for the signed sum on arbitrarily late complete blocks remains open. [Mizusawa, Lemma 4.2](https://jtnb.centre-mersenne.org/item/10.5802/jtnb.707.pdf#page=13) [Note and prior work](results/geometric-window-descent/) [Lean source](results/geometric-window-descent/lean/SecondSeedRH.lean) [Replay and comparison](results/geometric-window-descent/REPLAY.md)
 
 ## Shared verification files

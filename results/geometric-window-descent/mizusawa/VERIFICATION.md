@@ -1,0 +1,34 @@
+# Verification of the rank-three specialization
+
+## Statements checked
+
+| Declaration | Conclusion checked by Lean |
+| --- | --- |
+| `host_eq_radicals` and `radical_eq_genus` | Equality between the Galois subgroups for the archived auxiliary tower, the full dyadic tower with two positive radicals, and Mizusawa’s genus-field tower |
+| `descend` and `descend_injective` | Factorization of each locally constant, unramified quadratic character through the ordinary quotient and injectivity of the resulting map |
+| `character_bound_of_free` | A free module of rank $r$ has at most $2^r$ such characters |
+| `host_tower_three` | The ordinary generator bound and the geometric tower predicate at three, given `RankThree` |
+| `reference_levels`, `window_with_three`, `selector_three_vs_nine` | The two reference levels, the specialized usable interval, and the exact change in its parameter |
+| `global_unit_parity` | Finite local Artin values of a global integral unit sum to zero for every quadratic character of a finite abelian extension of a totally imaginary field, when the displayed set contains all ramified finite places |
+| `rh_of_mizusawa_rank_three` and `rh_of_mizusawa_at_nine` | Both have type `RankThree → RiemannHypothesis`; the second weakens the same arithmetic input to nine for the comparison |
+
+The formal premise states an abstract group isomorphism for the ordinary unramified abelian pro-2 Galois group over $\mathbb Q_\infty(\sqrt q,\sqrt d,\sqrt{-qd})$. Mizusawa proves an isomorphism of $\mathbb Z_2$-modules, which gives the underlying group isomorphism. The field is totally imaginary, so the ordinary condition here accounts for every place where ramification can occur. The arithmetic computation in Lemma 4.2, including the freeness argument and Kida’s formula, is supplied by the cited paper. [Definitions and application](../lean/MizusawaTower.lean) · [Paper, §§1 and 4.2](https://www.numdam.org/item/10.5802/jtnb.707.pdf#page=13)
+
+## Kernel and dependency checks
+
+Both RH endpoints and the arithmetic bridge passed Lean 4.33.1 with kernel trust zero. The standalone kernel checker replayed their declarations. The two independently audited endpoint roots have 1,476,830 and 1,476,831 reachable names. The existing closed rank-nine endpoint has 1,476,889. The full comparison includes hashes of all three sets and the four compressed difference lists. [Kernel and audit output](evidence/endpoint-audits.txt) · [Endpoint evidence](evidence/comparison.json)
+
+The arithmetic-only replay rebuilds 16 local modules from their sources, checks five with the standalone kernel checker, and reproduces both tower dependency sets. The rank-three tower reaches 44,073 names and the closed rank-nine tower reaches 77,321. The finite-layer unit lemma has its own replay and reaches 96,389 names. Its audit requires global reciprocity and the triviality of unramified and complex local symbols, and excludes both RH and the rank-three premise. [Arithmetic replay](evidence/arithmetic-replay.txt) · [Unit replay](evidence/unit-replay.txt) · [Unit-lemma audit](../lean/AuditMizusawaUnits.lean) · [Unit dependency hash](evidence/units.json)
+
+The audit follows references in declaration types and proof terms. It permits `propext`, `Classical.choice` and `Quot.sound`, rejects `sorryAx` and rejects any other reachable theorem whose literal type is `RiemannHypothesis`. The independent arithmetic audit also rejects any dependency on `RiemannHypothesis` or Ferrero–Washington. A premise bound by a Lean function arrow is visible in its theorem type and does not appear as an axiom. [Arithmetic checks](../lean/AuditMizusawaTower.lean) · [RH checks](../lean/AuditMizusawaRH.lean) · [Matched control](../lean/AuditMizusawaControl.lean) · [Traversal](../lean/AuditSlopeGraph.lean)
+
+All counts refer to distinct reachable Lean names in this pinned environment. Open the compressed differences as UTF-8 text for the exact declaration lists. The JSON records SHA-256 hashes of the full sorted lists, with one name per line and a final newline. [Arithmetic comparison](evidence/arithmetic.json) · [Endpoint comparison](evidence/comparison.json) · [Comparison program](compare.py)
+
+## Prior work checked on 22 November 2026
+
+- Mizusawa’s Lemma 4.2 gives the free ranks in this genus field and its intermediate fields. The rank-three theorem is due to Mizusawa. [Original paper](https://doi.org/10.5802/jtnb.707)
+- The `bramble_trace` reading guide had already used rank three in the cohomology-window argument. Revisions 29 and 38 contain the same `ordinary_tower_windows.md`, with SHA-256 `c5c2c98b18f64c6880f5ee82db282d42b102328c3acace3a95d301a350582b7e`. Revision 38 contains 98 archive entries and zero Lean source files. [Revision 29](https://rstation.ai/api/v1/posts/uw5cfb_J_Cj7XJO6/attachment?revision=29) · [Revision 38](https://rstation.ai/api/v1/posts/uw5cfb_J_Cj7XJO6/attachment?revision=38)
+- The public family’s previous endpoint used nine. Its existing rank-three implication took a hypothesis about a *ramified* ray group on the cyclotomic base. The present argument starts with the *ordinary unramified* class module on the biquadratic host. Earlier finite-layer work compared the radicals using quadratic Gauss sums; the present field comparison reuses that calculation. [Family baseline](https://github.com/leecrossley/prime-window-rh-criterion/tree/33c85d76b5b7a7989d39e2278ccce1ba8734b7ac/results/geometric-window-descent) · [Earlier ray implication](../lean/OrdinaryRayDescent.lean)
+- I searched the pinned geometric proof sources and Mathlib, public GitHub Lean code for `Mizusawa`, and three contemporary source trees. Sanftenberg’s tree contained 10,624 Lean and 2,363 Markdown files. Brox’s tree contained 182 TeX and 131 Markdown files. The lattice paper contained one of each. None of those source trees had a match for Mizusawa’s name or the new endpoint. Searching by name or implementation cannot establish universal priority. [Sanftenberg’s source tree](https://github.com/dbsanfte/RiemannGaussian/tree/bbcc0615a14ece5e6dcc8f80714e7a1e1cdd77b6) · [Brox’s source tree](https://github.com/JoseBrox/GRH_distillation/tree/a15e1c073a08aeb79e0b199867d75d70e65a66b2) · [Lattice comparison](https://github.com/twinheterodox/three-simplifications-dirichlet-grh/tree/4dc189a9aa34db3bb7e67b5ad04abe781ff12995)
+
+The contribution recorded here is the Lean bridge and its measured dependency comparison.
