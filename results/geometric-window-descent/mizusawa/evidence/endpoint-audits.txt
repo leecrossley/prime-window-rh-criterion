@@ -1,0 +1,18 @@
+replaying MizusawaNineControl
+replaying MizusawaWindowRH
+RiemannReduction.ConductorOne.rh_of_mizusawa_rank_three: 1476830 reachable declarations; axioms [propext,
+ Classical.choice,
+ Quot.sound]; no previously closed RH theorem.
+Reachability of Formalism.HN.thmF_share: false
+Reachability of Formalism.HN.frameB_integral: false
+Reachability of Formalism.CorankShareLayerCake.FR.layer_cake_formula: false
+Reachability of IntegratedSlopeShare.shortfall_integral: false
+Reachability of IntegratedSlopeShare.rank_share_transfer: false
+RiemannReduction.ConductorOne.rh_of_mizusawa_at_nine: 1476831 reachable declarations; axioms [propext,
+ Classical.choice,
+ Quot.sound]; no previously closed RH theorem.
+Reachability of Formalism.HN.thmF_share: false
+Reachability of Formalism.HN.frameB_integral: false
+Reachability of Formalism.CorankShareLayerCake.FR.layer_cake_formula: false
+Reachability of IntegratedSlopeShare.shortfall_integral: false
+Reachability of IntegratedSlopeShare.rank_share_transfer: false

@@ -24,6 +24,10 @@ TARGETS = {
     "window": ("AuditSecondSeedWindow",),
     "proof": ("AuditGeometricRH",),
     "compare": ("AuditGeometricRH", "AuditSecondSeedWindow", "AuditPrevious", "AuditPublished"),
+    "mizusawa-units": ("AuditMizusawaUnits",),
+    "mizusawa-rank": ("AuditMizusawaTower", "MizusawaSelector", "AuditDescent"),
+    "mizusawa": ("AuditMizusawaTower", "MizusawaSelector", "AuditDescent", "AuditMizusawaRH",
+                 "AuditMizusawaControl", "AuditGeometricRH"),
 }
 AUDITS = {
     "AuditDescent": "rank-names.txt",
@@ -31,7 +35,13 @@ AUDITS = {
     "AuditGeometricRH": "second-rh-names.txt",
     "AuditPrevious": "previous-rh-names.txt",
     "AuditPublished": "published-rh-names.txt",
+    "AuditMizusawaUnits": "unit-parity-names.txt",
+    "AuditMizusawaTower": "mizusawa-rank-names.txt",
+    "AuditMizusawaRH": "mizusawa-rh-names.txt",
+    "AuditMizusawaControl": "mizusawa-control-names.txt",
 }
+MIZUSAWA_MODULES = ("MizusawaCharacters", "MizusawaHostField", "MizusawaGenusField",
+                    "MizusawaTower", "MizusawaSelector")
 CHECK = {
     "rank": ("QuadraticSchreier", "QuadraticGenus", "BiquadraticDescent",
              "OrdinaryRayDescent", "NineIntegralTower", "DyadicHostBound"),
@@ -39,6 +49,9 @@ CHECK = {
     "proof": ("QuadraticSchreier", "QuadraticGenus", "BiquadraticDescent",
               "OrdinaryRayDescent", "NineIntegralTower", "CaseTwoAutomorphy",
               "SecondSeedCount", "SecondSeedWindow", "FiniteFrameRH", "SecondSeedRH"),
+    "mizusawa-units": ("MizusawaUnitParity",),
+    "mizusawa-rank": MIZUSAWA_MODULES,
+    "mizusawa": (*MIZUSAWA_MODULES, "MizusawaWindowRH", "MizusawaNineControl", "SecondSeedRH"),
 }
 IMPORT = re.compile(r"^(?:(?:public|meta)\s+)*import\s+([\w.']+)\s*(?:--.*)?$")
 
@@ -134,12 +147,22 @@ def check_audit(name, work, evidence):
         if len(names) != 390211 or len(set(names)) != len(names):
             raise ValueError(f"Unexpected window dependency list: {len(names)} entries")
         return
-    groups = evidence["comparisons"]
-    count, expected = {
-        "AuditGeometricRH": (evidence["candidate_count"], evidence["candidate_sorted_sha256"]),
-        "AuditPrevious": (groups["single_inertia"]["count"], groups["single_inertia"]["sorted_sha256"]),
-        "AuditPublished": (groups["published_principal"]["count"], groups["published_principal"]["sorted_sha256"]),
-    }[name]
+    if name.startswith("AuditMizusawa"):
+        filename, key = {
+            "AuditMizusawaUnits": ("units.json", "unit_parity"),
+            "AuditMizusawaTower": ("arithmetic.json", "arithmetic_three"),
+            "AuditMizusawaRH": ("comparison.json", "literature_three"),
+            "AuditMizusawaControl": ("comparison.json", "literature_nine"),
+        }[name]
+        graph = json.loads((HERE / "mizusawa/evidence" / filename).read_text())["graphs"][key]
+        count, expected = graph["count"], graph["sorted_sha256"]
+    else:
+        groups = evidence["comparisons"]
+        count, expected = {
+            "AuditGeometricRH": (evidence["candidate_count"], evidence["candidate_sorted_sha256"]),
+            "AuditPrevious": (groups["single_inertia"]["count"], groups["single_inertia"]["sorted_sha256"]),
+            "AuditPublished": (groups["published_principal"]["count"], groups["published_principal"]["sorted_sha256"]),
+        }[name]
     actual = hashlib.sha256(("\n".join(sorted(names)) + "\n").encode()).hexdigest()
     if len(names) != count or actual != expected:
         raise ValueError(f"{name}: {len(names)} names, SHA-256 {actual}")
@@ -204,6 +227,10 @@ def main():
     for name, cmd in audits.items():
         checked_run(cmd, work, env, "audit " + name)
         check_audit(name, work, evidence)
+    if args.target in ("mizusawa", "mizusawa-rank"):
+        options = ["--arithmetic-only"] if args.target == "mizusawa-rank" else []
+        checked_run([sys.executable, HERE / "mizusawa/compare.py", work, work / "comparison",
+                     "--check", HERE / "mizusawa/evidence", *options], work, env, "compare rank-three dependencies")
     if args.target == "compare":
         checked_run([sys.executable, HERE / "compare.py", work / AUDITS["AuditPublished"],
                      work / AUDITS["AuditPrevious"], work / AUDITS["AuditGeometricRH"],
