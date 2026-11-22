@@ -2,6 +2,8 @@
 
 Lee Crossley · 21 November 2026
 
+Edition 1.0.3 includes the five certificate programs and their checks for Python optimisation. [Versioned archive](https://doi.org/10.5281/zenodo.24438940) [Tagged paper and checks](https://github.com/leecrossley/prime-window-rh-criterion/tree/53d57c0a080f90c3945d43aa3f421ec045bcba16/results/prime-window-power-samples/square-blocks)
+
 Put $`E_n=\pi(n^2)-\mathrm{li}(n^2)`$, $`J_K=\{K,\ldots,K+\lfloor K/\log\log K\rfloor\}`$ and let $`m_K`$ be any median of $`E_n`$ on $`J_K`$. Count the samples with $`|E_n-m_K|>K(\log K)^2`$. Write $`B_K`$ for that count.
 
 **A median criterion for RH.** The following are equivalent.
