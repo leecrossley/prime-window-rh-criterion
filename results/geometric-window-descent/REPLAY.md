@@ -40,6 +40,12 @@ For all three endpoints in one run, use the following command. The final audit r
 python3 replay.py compare --lean-bin "$lean_bin" --mathlib "$inputs/mathlib4" --archive "$archive" --work "$inputs/runs"
 ```
 
+To replay the conditional window before applying the nine-generator bound, run the following command. It builds 37 modules including the audit. The runner resolves each direct import against the configured archive and package search paths. Every imported archive object must have a matching SHA-256 entry.
+
+```sh
+python3 replay.py window --lean-bin "$lean_bin" --mathlib "$inputs/mathlib4" --archive "$archive" --work "$inputs/runs"
+```
+
 To inspect the source order before downloading the archive, run `python3 replay.py proof --list`. The full proof has 74 package modules including its audit. The standalone rank replay has 11. The baseline and the specialization give different implementations of some declarations, so the runner checks their endpoints in separate Lean processes.
 
 Lean elaborates from source with `--trust=0` and warnings as errors. The standalone `leanchecker` checks the named modules against their compiled imports. The audit separately follows proof terms and types, checks Mathlib’s literal RH statement and the axiom set, and rejects any other reachable theorem with that literal type. The rank audit also excludes RH itself, Ferrero–Washington and the earlier tower estimates from the arithmetic calculation. The repository’s standard manifest check verifies package checksums. [Audit implementation](lean/AuditSlopeGraph.lean) · [Root-specific checks](lean/AuditGeometricRH.lean) · [Recorded runs](VERIFICATION.md)

@@ -38,3 +38,4 @@ for result in "$root" "$root"/results/*; do
     printf '\n%s\n' "$result"
     (cd "$result" && $checksum -c SHA256SUMS)
 done
+python3 -B "$root/results/geometric-window-descent/test_replay.py"
