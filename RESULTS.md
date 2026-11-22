@@ -23,9 +23,15 @@ This note’s version of Sanftenberg’s ordinary-character specialisation of Al
 
 Each entry in [the shared-file list](shared-files.json) names the source to edit and its replayable copies. After a change, run `python3 tools/shared_files.py --sync`, replay each affected result and update its manifest. Each result can still be checked from its own directory.
 
+The standalone copy of [BandSpectrum.lean](results/prime-window-power-samples/pairs/mobius/lean/BandSpectrum.lean) comes from [the maintained source](https://github.com/leecrossley/prime-window-all-widths/blob/f12e654b888be6d87780be8f81c065cf73f844db/results/prime-band-mellin/BandSpectrum.lean). Its SHA-256 is `a5e0c0496bd1b72b797ebb92fe38141736e400db1ab8a5693ea3edae30a287d8`. When updating the copy, compare it with the cited revision and update the digest and its result manifest.
+
+The theta trace result also distributes the [dyadic arithmetic lemmas](DyadicArithmetic.lean). [Theta copy](https://github.com/leecrossley/theta-host-split-inert-race/blob/1d59a5537177d4c2ec1e9e490c51b5cad9ba70cc/results/theta-prime-trace/DyadicArithmetic.lean)
+
 ## Checking the collection
 
-Run `sh verify-collection.sh` from the repository root to check the result manifests. Each result’s README gives its mathematical replay and environment requirements. [Contribution and publication guidance](AGENTS.md)
+When a collection file changes, stage new paths with Git, then run `python3 tools/collection_manifest.py --write` to refresh `COLLECTION.sha256`.
+
+Run `sh verify-collection.sh` from the repository root to check the collection files and the manifests for every result directory. The index must point to an existing result with a manifest. Each result’s README gives its mathematical replay and environment requirements. [Contribution and publication guidance](AGENTS.md)
 
 ## Edition DOIs
 
