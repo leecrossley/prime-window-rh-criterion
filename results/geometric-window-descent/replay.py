@@ -24,6 +24,9 @@ TARGETS = {
     "window": ("AuditSecondSeedWindow",),
     "proof": ("AuditGeometricRH",),
     "compare": ("AuditGeometricRH", "AuditPrevious", "AuditPublished"),
+    "real-unit-rows": ("AuditRealUnitRows",),
+    "tame-eight": ("AuditTameEight",),
+    "tame-eight-rh": ("AuditTameEightRH",),
     "mizusawa-residues": ("AuditMizusawaResidue",),
     "mizusawa-units": ("AuditMizusawaUnits",),
     "mizusawa-rank": ("AuditMizusawaTower", "MizusawaSelector", "AuditDescent"),
@@ -36,6 +39,9 @@ AUDITS = {
     "AuditGeometricRH": "second-rh-names.txt",
     "AuditPrevious": "previous-rh-names.txt",
     "AuditPublished": "published-rh-names.txt",
+    "AuditRealUnitRows": "real-unit-row-names.txt",
+    "AuditTameEight": "tame-eight-names.txt",
+    "AuditTameEightRH": "tame-eight-rh-names.txt",
     "AuditMizusawaResidue": "root-of-unity-names.txt",
     "AuditMizusawaUnits": "unit-parity-names.txt",
     "AuditMizusawaTower": "mizusawa-rank-names.txt",
@@ -51,6 +57,13 @@ CHECK = {
     "proof": ("QuadraticSchreier", "QuadraticGenus", "BiquadraticDescent",
               "OrdinaryRayDescent", "NineIntegralTower", "CaseTwoAutomorphy",
               "SecondSeedCount", "SecondSeedWindow", "FiniteFrameRH", "SecondSeedRH"),
+    "tame-eight-rh": ("CyclotomicEight", "TameEightWindowRH"),
+    "real-unit-rows": ("RealCyclotomicUnit", "RealUnitFrobenius", "RealUnitResidueSigns",
+                       "RealUnitPrimeSigns", "RealUnitSignRows"),
+    "tame-eight": ("RealCyclotomicUnit", "RealUnitFrobenius", "RealUnitResidueSigns",
+                   "RealUnitPrimeSigns", "RealUnitSignRows", "RaySignPlaces", "LocalTameUnitSigns",
+                   "FiniteRayCharacter", "FiniteTameParity", "CofinalRayLayers", "TameUnitRelations",
+                   "RayLayerSites", "TameRayBound", "CyclotomicEight"),
     "mizusawa-residues": ("MizusawaUnitResidue",),
     "mizusawa-units": ("MizusawaUnitParity",),
     "mizusawa-rank": MIZUSAWA_MODULES,
@@ -150,7 +163,10 @@ def check_audit(name, work, evidence):
         if len(names) != 390211 or len(set(names)) != len(names):
             raise ValueError(f"Unexpected window dependency list: {len(names)} entries")
         return
-    if name.startswith("AuditMizusawa"):
+    if name in ("AuditRealUnitRows", "AuditTameEight", "AuditTameEightRH"):
+        graph = json.loads((HERE / "mizusawa/tame-signs/evidence/dependencies.json").read_text())[name]
+        count, expected = graph["count"], graph["sorted_sha256"]
+    elif name.startswith("AuditMizusawa"):
         filename, key = {
             "AuditMizusawaResidue": ("residues.json", "root_of_unity"),
             "AuditMizusawaUnits": ("units.json", "unit_parity"),
@@ -189,7 +205,7 @@ def main():
         return
     if not all((args.lean_bin, args.mathlib, args.work)):
         parser.error("supply --lean-bin, --mathlib and --work")
-    if args.target != "mizusawa-residues" and not args.archive:
+    if args.target not in ("mizusawa-residues", "real-unit-rows") and not args.archive:
         parser.error("this target also needs the geometric proof --archive")
     bins, mathlib = args.lean_bin.resolve(), args.mathlib.resolve()
     archives = [path.resolve() for path in args.archive]

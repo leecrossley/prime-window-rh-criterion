@@ -1,0 +1,10 @@
+RiemannReduction.ConductorOne.rh_from_tame_units: 1477044 reachable declarations; axioms [propext,
+ Classical.choice,
+ Quot.sound]; no previously closed RH theorem.
+Reachability of Formalism.HN.thmF_share: false
+Reachability of Formalism.HN.frameB_integral: false
+Reachability of Formalism.CorankShareLayerCake.FR.layer_cake_formula: false
+Reachability of IntegratedSlopeShare.shortfall_integral: false
+Reachability of IntegratedSlopeShare.rank_share_transfer: false
+Sorted declaration names: 1,477,044
+SHA-256: e49318770618b5cd9fe9eadc399926917a52d76e23df1a6b908e6b021891b15e
