@@ -1,3 +1,12 @@
+/-
+Copyright 2026 David Sanftenberg
+SPDX-License-Identifier: Apache-2.0
+
+This file modifies D. B. Sanftenberg’s CheckAlpogePrincipalArchivedGeometryRH by importing the literature hypotheses separately and exposing the rank-N inputs. See upstream/LICENSE.
+
+Source: https://github.com/dbsanfte/RiemannGaussian/blob/0755e6518416ac74bbb0e7f986f8610c7b7ed347/scripts/CheckAlpogePrincipalArchivedGeometryRH.lean
+-/
+
 import CheckAlpogePrincipalArchivedRowSelection
 import CheckAlpogeLocalThetaSupplier
 import Development.AbelianVarietyTheory.Proofs.IwasawaDecomposition.RowRatWOfRowTest
@@ -704,7 +713,3 @@ theorem principal_rankN_inputs (O : ArchivedInputs.OpenLiteratureStatements)
   exact ⟨loc, aut, ArchivedInputs.literature_cohomology O, cm⟩
 
 end RiemannGaussian.AlpogeWindow
-
-/- This file adapts D. B. Sanftenberg's CheckAlpogePrincipalArchivedGeometryRH.
-It imports the literature hypotheses separately and exposes the rank-N inputs.
-The upstream code and this adaptation are distributed under upstream/LICENSE. -/

@@ -13,3 +13,4 @@ for result in "$root" "$root"/results/*; do
         (cd "$result" && shasum -a 256 -c SHA256SUMS)
     fi
 done
+python3 -B "$root/results/geometric-window-descent/test_replay.py"

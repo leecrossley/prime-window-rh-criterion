@@ -1,5 +1,14 @@
 name: Result manifests
-on: [push, pull_request, workflow_dispatch]
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+    inputs:
+      geometric_target:
+        description: Optional geometric proof replay
+        type: choice
+        default: none
+        options: [none, rank, window, proof, compare]
 permissions:
   contents: read
 jobs:
@@ -10,3 +19,24 @@ jobs:
         with:
           persist-credentials: false
       - run: sh verify-collection.sh
+  geometric:
+    if: github.event_name == 'workflow_dispatch' && inputs.geometric_target != 'none'
+    needs: check
+    runs-on: ubuntu-24.04
+    timeout-minutes: 360
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Replay the geometric proof
+        env:
+          TARGET: ${{ inputs.geometric_target }}
+        run: bash results/geometric-window-descent/hosted-replay.sh "$TARGET"
+      - name: Save the transcript and declaration lists
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: geometric-${{ inputs.geometric_target }}-${{ github.sha }}
+          path: ${{ runner.temp }}/geometric-evidence/
+          if-no-files-found: warn
+          retention-days: 30

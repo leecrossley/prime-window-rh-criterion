@@ -22,15 +22,16 @@ zstd -dc "$inputs/oleans.tar.zst" | tar -xf - -C "$inputs/archive"
 archive="$inputs/archive/.lake/build/lib/lean"
 ```
 
-On macOS use `shasum -a 256 -c -` in place of `sha256sum -c -`. An existing extraction of the verified archive and an existing build of the pinned Mathlib can be used directly. The runner checks the compiler revision, Mathlib source hashes and the directly imported archive object hashes. The latter come from the publisher’s `olean-manifest.sha256`, whose SHA-256 is `fb3609ad73a17102e6e3e2346c5358a9c0957bcf5945442a7e5ffaa00c441ff5`. Authenticating the compressed archive above covers the transitive inputs. [Mathlib revision](https://github.com/leanprover-community/mathlib4/tree/0df444a360eaa60ab8c11dca51a86af692955474) · [Publisher’s manifest](https://huggingface.co/datasets/JackMcCarthy/riemann-hypothesis-build/blob/9036e64326acf4acfae159b96664e9708445c1d1/olean-manifest.sha256)
+On macOS use `shasum -a 256 -c -` in place of `sha256sum -c -`. The runner checks the compiler revision, the Mathlib source hashes and the hash of every directly imported archive object. Lean 4.33.1 takes a package from the first library directory containing its root. When supplying several `--archive` paths, keep each top-level package together. The direct hashes come from the publisher’s `olean-manifest.sha256`, whose SHA-256 is `fb3609ad73a17102e6e3e2346c5358a9c0957bcf5945442a7e5ffaa00c441ff5`. Checking the compressed archive before extraction also covers transitive inputs. [Mathlib revision](https://github.com/leanprover-community/mathlib4/tree/0df444a360eaa60ab8c11dca51a86af692955474) [Publisher’s manifest](https://huggingface.co/datasets/JackMcCarthy/riemann-hypothesis-build/blob/9036e64326acf4acfae159b96664e9708445c1d1/olean-manifest.sha256) [Lean’s module lookup](https://github.com/leanprover/lean4/blob/819816b2e0a3bf405af45ae5c7af2491d8f5bee6/src/Lean/Util/Path.lean#L61-L65)
 
 ## Run a replay
 
-`rank` builds the two generator bounds, replays their arithmetic in the standalone kernel and audits the nine-generator proof independently of RH. `proof` builds the specialized geometric endpoint, replays the ten named mathematical modules including the final theorem, then checks its dependencies. `compare` additionally builds and audits the two reference endpoints and reproduces the comparison table. Each run creates its own directory under `--work`. The printed timestamps and outputs can be kept as a verification record.
+`rank` replays six arithmetic modules and audits the nine-generator proof. `window` runs the kernel on the case-two automorphy, count and window modules, then checks the 390,211 declarations of `window_from_second_seed` before the tower input is supplied. `proof` replays ten modules through the closed RH theorem and audits its dependencies. `compare` runs the RH and window audits and adds the two reference proofs. Each run creates a fresh directory under `--work` for the compiled objects and audit reports.
 
 ```sh
 sh ../../verify-collection.sh
 python3 replay.py rank --lean-bin "$lean_bin" --mathlib "$inputs/mathlib4" --archive "$archive" --work "$inputs/runs"
+python3 replay.py window --lean-bin "$lean_bin" --mathlib "$inputs/mathlib4" --archive "$archive" --work "$inputs/runs"
 python3 replay.py proof --lean-bin "$lean_bin" --mathlib "$inputs/mathlib4" --archive "$archive" --work "$inputs/runs"
 ```
 
@@ -40,6 +41,10 @@ For all three endpoints in one run, use the following command. The final audit r
 python3 replay.py compare --lean-bin "$lean_bin" --mathlib "$inputs/mathlib4" --archive "$archive" --work "$inputs/runs"
 ```
 
-To inspect the source order before downloading the archive, run `python3 replay.py proof --list`. The full proof has 74 package modules including its audit. The standalone rank replay has 11. The baseline and the specialization give different implementations of some declarations, so the runner checks their endpoints in separate Lean processes.
+To inspect the build order before downloading the archive, use `python3 replay.py proof --list`. The rank, window, proof and comparison targets contain 11, 37, 74 and 81 package modules respectively, including their audits. The runner checks the reference endpoints in separate Lean processes because they give different implementations of some declarations.
 
 Lean elaborates from source with `--trust=0` and warnings as errors. The standalone `leanchecker` checks the named modules against their compiled imports. The audit separately follows proof terms and types, checks Mathlib’s literal RH statement and the axiom set, and rejects any other reachable theorem with that literal type. The rank audit also excludes RH itself, Ferrero–Washington and the earlier tower estimates from the arithmetic calculation. The repository’s standard manifest check verifies package checksums. [Audit implementation](lean/AuditSlopeGraph.lean) · [Root-specific checks](lean/AuditGeometricRH.lean) · [Recorded runs](VERIFICATION.md)
+
+## Hosted replay
+
+The collection’s Result manifests workflow accepts an optional `geometric_target` when started manually. Select `compare` to check all three closed endpoints and the conditional window. The Ubuntu runner verifies both downloads, mounts the object archive read-only and saves the transcript, declaration lists and comparison for 30 days. [Workflow](../../.github/workflows/result-manifests.yml) [Runner script](hosted-replay.sh)
