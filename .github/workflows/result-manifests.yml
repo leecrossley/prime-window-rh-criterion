@@ -28,6 +28,13 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
+      - name: Prepare the hosted runner for the archive
+        run: |
+          sudo rm -rf /usr/local/lib/android /usr/share/dotnet /opt/ghc /opt/hostedtoolcache/CodeQL
+          if (( $(sysctl -n vm.max_map_count) < 1048576 )); then
+            sudo sysctl -w vm.max_map_count=1048576
+          fi
+          df -h .
       - name: Replay the geometric proof
         env:
           TARGET: ${{ inputs.geometric_target }}

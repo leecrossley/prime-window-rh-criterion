@@ -20,13 +20,16 @@ download() {
 
 cache=https://huggingface.co/datasets/JackMcCarthy/riemann-hypothesis-build/resolve/9036e64326acf4acfae159b96664e9708445c1d1
 download "$cache/oleans.tar.zst?download=true" oleans.tar.zst 953bab5386a7849527a11960f80a2fab427c49c637d6e94cc75788dd8f40196b
-if ! command -v sqfstar >/dev/null; then
+if ! command -v mksquashfs >/dev/null; then
   sudo apt-get update -qq
   sudo apt-get install -y --no-install-recommends squashfs-tools
 fi
-# A compressed read-only mount keeps the authenticated archive within the hosted runner's disk allowance.
-zstd -dc oleans.tar.zst | sqfstar -no-progress -comp zstd -Xcompression-level 3 -mem 512M archive.sqfs
-sudo mount -o loop,ro -t squashfs archive.sqfs archive
+# Dropping the editor indexes leaves more space for swap. Lean reads the compiled objects from the compressed mount.
+zstd -dc oleans.tar.zst \
+  | tar --wildcards --wildcards-match-slash --delete -f - -- '*.ilean' \
+  | mksquashfs - archive.sqfs -tar -no-strip -no-progress -noappend -no-xattrs -comp zstd -Xcompression-level 8 -mem 512M
+sudo mount -o loop,ro,nosuid,nodev,noexec -t squashfs archive.sqfs archive
+test -d archive/.lake/build/lib/lean/Formalism
 rm oleans.tar.zst
 
 download https://github.com/leanprover/lean4/releases/download/v4.33.1/lean-4.33.1-linux.tar.zst lean.tar.zst 890afd185370f85666025b883914ab4f4b339136f8c96167b69cfb62aecaf235
@@ -38,8 +41,8 @@ git init -q mathlib4
 git -C mathlib4 fetch --quiet --depth 1 https://github.com/leanprover-community/mathlib4.git 0df444a360eaa60ab8c11dca51a86af692955474
 git -C mathlib4 checkout --quiet --detach FETCH_HEAD
 (cd mathlib4 && lake exe cache get)
-if (( $(awk '/SwapTotal/ {print $2}' /proc/meminfo) < 8388608 )); then
-  sudo fallocate -l 12G extra.swap
+if [[ "$target" != rank ]]; then
+  sudo fallocate -l 40G extra.swap
   sudo chmod 600 extra.swap
   sudo mkswap extra.swap
   sudo swapon extra.swap
