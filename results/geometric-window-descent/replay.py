@@ -24,6 +24,7 @@ TARGETS = {
     "window": ("AuditSecondSeedWindow",),
     "proof": ("AuditGeometricRH",),
     "compare": ("AuditGeometricRH", "AuditSecondSeedWindow", "AuditPrevious", "AuditPublished"),
+    "mizusawa-residues": ("AuditMizusawaResidue",),
     "mizusawa-units": ("AuditMizusawaUnits",),
     "mizusawa-rank": ("AuditMizusawaTower", "MizusawaSelector", "AuditDescent"),
     "mizusawa": ("AuditMizusawaTower", "MizusawaSelector", "AuditDescent", "AuditMizusawaRH",
@@ -35,6 +36,7 @@ AUDITS = {
     "AuditGeometricRH": "second-rh-names.txt",
     "AuditPrevious": "previous-rh-names.txt",
     "AuditPublished": "published-rh-names.txt",
+    "AuditMizusawaResidue": "root-of-unity-names.txt",
     "AuditMizusawaUnits": "unit-parity-names.txt",
     "AuditMizusawaTower": "mizusawa-rank-names.txt",
     "AuditMizusawaRH": "mizusawa-rh-names.txt",
@@ -49,6 +51,7 @@ CHECK = {
     "proof": ("QuadraticSchreier", "QuadraticGenus", "BiquadraticDescent",
               "OrdinaryRayDescent", "NineIntegralTower", "CaseTwoAutomorphy",
               "SecondSeedCount", "SecondSeedWindow", "FiniteFrameRH", "SecondSeedRH"),
+    "mizusawa-residues": ("MizusawaUnitResidue",),
     "mizusawa-units": ("MizusawaUnitParity",),
     "mizusawa-rank": MIZUSAWA_MODULES,
     "mizusawa": (*MIZUSAWA_MODULES, "MizusawaWindowRH", "MizusawaNineControl", "SecondSeedRH"),
@@ -149,6 +152,7 @@ def check_audit(name, work, evidence):
         return
     if name.startswith("AuditMizusawa"):
         filename, key = {
+            "AuditMizusawaResidue": ("residues.json", "root_of_unity"),
             "AuditMizusawaUnits": ("units.json", "unit_parity"),
             "AuditMizusawaTower": ("arithmetic.json", "arithmetic_three"),
             "AuditMizusawaRH": ("comparison.json", "literature_three"),
@@ -183,8 +187,10 @@ def main():
         for folder, path in sources.values():
             print(path.relative_to(HERE))
         return
-    if not all((args.lean_bin, args.mathlib, args.archive, args.work)):
-        parser.error("supply --lean-bin, --mathlib, --archive and --work")
+    if not all((args.lean_bin, args.mathlib, args.work)):
+        parser.error("supply --lean-bin, --mathlib and --work")
+    if args.target != "mizusawa-residues" and not args.archive:
+        parser.error("this target also needs the geometric proof --archive")
     bins, mathlib = args.lean_bin.resolve(), args.mathlib.resolve()
     archives = [path.resolve() for path in args.archive]
     env = os.environ.copy()

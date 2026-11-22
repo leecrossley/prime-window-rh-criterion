@@ -29,6 +29,19 @@ def canonical(names):
 def record(names):
     return {"count": len(names), "sorted_sha256": hashlib.sha256(canonical(names)).hexdigest()}
 
+def tower_overlap(inputs, closed, candidate):
+    old_tower = read_names(inputs / FILES["arithmetic_nine"])
+    new_tower = read_names(inputs / FILES["arithmetic_three"])
+    if not old_tower <= closed or not new_tower <= candidate:
+        raise ValueError("A tower dependency is missing from its full endpoint")
+    removed, added = old_tower - new_tower, new_tower - old_tower
+    return {
+        "tower_removals_still_reachable": len(removed & candidate),
+        "tower_removals_absent_from_full_endpoint": len(removed - candidate),
+        "tower_additions_already_reachable": len(added & closed),
+        "tower_additions_new_to_full_endpoint": len(added - closed),
+    }
+
 def compare(inputs, output, target, baselines, filename):
     output.mkdir(parents=True, exist_ok=True)
     candidate = read_names(inputs / FILES[target])
@@ -36,6 +49,8 @@ def compare(inputs, output, target, baselines, filename):
     for label in baselines:
         reference = read_names(inputs / FILES[label])
         report["graphs"][label] = record(reference)
+        if label == "closed_nine":
+            report["arithmetic_overlap"] = tower_overlap(inputs, reference, candidate)
         dropped, added = reference - candidate, candidate - reference
         report["comparisons"][label] = {
             "dropped": len(dropped), "added": len(added),

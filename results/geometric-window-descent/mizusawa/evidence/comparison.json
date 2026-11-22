@@ -24,5 +24,11 @@
       "added": 3,
       "net_fewer": 1
     }
+  },
+  "arithmetic_overlap": {
+    "tower_removals_still_reachable": 33446,
+    "tower_removals_absent_from_full_endpoint": 98,
+    "tower_additions_already_reachable": 257,
+    "tower_additions_new_to_full_endpoint": 39
   }
 }
