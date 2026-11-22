@@ -17,7 +17,7 @@ The [square-sample median and pair-discrepancy results](results/prime-window-pow
 
 ## Geometric proof-engineering note
 
-An ordinary-character specialization uses nine generators for the prime-two tower and only the second automorphy case in the rank-four count. The Lean proof reaches Mathlib’s RH through the geometric argument. A direct arithmetic bound for the signed sum on arbitrarily late complete blocks remains open. [Note and prior work](results/geometric-window-descent/) · [Lean source](results/geometric-window-descent/lean/SecondSeedRH.lean) · [Replay and comparison](results/geometric-window-descent/REPLAY.md)
+The ordinary-character Lean proof lowers its generator bound for the prime-two tower from 24 to nine. The earlier class-group calculation gives sharp rank three for its ordinary class module. The Lean proof also uses the second automorphy case directly in the rank-four count and reaches Mathlib’s RH through the geometric argument. A direct arithmetic bound for the signed sum on arbitrarily late complete blocks remains open. [Note and prior work](results/geometric-window-descent/) [Lean source](results/geometric-window-descent/lean/SecondSeedRH.lean) [Replay and comparison](results/geometric-window-descent/REPLAY.md)
 
 ## Shared verification files
 

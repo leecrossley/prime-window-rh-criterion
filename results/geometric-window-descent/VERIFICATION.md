@@ -1,6 +1,6 @@
 # Verification record
 
-The standalone Lean kernel replayed the closed geometric RH theorem on 22 November 2026. The declaration audit found exactly Mathlib’s `RiemannHypothesis` at its root and only `propext`, `Classical.choice`, and `Quot.sound` among its axioms. The archived geometric library and Mathlib were supplied as checked inputs. Their public revisions and the commands to rebuild the specialization are in the replay instructions. [Geometric build, kernel output and audit](evidence/checked-geometric-rh.txt) · [Replay](REPLAY.md)
+On 22 November 2026 the standalone Lean kernel replayed the file containing `rh_from_second_seed` and a square-block corollary. The declaration audit started at `rh_from_second_seed`, found exactly Mathlib’s `RiemannHypothesis` as its type and reported only `propext`, `Classical.choice` and `Quot.sound` among its axioms. The file distributed here ends at the RH theorem. The public replay builds it from source against the pinned geometric library and Mathlib. [Recorded kernel output and audit](evidence/checked-geometric-rh.txt) [Distributed theorem](lean/SecondSeedRH.lean) [Replay](REPLAY.md)
 
 ## Arithmetic and automorphy
 
@@ -20,4 +20,4 @@ The three retained comparisons transport a matched Hecke operator through the la
 
 The two comparisons and all four complete declaration differences were reproduced from the recorded name lists when preparing this note. The `compare` replay regenerates all three lists from the Lean endpoints, checks their hashes, and compares the complete differences. The public note includes the proof sources and only the differences between the full lists. [Published baseline audit](evidence/checked-reference-rh.txt) · [Previous calculation](evidence/checked-24-generator-rh.txt) · [Comparison program](compare.py)
 
-The geometry-only source files stop at the RH conclusion. The original run also checked a square-block corollary obtained by applying this repository’s implication from RH. That implication and the open direct cancellation problem are recorded in the note. [Square-bound implication](../prime-window-power-samples/pairs/mobius/lean/SquareSignedConverse.lean) · [Open arithmetic estimate](../prime-window-power-samples/pairs/mobius/CUTOFFS.md)
+The separate square-block corollary applies the collection’s implication from RH. The note records the remaining problem of proving the cancellation estimate directly from the signed sum. [Square-bound implication](../prime-window-power-samples/pairs/mobius/lean/SquareSignedConverse.lean) [Open arithmetic estimate](../prime-window-power-samples/pairs/mobius/CUTOFFS.md)
