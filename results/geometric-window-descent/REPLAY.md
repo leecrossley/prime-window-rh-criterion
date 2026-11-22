@@ -46,7 +46,7 @@ To replay the conditional window before applying the nine-generator bound, run t
 python3 replay.py window --lean-bin "$lean_bin" --mathlib "$inputs/mathlib4" --archive "$archive" --work "$inputs/runs"
 ```
 
-For the three-generator proof from unit signs, use `real-unit-rows` for the Mathlib calculation and `tame-eight` for the arithmetic tower bound. [Commands and receipts](mizusawa/tame-signs/README.md#replay)
+For the three-generator proof from unit signs, use `real-unit-rows` for the Mathlib calculation, `tame-eight` for the arithmetic tower bound and `tame-eight-rh` for its application in the geometric endpoint. [Commands and receipts](mizusawa/tame-signs/README.md#replay)
 
 To inspect the source order before downloading the archive, run `python3 replay.py proof --list`. The full proof has 74 package modules including its audit. The standalone rank replay has 11. The baseline and the specialization give different implementations of some declarations, so the runner checks their endpoints in separate Lean processes.
 

@@ -32,10 +32,11 @@ This addition supplies a Lean proof from the cubing and inverse-ninth-power Frob
 
 ## Replay
 
-From `results/geometric-window-descent`, use the compiler, Mathlib and geometric archive paths in the family replay instructions. The first command uses Mathlib alone and the second checks the three-generator bound on the ordinary tower. The Python calculation independently checks 24 prime/conductor combinations and a prime outside the hypotheses. [Pinned inputs](../../REPLAY.md) · [Verification record](VERIFICATION.md)
+From `results/geometric-window-descent`, use the compiler, Mathlib and geometric archive paths in the family replay instructions. The first command uses Mathlib alone, the second checks the three-generator tower bound and the third applies it to the existing geometric RH endpoint. The Python calculation independently checks 24 prime/conductor combinations and a prime outside the hypotheses. [Pinned inputs](../../REPLAY.md) · [Verification record](VERIFICATION.md)
 
 ```sh
 python3 replay.py real-unit-rows --lean-bin "$lean_bin" --mathlib "$inputs/mathlib4" --work "$inputs/runs"
 python3 replay.py tame-eight --lean-bin "$lean_bin" --mathlib "$inputs/mathlib4" --archive "$archive" --work "$inputs/runs"
+python3 replay.py tame-eight-rh --lean-bin "$lean_bin" --mathlib "$inputs/mathlib4" --archive "$archive" --work "$inputs/runs"
 python3 mizusawa/tame-signs/check_residues.py
 ```

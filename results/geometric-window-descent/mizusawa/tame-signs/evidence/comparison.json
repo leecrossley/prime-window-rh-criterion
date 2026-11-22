@@ -1,0 +1,16 @@
+{
+  "tower": {
+    "nine": 77321,
+    "three_from_units": 100303,
+    "added": 23122,
+    "removed": 140,
+    "net_change": 22982
+  },
+  "geometric_rh": {
+    "nine": 1476889,
+    "three_from_units": 1477044,
+    "added": 195,
+    "removed": 40,
+    "net_change": 155
+  }
+}

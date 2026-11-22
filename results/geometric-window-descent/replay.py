@@ -26,6 +26,7 @@ TARGETS = {
     "compare": ("AuditGeometricRH", "AuditPrevious", "AuditPublished"),
     "real-unit-rows": ("AuditRealUnitRows",),
     "tame-eight": ("AuditTameEight",),
+    "tame-eight-rh": ("AuditTameEightRH",),
     "mizusawa-residues": ("AuditMizusawaResidue",),
     "mizusawa-units": ("AuditMizusawaUnits",),
     "mizusawa-rank": ("AuditMizusawaTower", "MizusawaSelector", "AuditDescent"),
@@ -40,6 +41,7 @@ AUDITS = {
     "AuditPublished": "published-rh-names.txt",
     "AuditRealUnitRows": "real-unit-row-names.txt",
     "AuditTameEight": "tame-eight-names.txt",
+    "AuditTameEightRH": "tame-eight-rh-names.txt",
     "AuditMizusawaResidue": "root-of-unity-names.txt",
     "AuditMizusawaUnits": "unit-parity-names.txt",
     "AuditMizusawaTower": "mizusawa-rank-names.txt",
@@ -55,6 +57,7 @@ CHECK = {
     "proof": ("QuadraticSchreier", "QuadraticGenus", "BiquadraticDescent",
               "OrdinaryRayDescent", "NineIntegralTower", "CaseTwoAutomorphy",
               "SecondSeedCount", "SecondSeedWindow", "FiniteFrameRH", "SecondSeedRH"),
+    "tame-eight-rh": ("CyclotomicEight", "TameEightWindowRH"),
     "real-unit-rows": ("RealCyclotomicUnit", "RealUnitFrobenius", "RealUnitResidueSigns",
                        "RealUnitPrimeSigns", "RealUnitSignRows"),
     "tame-eight": ("RealCyclotomicUnit", "RealUnitFrobenius", "RealUnitResidueSigns",
@@ -160,7 +163,7 @@ def check_audit(name, work, evidence):
         if len(names) != 390211 or len(set(names)) != len(names):
             raise ValueError(f"Unexpected window dependency list: {len(names)} entries")
         return
-    if name in ("AuditRealUnitRows", "AuditTameEight"):
+    if name in ("AuditRealUnitRows", "AuditTameEight", "AuditTameEightRH"):
         graph = json.loads((HERE / "mizusawa/tame-signs/evidence/dependencies.json").read_text())[name]
         count, expected = graph["count"], graph["sorted_sha256"]
     elif name.startswith("AuditMizusawa"):

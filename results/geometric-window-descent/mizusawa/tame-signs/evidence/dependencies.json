@@ -6,5 +6,9 @@
   "AuditTameEight": {
     "count": 100303,
     "sorted_sha256": "456a285842b6de828ecd2de88e8d35218ee1c75c367b682ef6abcad56fde8e4c"
+  },
+  "AuditTameEightRH": {
+    "count": 1477044,
+    "sorted_sha256": "e49318770618b5cd9fe9eadc399926917a52d76e23df1a6b908e6b021891b15e"
   }
 }
