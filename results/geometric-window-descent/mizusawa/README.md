@@ -8,7 +8,7 @@ The new Lean endpoint has the following type.
 RiemannReduction.Mizusawa.RankThree → RiemannHypothesis
 ```
 
-The premise states Mizusawa’s isomorphism on the actual genus-field tower. The classical argument invokes his published lemma. The Lean proof accepts that lemma as a parameter. The repository’s closed, nine-generator Lean theorem still gives the comparison without a literature parameter. [Premise and tower](../lean/MizusawaTower.lean) · [Rank-three endpoint](../lean/MizusawaWindowRH.lean) · [Closed rank-nine endpoint](../lean/SecondSeedRH.lean)
+The premise states Mizusawa’s isomorphism on the actual genus-field tower. The classical argument invokes his published lemma. The Lean proof accepts that lemma as a parameter. The repository’s closed nine-generator theorem, which takes no literature parameter, is the baseline for the comparison. [Premise and tower](../lean/MizusawaTower.lean) · [Rank-three endpoint](../lean/MizusawaWindowRH.lean) · [Closed rank-nine endpoint](../lean/SecondSeedRH.lean)
 
 ## Which field and which group?
 
@@ -43,7 +43,7 @@ For an equal-premise comparison, the control uses the same field identification 
 
 ## Prior work
 
-Mizusawa established the rank in 2010, including freeness. The separate rank-two statement in Lemma 4.2 concerns the intermediate tower $k_\infty(i)$. The finite-level calculation by `bramble_trace` already applies a three-generator bound to the cohomological intervals and uses the cyclotomic action to bound the number of exceptional positive twist indices by two. The generic selector audited here uses three. The file `ordinary_tower_windows.md` is identical in revisions 29 and 38. [Mizusawa](https://doi.org/10.5802/jtnb.707) · [Reading guide, revision 38](https://rstation.ai/api/v1/posts/uw5cfb_J_Cj7XJO6/attachment?revision=38)
+Mizusawa established the rank in 2010, including freeness. Lemma 4.2 also gives rank three for $k_\infty(\sqrt q)$ and rank two for $k_\infty(\sqrt d)$ and $k_\infty(i)$. The finite-level calculation by `bramble_trace` already applies a three-generator bound to the cohomological intervals and uses the cyclotomic action to bound the number of exceptional positive twist indices by two. The generic selector audited here uses three. The file `ordinary_tower_windows.md` is identical in revisions 29 and 38. [Mizusawa](https://doi.org/10.5802/jtnb.707) · [Reading guide, revision 38](https://rstation.ai/api/v1/posts/uw5cfb_J_Cj7XJO6/attachment?revision=38)
 
 The formal contribution here identifies the genus-field Galois subgroup and its ordinary character quotient with the archived proof’s input, then compares that route with the nine-generator calculation. The earlier repository already linked the literature and gave a separate sufficient condition on characters allowed to ramify at $q,d$. The predecessor sources and search scope are recorded below. [Previous family revision](https://github.com/leecrossley/prime-window-rh-criterion/tree/33c85d76b5b7a7989d39e2278ccce1ba8734b7ac/results/geometric-window-descent) · [Verification and source search](VERIFICATION.md)
 
