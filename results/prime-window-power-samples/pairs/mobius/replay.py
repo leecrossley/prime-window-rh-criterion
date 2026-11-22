@@ -101,7 +101,9 @@ def main():
             for job in finished:
                 job.result()
                 order.done(pending.pop(job))
-    subprocess.run(["leanchecker", "-v", *KERNEL], env=env, check=True)
+    for name in KERNEL:
+        print("Kernel replay:", name, flush=True)
+        subprocess.run(["leanchecker", "-v", name], env=env, check=True)
     print(f"Kernel replay passed for {len(KERNEL)} result modules and all three declaration audits.", flush=True)
 
 
