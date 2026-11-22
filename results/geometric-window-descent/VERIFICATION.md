@@ -4,6 +4,8 @@ The development build of 22 November 2026 compiled `SecondSeedRH` with both `rh_
 
 The distributed `SecondSeedRH` ends at the closed RH theorem. The logs above predate the distributed replay scripts. The `proof` target checks the distributed theorem, `window` checks the earlier conditional statement and `compare` checks both together with the two reference endpoints. [Distributed theorem](lean/SecondSeedRH.lean) [Replay instructions](REPLAY.md)
 
+The 22 November hosted replay of `window_from_second_seed` at `821eecfa35d98402130d396456099d0f4c8f4c58` found 390,211 reachable declarations. The SHA-256 of their sorted names is `bd7b33add74d45a7d62f265018d38b110fd655b1253b8aa27ca7ad02fd2b6bd7`. The theorem takes the tower input and the literature hypothesis. Its axiom audit reported `propext`, `Classical.choice` and `Quot.sound`. [Hosted run](https://github.com/leecrossley/prime-window-rh-criterion/actions/runs/45005432944/job/137155924487) [Theorem at the checked revision](https://github.com/leecrossley/prime-window-rh-criterion/blob/821eecfa35d98402130d396456099d0f4c8f4c58/results/geometric-window-descent/lean/SecondSeedWindow.lean)
+
 ## Arithmetic and automorphy
 
 The `rank` command in this package was run from a fresh object directory. It built the nine-generator and previous 24-generator statements and independently replayed six modules in `leanchecker`. The audit of `host_tower_nine` reached 77,321 declarations. Its excluded dependencies include `RiemannHypothesis`, Ferrero–Washington and the former `baseRk`, `quadStep`, and `idxTwo` tower bounds. [Fresh arithmetic replay](evidence/rank-replay.txt) · [Arithmetic audit](lean/AuditDescent.lean)
