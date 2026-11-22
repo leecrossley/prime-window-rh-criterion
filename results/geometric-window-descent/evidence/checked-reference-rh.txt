@@ -1,0 +1,12 @@
+CheckAlpogePrincipalArchivedGeometryRH-kernel.log
+replaying CheckAlpogePrincipalArchivedGeometryRH
+
+ReferenceDependencyAudit.log
+RiemannGaussian.AlpogeWindow.rh_of_principal_archived_geometry: 1477932 reachable declarations, 151681 represented modules, 146399 represented archive modules, axioms [propext,
+ Classical.choice,
+ Quot.sound]
+Other reachable theorems with the bare type RiemannHypothesis: []
+Reachability of UpperTheory.V.Odd.stickBound: true
+Reachability of UpperTheory.V.Odd.thmBcFree_of: true
+Reachability of RiemannReduction.ConductorOne.principal_window_of_literature: false
+Reachability of RiemannReduction.ConductorOne.principal_window_from_counts: false

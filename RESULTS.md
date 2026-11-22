@@ -15,6 +15,10 @@ The power-sampling result now also gives an $8/9$ upper bound for the mean squar
 
 The [square-sample median and pair-discrepancy results](results/prime-window-power-samples/square-blocks/) give an RH equivalence on shrinking blocks, a finite zero-exception range and a sharp lower limit for a weighted pair statistic. [All square-sample editions](https://github.com/leecrossley/prime-window-rh-criterion/releases?q=square-block-median) · [Hypotheses and verification (v1.0.2)](https://github.com/leecrossley/prime-window-rh-criterion/releases/tag/square-block-median-v1.0.2) · [Equation display fixes (v1.0.1)](https://github.com/leecrossley/prime-window-rh-criterion/releases/tag/square-block-median-v1.0.1) · [First edition (v1.0.0)](https://github.com/leecrossley/prime-window-rh-criterion/releases/tag/square-block-median-v1.0.0)
 
+## Geometric proof-engineering note
+
+An ordinary-character specialization uses nine generators for the prime-two tower and only the second automorphy case in the rank-four count. The Lean proof reaches Mathlib’s RH through the geometric argument. A direct arithmetic bound for the signed sum on arbitrarily late complete blocks remains open. [Note and prior work](results/geometric-window-descent/) · [Lean source](results/geometric-window-descent/lean/SecondSeedRH.lean) · [Replay and comparison](results/geometric-window-descent/REPLAY.md)
+
 ## Shared verification files
 
 Each entry in [the shared-file list](shared-files.json) names the source to edit and its replayable copies. After a change, run `python3 tools/shared_files.py --sync`, replay each affected result and update its manifest. Each result can still be checked from its own directory.
