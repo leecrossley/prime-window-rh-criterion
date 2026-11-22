@@ -3,6 +3,9 @@
 import argparse
 from fractions import Fraction
 
+if not __debug__:
+    raise SystemExit("Square-block certificates require Python assertions. Disable optimisation.")
+
 from flint import arb, arb_poly, ctx
 
 from check_discrepancy import primes_through
