@@ -9,15 +9,18 @@ from pathlib import Path
 import shutil
 import tempfile
 
-from replay import AUDITS, CHECK, ENDPOINTS, HERE, TARGETS, check_audit, compare_dependencies, ordered_sources
+from replay import AUDITS, CHECK, ENDPOINTS, HERE, TARGETS, check_audit, compare_dependencies, comparison_checkpoints, ordered_sources
 
 
 def collect(parts, output, revision):
     evidence = json.loads((HERE / "evidence/comparison.json").read_text())
     sources = ordered_sources(TARGETS["compare"])
-    terminals = {name for name, _ in ENDPOINTS.values() if name}
-    common = sources.keys() - AUDITS.keys() - terminals
-    stages = {"common": ["build " + name for name in sorted(common)]}
+    checkpoints = comparison_checkpoints(sources)
+    stages = {stage: ["build " + name for name in builds] for stage, (_, builds) in checkpoints.items()}
+    if (parts / f"geometric-part-common-{revision}").is_dir():
+        if any((parts / f"geometric-part-{name}-{revision}").is_dir() for name in stages):
+            raise ValueError("Found both the single and split common builds")
+        stages = {"common": [label for labels in stages.values() for label in labels]}
     for endpoint, (terminal, audit) in ENDPOINTS.items():
         if terminal:
             stages["build-" + endpoint] = ["build " + terminal]

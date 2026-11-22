@@ -221,6 +221,12 @@ def comparison_stage(stage, sources, built):
         if available:
             raise ValueError("The common build needs an empty object directory")
         return common, (), set()
+    checkpoints = comparison_checkpoints(sources)
+    if stage in checkpoints:
+        required, builds = checkpoints[stage]
+        if available != required:
+            raise ValueError(f"{stage} received different modules: {sorted(available ^ required)}")
+        return builds, (), set()
     operation, endpoint = stage.split("-", 1)
     terminal, audit = ENDPOINTS[endpoint]
     required = common if operation == "build" or not terminal else common | {terminal}
@@ -242,12 +248,12 @@ RANK_ENDPOINTS = {
 }
 
 
-def rank_plan(sources):
-    """List the compiled inputs, new objects, kernel roots and audits for each rank job."""
+def geometry_checkpoints(*arithmetic_roots):
+    """Divide the window and frame builds at their shared imports."""
     def closure(*roots):
         return set(ordered_sources(roots))
 
-    arithmetic = closure(*MIZUSAWA_MODULES, "NineIntegralTower", "AuditSlopeGraph")
+    arithmetic = closure(*arithmetic_roots, "NineIntegralTower", "AuditSlopeGraph")
     window = closure("SecondSeedWindow")
     frame = closure("FiniteFrameRH")
     basis = arithmetic | (window & frame)
@@ -256,19 +262,41 @@ def rank_plan(sources):
     window |= basis
     frame |= basis
     frame_inputs = frame - {"FiniteFrameRH"}
+    if not counts <= window or not suppliers <= frame_inputs:
+        raise ValueError("The window or frame checkpoint is missing imports")
+    plan = {
+        "build-basis": (set(), basis),
+        "build-counts": (basis, counts - basis),
+        "build-window": (counts, window - counts),
+        "build-suppliers": (basis, suppliers - basis),
+        "build-frame-inputs": (suppliers, frame_inputs - suppliers),
+        "build-frame": (frame_inputs, frame - frame_inputs),
+    }
+    return plan, window, frame
+
+
+def comparison_checkpoints(sources):
+    plan, window, frame = geometry_checkpoints()
+    previous = set(ordered_sources(("SingleInertiaWindow",))) - window
+    plan["build-single-window"] = (window, previous)
+    terminals = {module for module, _ in ENDPOINTS.values() if module}
+    objects = sources.keys() - AUDITS.keys()
+    common = window | frame | previous
+    if common | terminals != objects or common & terminals or previous & frame:
+        raise ValueError("The comparison checkpoints differ from the local source closure")
+    return plan
+
+
+def rank_plan(sources):
+    """List the compiled inputs, new objects, kernel roots and audits for each rank job."""
+    checkpoints, window, frame = geometry_checkpoints(*MIZUSAWA_MODULES)
     shared = window | frame
     terminals = {module for module, _ in RANK_ENDPOINTS.values()}
-    if (shared | terminals != sources.keys() - AUDITS.keys() or shared & terminals
-            or not counts <= window or not suppliers <= frame_inputs):
+    if shared | terminals != sources.keys() - AUDITS.keys() or shared & terminals:
         raise ValueError("The rank stages differ from the local source closure")
-    plan = {
-        "build-basis": (set(), basis, (MIZUSAWA_MODULES,), {"AuditMizusawaTower", "AuditDescent"}),
-        "build-counts": (basis, counts - basis, (), set()),
-        "build-window": (counts, window - counts, (), set()),
-        "build-suppliers": (basis, suppliers - basis, (), set()),
-        "build-frame-inputs": (suppliers, frame_inputs - suppliers, (), set()),
-        "build-frame": (frame_inputs, frame - frame_inputs, (), set()),
-    }
+    plan = {name: (required, builds, (), set()) for name, (required, builds) in checkpoints.items()}
+    required, basis = checkpoints["build-basis"]
+    plan["build-basis"] = (required, basis, (MIZUSAWA_MODULES,), {"AuditMizusawaTower", "AuditDescent"})
     for endpoint, (module, audit) in RANK_ENDPOINTS.items():
         ready = shared | {module}
         plan["build-" + endpoint] = (shared, {module}, (), set())

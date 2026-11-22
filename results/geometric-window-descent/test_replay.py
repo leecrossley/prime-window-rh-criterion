@@ -2,7 +2,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from replay import AUDITS, CHECK, ENDPOINTS, RANK_ENDPOINTS, TARGETS, check_archive_imports, comparison_stage, digest, direct_imports, ordered_sources, rank_plan, rank_stage, unit_stage
+from replay import AUDITS, CHECK, ENDPOINTS, RANK_ENDPOINTS, TARGETS, check_archive_imports, comparison_checkpoints, comparison_stage, digest, direct_imports, ordered_sources, rank_plan, rank_stage, unit_stage
 
 
 class ArchiveImports(unittest.TestCase):
@@ -127,6 +127,35 @@ class ComparisonStages(unittest.TestCase):
             self.phase("audit-previous")
         with self.assertRaisesRegex(ValueError, "empty object directory"):
             self.phase("common")
+
+    def test_comparison_checkpoints_cover_the_common_objects_once(self):
+        plan = comparison_checkpoints(self.sources)
+        original, _, _ = self.phase("common")
+        compiled = []
+        for stage, (required, builds) in plan.items():
+            with self.subTest(stage=stage):
+                for name in required:
+                    self.object(name)
+                self.assertEqual(self.phase(stage), (builds, (), set()))
+                self.assertTrue(required.isdisjoint(builds))
+                for name in builds:
+                    imports = set(direct_imports(self.sources[name][1])) & self.sources.keys()
+                    self.assertTrue(imports <= (required | builds), name)
+                for path in self.objects.rglob("*.olean"):
+                    path.unlink()
+                compiled.extend(builds)
+        self.assertCountEqual(compiled, original)
+        window = set.union(*plan["build-single-window"])
+        frame = set.union(*plan["build-frame"])
+        self.assertEqual(window & frame, plan["build-basis"][1])
+        self.assertEqual(window | frame, original)
+
+    def test_comparison_checkpoints_reject_missing_and_extra_modules(self):
+        with self.assertRaisesRegex(ValueError, "different modules"):
+            self.phase("build-counts")
+        self.object("Unrelated")
+        with self.assertRaisesRegex(ValueError, "different modules"):
+            self.phase("build-basis")
 
     def test_rank_stages_cover_the_full_replay(self):
         sources = ordered_sources(TARGETS["mizusawa"])

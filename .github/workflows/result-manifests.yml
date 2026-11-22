@@ -47,14 +47,57 @@ jobs:
           path: ${{ runner.temp }}/geometric-evidence/
           if-no-files-found: warn
           retention-days: 30
-  common:
-    if: github.event_name == 'workflow_dispatch' && inputs.geometric_target == 'compare'
+  build-basis:
+    if: github.event_name == 'workflow_dispatch' && (inputs.geometric_target == 'compare' || inputs.geometric_target == 'mizusawa')
     needs: check
     uses: ./.github/workflows/geometric-stage.yml
     with:
-      stage: common
+      target: ${{ inputs.geometric_target }}
+      stage: build-basis
+  build-counts:
+    needs: build-basis
+    uses: ./.github/workflows/geometric-stage.yml
+    with:
+      target: ${{ inputs.geometric_target }}
+      stage: build-counts
+      source: build-basis
+  build-window:
+    needs: build-counts
+    uses: ./.github/workflows/geometric-stage.yml
+    with:
+      target: ${{ inputs.geometric_target }}
+      stage: build-window
+      source: build-counts
+  build-suppliers:
+    needs: build-basis
+    uses: ./.github/workflows/geometric-stage.yml
+    with:
+      target: ${{ inputs.geometric_target }}
+      stage: build-suppliers
+      source: build-basis
+  build-frame-inputs:
+    needs: build-suppliers
+    uses: ./.github/workflows/geometric-stage.yml
+    with:
+      target: ${{ inputs.geometric_target }}
+      stage: build-frame-inputs
+      source: build-suppliers
+  build-frame:
+    needs: build-frame-inputs
+    uses: ./.github/workflows/geometric-stage.yml
+    with:
+      target: ${{ inputs.geometric_target }}
+      stage: build-frame
+      source: build-frame-inputs
+  build-single-window:
+    if: inputs.geometric_target == 'compare'
+    needs: build-window
+    uses: ./.github/workflows/geometric-stage.yml
+    with:
+      stage: build-single-window
+      source: build-window
   endpoints:
-    needs: common
+    needs: [build-single-window, build-frame]
     strategy:
       fail-fast: false
       matrix:
@@ -62,7 +105,8 @@ jobs:
     uses: ./.github/workflows/geometric-stage.yml
     with:
       stage: build-${{ matrix.endpoint }}
-      source: common
+      source: build-single-window
+      also: build-frame
   kernels:
     needs: endpoints
     strategy:
@@ -82,11 +126,12 @@ jobs:
           - {endpoint: candidate, source: build-candidate}
           - {endpoint: previous, source: build-previous}
           - {endpoint: published, source: build-published}
-          - {endpoint: window, source: common}
+          - {endpoint: window, source: build-single-window, also: build-frame}
     uses: ./.github/workflows/geometric-stage.yml
     with:
       stage: audit-${{ matrix.endpoint }}
       source: ${{ matrix.source }}
+      also: ${{ matrix.also }}
   comparison:
     needs: [kernels, audits]
     runs-on: ubuntu-24.04
@@ -132,50 +177,9 @@ jobs:
       target: tame-eight-rh
       stage: ${{ matrix.stage }}
       source: build-endpoint
-  rank-basis:
-    if: github.event_name == 'workflow_dispatch' && inputs.geometric_target == 'mizusawa'
-    needs: check
-    uses: ./.github/workflows/geometric-stage.yml
-    with:
-      target: mizusawa
-      stage: build-basis
-  rank-counts:
-    needs: rank-basis
-    uses: ./.github/workflows/geometric-stage.yml
-    with:
-      target: mizusawa
-      stage: build-counts
-      source: build-basis
-  rank-window:
-    needs: rank-counts
-    uses: ./.github/workflows/geometric-stage.yml
-    with:
-      target: mizusawa
-      stage: build-window
-      source: build-counts
-  rank-suppliers:
-    needs: rank-basis
-    uses: ./.github/workflows/geometric-stage.yml
-    with:
-      target: mizusawa
-      stage: build-suppliers
-      source: build-basis
-  rank-frame-inputs:
-    needs: rank-suppliers
-    uses: ./.github/workflows/geometric-stage.yml
-    with:
-      target: mizusawa
-      stage: build-frame-inputs
-      source: build-suppliers
-  rank-frame:
-    needs: rank-frame-inputs
-    uses: ./.github/workflows/geometric-stage.yml
-    with:
-      target: mizusawa
-      stage: build-frame
-      source: build-frame-inputs
   rank-endpoints:
-    needs: [rank-window, rank-frame]
+    if: inputs.geometric_target == 'mizusawa'
+    needs: [build-window, build-frame]
     strategy:
       fail-fast: false
       matrix:
