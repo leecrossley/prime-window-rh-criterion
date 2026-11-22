@@ -1,6 +1,6 @@
 # Verification record
 
-On 22 November 2026 the standalone Lean kernel replayed the file containing `rh_from_second_seed` and a square-block corollary. The declaration audit started at `rh_from_second_seed`, found exactly Mathlib’s `RiemannHypothesis` as its type and reported only `propext`, `Classical.choice` and `Quot.sound` among its axioms. The file distributed here ends at the RH theorem. The public replay builds it from source against the pinned geometric library and Mathlib. [Recorded kernel output and audit](evidence/checked-geometric-rh.txt) [Distributed theorem](lean/SecondSeedRH.lean) [Replay](REPLAY.md)
+On 22 November 2026 the standalone Lean kernel replayed the file containing `rh_from_second_seed` and a square-block corollary. The declaration audit started at `rh_from_second_seed`, found exactly Mathlib’s `RiemannHypothesis` as its type and reported only `propext`, `Classical.choice` and `Quot.sound` among its axioms. The file distributed here ends at the RH theorem. The recorded RH and window audits used development modules, including `AuditSecondSeedRH` and `AuditSecondSeedWindow`, that also contained the corollary, and the reference count came from a separate `ReferenceDependencyAudit`. Runs of the distributed `proof` and `compare` targets have not yet been recorded. The public replay builds it from source against the pinned geometric library and Mathlib. [Recorded kernel output and audit](evidence/checked-geometric-rh.txt) [Distributed theorem](lean/SecondSeedRH.lean) [Replay](REPLAY.md)
 
 ## Arithmetic and automorphy
 
