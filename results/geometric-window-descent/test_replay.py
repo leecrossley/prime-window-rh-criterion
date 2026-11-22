@@ -2,7 +2,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from replay import check_archive_imports, digest
+from replay import AUDITS, CHECK, ENDPOINTS, TARGETS, check_archive_imports, comparison_stage, digest, ordered_sources
 
 
 class ArchiveImports(unittest.TestCase):
@@ -74,6 +74,59 @@ class ArchiveImports(unittest.TestCase):
         self.manifest.write_text(self.rows[0] + "\n")
         with self.assertRaisesRegex(ValueError, "Missing imported object: Other"):
             self.check()
+
+
+class ComparisonStages(unittest.TestCase):
+    def setUp(self):
+        temp = tempfile.TemporaryDirectory()
+        self.addCleanup(temp.cleanup)
+        self.objects = Path(temp.name)
+        self.sources = ordered_sources(TARGETS["compare"])
+
+    def phase(self, stage):
+        return comparison_stage(stage, self.sources, self.objects)
+
+    def object(self, name):
+        path = self.objects.joinpath(*name.split(".")).with_suffix(".olean")
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.touch()
+        return path
+
+    def test_all_builds_kernels_and_audits(self):
+        common, kernels, audits = self.phase("common")
+        self.assertEqual((len(common), kernels, audits), (74, (), set()))
+        for name in common:
+            self.object(name)
+        compiled, checked, audited = set(common), [], []
+        for endpoint, (terminal, _) in ENDPOINTS.items():
+            if terminal:
+                names, groups, reports = self.phase("build-" + endpoint)
+                self.assertEqual((names, groups, reports), ({terminal}, (), set()))
+                self.assertNotIn(terminal, compiled)
+                compiled.update(names)
+                obj = self.object(terminal)
+                names, groups, reports = self.phase("kernel-" + endpoint)
+                self.assertFalse(names or reports)
+                checked.extend(groups)
+            names, groups, reports = self.phase("audit-" + endpoint)
+            self.assertFalse(names or groups)
+            audited.extend(reports)
+            if terminal:
+                obj.unlink()
+        self.assertEqual(compiled, self.sources.keys() - AUDITS.keys())
+        self.assertCountEqual(checked, [CHECK["proof"], ("SingleInertiaRH",), ("CheckAlpogePrincipalArchivedGeometryRH",)])
+        self.assertCountEqual(audited, self.sources.keys() & AUDITS.keys())
+
+    def test_missing_or_wrong_checkpoint(self):
+        with self.assertRaisesRegex(ValueError, "different modules"):
+            self.phase("kernel-published")
+        common, _, _ = self.phase("common")
+        for name in common | {"SecondSeedRH"}:
+            self.object(name)
+        with self.assertRaisesRegex(ValueError, "different modules"):
+            self.phase("audit-previous")
+        with self.assertRaisesRegex(ValueError, "empty object directory"):
+            self.phase("common")
 
 
 if __name__ == "__main__":

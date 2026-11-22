@@ -51,4 +51,6 @@ The collection’s Result manifests workflow accepts an optional `geometric_targ
 
 The rank-three companion has three hosted targets. Choose `mizusawa-rank` for the tower theorem and interval selector, `mizusawa-units` for the finite-layer parity lemma, or `mizusawa` for both conditional RH statements and the closed nine-generator comparison. The conditional statements take Mizusawa’s rank theorem as a premise. [Companion proof and counts](mizusawa/README.md)
 
+For `compare`, the workflow builds 74 modules before compiling the three closed endpoints in separate jobs. Each endpoint has a standalone kernel check and a declaration audit. A fourth audit checks the conditional window. Each job reads the compiled objects from its predecessor, verifies their checksum and checks the recorded commit and workflow run. The final job compares the four lists with the published results and retains the stage transcripts. [Hosted stages](../../.github/workflows/geometric-stage.yml) [Comparison collector](collect-comparison.py)
+
 The standard Linux verification also runs the six-prime residue calculation, `mizusawa-residues`, using the pinned Lean toolchain and Mathlib alone. [Linux verifier](../../verify-linux.sh)

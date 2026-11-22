@@ -5,6 +5,9 @@ case ${1:-} in
   rank|window|proof|compare|mizusawa-units|mizusawa-rank|mizusawa) target=$1 ;;
   *) exit 2 ;;
 esac
+stage=${2:-}
+source_stage=${3:-}
+if [[ -n "$stage" && "$target" != compare ]]; then exit 2; fi
 note=$(cd "$(dirname "$0")" && pwd)
 inputs=$(mktemp -d "${RUNNER_TEMP:?}/geometric-inputs.XXXXXXXX")
 evidence="$RUNNER_TEMP/geometric-evidence"
@@ -50,7 +53,26 @@ fi
 df -h .
 free -h
 
-python3 -Bu "$note/replay.py" "$target" --lean-bin "$lean_bin" --mathlib "$inputs/mathlib4" --archive "$inputs/archive/.lake/build/lib/lean" --work "$inputs/runs"
+options=()
+if [[ -n "$stage" ]]; then
+  mkdir "$inputs/objects"
+  if [[ -n "$source_stage" ]]; then
+    checkpoint="$RUNNER_TEMP/geometric-checkpoint"
+    test "$(cat "$checkpoint/revision")" = "$GITHUB_RUN_ID $GITHUB_SHA $source_stage"
+    (cd "$checkpoint" && sha256sum -c objects.sha256)
+    tar --zstd -xf "$checkpoint/objects.tar.zst" -C "$inputs/objects"
+  fi
+  options=(--stage "$stage" --stage-objects "$inputs/objects")
+fi
+python3 -Bu "$note/replay.py" "$target" --lean-bin "$lean_bin" --mathlib "$inputs/mathlib4" --archive "$inputs/archive/.lake/build/lib/lean" --work "$inputs/runs" "${options[@]}"
+if [[ "$stage" == common || "$stage" == build-* ]]; then
+  saved="$RUNNER_TEMP/geometric-saved"
+  mkdir "$saved"
+  tar --zstd -cf "$saved/objects.tar.zst" -C "$inputs/objects" .
+  (cd "$saved" && sha256sum objects.tar.zst > objects.sha256)
+  printf '%s %s %s\n' "$GITHUB_RUN_ID" "$GITHUB_SHA" "$stage" > "$saved/revision"
+fi
+shopt -s nullglob
 for run in "$inputs/runs"/*; do
   for list in "$run"/*-names.txt; do
     gzip -c "$list" > "$evidence/$(basename "$list").gz"

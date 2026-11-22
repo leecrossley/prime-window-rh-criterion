@@ -56,6 +56,12 @@ CHECK = {
     "mizusawa-rank": MIZUSAWA_MODULES,
     "mizusawa": (*MIZUSAWA_MODULES, "MizusawaWindowRH", "MizusawaNineControl", "SecondSeedRH"),
 }
+ENDPOINTS = {
+    "candidate": ("SecondSeedRH", "AuditGeometricRH"),
+    "previous": ("SingleInertiaRH", "AuditPrevious"),
+    "published": ("CheckAlpogePrincipalArchivedGeometryRH", "AuditPublished"),
+    "window": (None, "AuditSecondSeedWindow"),
+}
 IMPORT = re.compile(r"^(?:(?:public|meta)\s+)*import\s+([\w.']+)\s*(?:--.*)?$")
 
 def digest(path):
@@ -172,6 +178,47 @@ def check_audit(name, work, evidence):
         raise ValueError(f"{name}: {len(names)} names, SHA-256 {actual}")
     print(f"{name}: {count:,} names, sorted SHA-256 {actual}", flush=True)
 
+def compare_dependencies(work, evidence, env):
+    checked_run([sys.executable, HERE / "compare.py", work / AUDITS["AuditPublished"],
+                 work / AUDITS["AuditPrevious"], work / AUDITS["AuditGeometricRH"],
+                 work / "comparison"], work, env, "compare dependency sets")
+    if json.loads((work / "comparison/comparison.json").read_text()) != evidence:
+        raise ValueError("Dependency comparison differs from the recorded evidence")
+    for reference in sorted((HERE / "evidence").glob("*-*.txt.gz")):
+        with gzip.open(reference, "rb") as old, gzip.open(work / "comparison" / reference.name, "rb") as new:
+            if old.read() != new.read():
+                raise ValueError("Declaration difference changed: " + reference.name)
+
+def comparison_stage(stage, sources, built):
+    """Select the work for one hosted job and check the modules it received."""
+    terminals = {name for name, _ in ENDPOINTS.values() if name}
+    objects = set(sources) - AUDITS.keys()
+    common = objects - terminals
+    if not terminals <= objects:
+        raise ValueError("Missing comparison endpoint")
+    for name in objects:
+        path = sources[name][1]
+        if terminals.intersection(direct_imports(path)):
+            raise ValueError(f"{name} imports a comparison endpoint")
+    available = {".".join(f.relative_to(built).with_suffix("").parts) for f in built.rglob("*.olean")}
+    if stage == "common":
+        if available:
+            raise ValueError("The common build needs an empty object directory")
+        return common, (), set()
+    operation, endpoint = stage.split("-", 1)
+    terminal, audit = ENDPOINTS[endpoint]
+    required = common if operation == "build" or not terminal else common | {terminal}
+    if available != required:
+        raise ValueError(f"{stage} received different modules: {sorted(available ^ required)}")
+    if operation == "build" and terminal:
+        return {terminal}, (), set()
+    if operation == "kernel" and terminal:
+        modules = CHECK["proof"] if endpoint == "candidate" else (terminal,)
+        return set(), (modules,), set()
+    if operation == "audit":
+        return set(), (), {audit}
+    raise ValueError("Unknown comparison stage: " + stage)
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("target", choices=TARGETS)
@@ -180,8 +227,12 @@ def main():
     parser.add_argument("--archive", type=Path, action="append", default=[],
                         help="extracted .lake/build/lib/lean, repeat for a split local cache")
     parser.add_argument("--work", type=Path, help="parent directory for a fresh build and its audit reports")
+    parser.add_argument("--stage", help="run one stage of the hosted comparison")
+    parser.add_argument("--stage-objects", type=Path, help="object directory for that stage")
     parser.add_argument("--list", action="store_true", help="list the local source closure without building")
     args = parser.parse_args()
+    if bool(args.stage) != bool(args.stage_objects) or (args.stage and args.target != "compare"):
+        parser.error("--stage and --stage-objects go together with compare")
     sources = ordered_sources(TARGETS[args.target])
     if args.list:
         for folder, path in sources.values():
@@ -207,8 +258,16 @@ def main():
     args.work.mkdir(parents=True, exist_ok=True)
     work = Path(tempfile.mkdtemp(prefix=args.target + "-", dir=args.work.resolve()))
     print("Replay directory:", work, flush=True)
-    built = work / "objects"
-    built.mkdir()
+    built = args.stage_objects.resolve() if args.stage else work / "objects"
+    built.mkdir(parents=True, exist_ok=bool(args.stage))
+    if args.stage:
+        build_names, kernel_groups, audit_names = comparison_stage(args.stage, sources, built)
+    else:
+        build_names, audit_names = sources.keys() - AUDITS.keys(), sources.keys() & AUDITS.keys()
+        kernel_groups = [CHECK["proof" if args.target == "compare" else args.target]]
+        if args.target == "compare":
+            # These endpoints have alternative implementations of the same upstream declarations.
+            kernel_groups += [("SingleInertiaRH",), ("CheckAlpogePrincipalArchivedGeometryRH",)]
     env["LEAN_PATH"] = os.pathsep.join(map(str, [built, *archives, *packages]))
     flags = ["--trust=0", "-j1", "-DwarningAsError=true", "-DmaxRecDepth=100000",
              "-DmaxHeartbeats=6000000", "-DsynthInstance.maxHeartbeats=200000"]
@@ -217,18 +276,15 @@ def main():
         cmd = [bins / "lean", *flags, "--root=" + str(folder)]
         if name in STRICT_IMPLICITS:
             cmd.append("-DautoImplicit=false")
-        if name in AUDITS:
+        if name in audit_names:
             audits[name] = [*cmd, path]
+        if name not in build_names:
             continue
         obj = built / path.relative_to(folder).with_suffix(".olean")
         obj.parent.mkdir(parents=True, exist_ok=True)
         checked_run([*cmd, "-o", obj, path], work, env, "build " + name)
-    modules = CHECK["proof" if args.target == "compare" else args.target]
-    checked_run([bins / "leanchecker", "-v", *modules], work, env, "kernel " + ", ".join(modules))
-    if args.target == "compare":
-        # These endpoints have alternative implementations of the same upstream declarations.
-        for name in ("SingleInertiaRH", "CheckAlpogePrincipalArchivedGeometryRH"):
-            checked_run([bins / "leanchecker", "-v", name], work, env, "kernel " + name)
+    for modules in kernel_groups:
+        checked_run([bins / "leanchecker", "-v", *modules], work, env, "kernel " + ", ".join(modules))
     evidence = json.loads((HERE / "evidence/comparison.json").read_text())
     for name, cmd in audits.items():
         checked_run(cmd, work, env, "audit " + name)
@@ -237,16 +293,8 @@ def main():
         options = ["--arithmetic-only"] if args.target == "mizusawa-rank" else []
         checked_run([sys.executable, HERE / "mizusawa/compare.py", work, work / "comparison",
                      "--check", HERE / "mizusawa/evidence", *options], work, env, "compare rank-three dependencies")
-    if args.target == "compare":
-        checked_run([sys.executable, HERE / "compare.py", work / AUDITS["AuditPublished"],
-                     work / AUDITS["AuditPrevious"], work / AUDITS["AuditGeometricRH"],
-                     work / "comparison"], work, env, "compare dependency sets")
-        if json.loads((work / "comparison/comparison.json").read_text()) != evidence:
-            raise ValueError("Dependency comparison differs from the recorded evidence")
-        for reference in sorted((HERE / "evidence").glob("*-*.txt.gz")):
-            with gzip.open(reference, "rb") as old, gzip.open(work / "comparison" / reference.name, "rb") as new:
-                if old.read() != new.read():
-                    raise ValueError("Declaration difference changed: " + reference.name)
+    if args.target == "compare" and not args.stage:
+        compare_dependencies(work, evidence, env)
 
 if __name__ == "__main__":
     main()
