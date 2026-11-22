@@ -2,6 +2,9 @@ name: Geometric comparison stage
 on:
   workflow_call:
     inputs:
+      target:
+        type: string
+        default: compare
       stage:
         required: true
         type: string
@@ -32,9 +35,10 @@ jobs:
           path: ${{ runner.temp }}/geometric-checkpoint
       - name: Replay the comparison stage
         env:
+          TARGET: ${{ inputs.target }}
           STAGE: ${{ inputs.stage }}
           SOURCE_STAGE: ${{ inputs.source }}
-        run: bash results/geometric-window-descent/hosted-replay.sh compare "$STAGE" "$SOURCE_STAGE"
+        run: bash results/geometric-window-descent/hosted-replay.sh "$TARGET" "$STAGE" "$SOURCE_STAGE"
       - name: Save the compiled modules
         if: inputs.stage == 'common' || startsWith(inputs.stage, 'build-')
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2

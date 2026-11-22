@@ -44,6 +44,8 @@ grep -E '^(Checked [0-9]+ upstream|Compiler commit:|Kernel replay passed:|Axioms
 diff -u "$repo/evidence/check.txt" "$scratch/check.txt"
 
 if [[ ${CHECK_CYCLOTOMIC_RESIDUES:-0} == 1 ]]; then
-  python3 "$repo/results/geometric-window-descent/replay.py" mizusawa-residues \
-    --lean-bin "$scratch/lean-4.33.1-linux/bin" --mathlib "$scratch/mathlib4" --work "$scratch/residue-check"
+  for target in mizusawa-residues real-unit-rows; do
+    python3 "$repo/results/geometric-window-descent/replay.py" "$target" \
+      --lean-bin "$scratch/lean-4.33.1-linux/bin" --mathlib "$scratch/mathlib4" --work "$scratch/residue-check"
+  done
 fi

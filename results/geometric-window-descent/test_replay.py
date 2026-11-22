@@ -2,7 +2,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from replay import AUDITS, CHECK, ENDPOINTS, TARGETS, check_archive_imports, comparison_stage, digest, ordered_sources
+from replay import AUDITS, CHECK, ENDPOINTS, TARGETS, check_archive_imports, comparison_stage, digest, ordered_sources, unit_stage
 
 
 class ArchiveImports(unittest.TestCase):
@@ -127,6 +127,26 @@ class ComparisonStages(unittest.TestCase):
             self.phase("audit-previous")
         with self.assertRaisesRegex(ValueError, "empty object directory"):
             self.phase("common")
+
+    def test_unit_proof_stages(self):
+        sources = ordered_sources(TARGETS["tame-eight-rh"])
+        inputs, kernels, audits = unit_stage("build-inputs", sources, self.objects)
+        self.assertTrue({"SecondSeedWindow", "CyclotomicEight"} <= inputs)
+        self.assertFalse(kernels or audits)
+        with self.assertRaisesRegex(ValueError, "different modules"):
+            unit_stage("build-endpoint", sources, self.objects)
+        for name in inputs:
+            self.object(name)
+        remaining, kernels, audits = unit_stage("build-endpoint", sources, self.objects)
+        self.assertFalse(kernels or audits or inputs & remaining)
+        self.assertEqual(inputs | remaining, sources.keys() - AUDITS.keys())
+        for name in remaining:
+            self.object(name)
+        self.assertEqual(unit_stage("kernel-endpoint", sources, self.objects), (set(), (CHECK["tame-eight-rh"],), set()))
+        self.assertEqual(unit_stage("audit-endpoint", sources, self.objects), (set(), (), {"AuditTameEightRH"}))
+        self.object("SecondSeedRH")
+        with self.assertRaisesRegex(ValueError, "different modules"):
+            unit_stage("audit-endpoint", sources, self.objects)
 
 
 if __name__ == "__main__":

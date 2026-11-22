@@ -1,0 +1,292 @@
+Lean (version 4.33.1, arm64-apple-darwin24.6.0, commit 819816b2e0a3bf405af45ae5c7af2491d8f5bee6, Release)
+Replay directory: <fresh replay directory>
+2026-11-22T15:52:59.539320+00:00 build MizusawaUnitResidue
+'RiemannReduction.UnitResidue.prime_counts' depends on axioms: [propext, Classical.choice, Quot.sound]
+'RiemannReduction.UnitResidue.root_of_unity_row' depends on axioms: [propext, Classical.choice, Quot.sound]
+Passed build MizusawaUnitResidue in 9.0s
+2026-11-22T15:53:08.583496+00:00 build RealUnitFrobenius
+Passed build RealUnitFrobenius in 9.5s
+2026-11-22T15:53:18.092475+00:00 build RealUnitResidueSigns
+Passed build RealUnitResidueSigns in 10.6s
+2026-11-22T15:53:28.722020+00:00 build RealCyclotomicUnit
+'RiemannReduction.CyclotomicUnits.primitive_real_orbit_product' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'RiemannReduction.CyclotomicUnits.real_cyclotomic_factor_isUnit' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+Passed build RealCyclotomicUnit in 8.6s
+2026-11-22T15:53:37.370202+00:00 build RealUnitPrimeSigns
+Passed build RealUnitPrimeSigns in 10.2s
+2026-11-22T15:53:47.594125+00:00 build RealUnitSignRows
+Passed build RealUnitSignRows in 12.5s
+2026-11-22T15:54:00.051242+00:00 build RaySignPlaces
+Passed build RaySignPlaces in 21.5s
+2026-11-22T15:54:21.555188+00:00 build MizusawaUnitParity
+'RiemannReduction.UnitParity.global_unit_parity' depends on axioms: [propext, Classical.choice, Quot.sound]
+Passed build MizusawaUnitParity in 15.5s
+2026-11-22T15:54:37.084019+00:00 build LocalTameUnitSigns
+Passed build LocalTameUnitSigns in 15.7s
+2026-11-22T15:54:52.763553+00:00 build FiniteTameParity
+Passed build FiniteTameParity in 12.6s
+2026-11-22T15:55:05.328752+00:00 build QuadraticSchreier
+'RiemannReduction.QuadraticDescent.rank_le_twice_sub_one' depends on axioms: [propext, Classical.choice, Quot.sound]
+Passed build QuadraticSchreier in 15.0s
+2026-11-22T15:55:20.327276+00:00 build QuadraticGenus
+'RiemannReduction.QuadraticDescent.quadratic_genus_bound' depends on axioms: [propext, Classical.choice, Quot.sound]
+Passed build QuadraticGenus in 11.4s
+2026-11-22T15:55:31.767210+00:00 build BiquadraticDescent
+'RiemannReduction.QuadraticDescent.biquadratic_rank' depends on axioms: [propext, Classical.choice, Quot.sound]
+Passed build BiquadraticDescent in 9.4s
+2026-11-22T15:55:41.173402+00:00 build OrdinaryDyadicBase
+Passed build OrdinaryDyadicBase in 9.0s
+2026-11-22T15:55:50.172190+00:00 build SingleInertia
+'RiemannReduction.GaussianTower.core_is_two_group' depends on axioms: [propext, Classical.choice, Quot.sound]
+'RiemannReduction.GaussianTower.inertia_surjects' depends on axioms: [propext, Classical.choice, Quot.sound]
+Passed build SingleInertia in 2.5s
+2026-11-22T15:55:52.710517+00:00 build RationalDyadicInertia
+'RiemannReduction.GaussianTower.pure_rank_zero' depends on axioms: [propext, Classical.choice, Quot.sound]
+Passed build RationalDyadicInertia in 10.7s
+2026-11-22T15:56:03.430402+00:00 build OrdinaryRayDescent
+'RiemannReduction.GaussianTower.host_rank_nine' depends on axioms: [propext, Classical.choice, Quot.sound]
+'RiemannReduction.GaussianTower.host_rank_three_of_eight_ray_characters' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+Passed build OrdinaryRayDescent in 9.5s
+2026-11-22T15:56:12.886713+00:00 build AtCharacter
+Passed build AtCharacter in 1.5s
+2026-11-22T15:56:14.362635+00:00 build CofinalRayLayers
+'RiemannReduction.GaussianTower.host_rank_of_cofinal_finite_ray' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+Passed build CofinalRayLayers in 14.5s
+2026-11-22T15:56:28.913122+00:00 build TameUnitRelations
+'RiemannReduction.GaussianTower.host_rank_three_of_cofinal_unit_relations' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+Passed build TameUnitRelations in 9.3s
+2026-11-22T15:56:38.239942+00:00 build FiniteRayCharacter
+Passed build FiniteRayCharacter in 7.4s
+2026-11-22T15:56:45.656682+00:00 build RayLayerSites
+Passed build RayLayerSites in 10.7s
+2026-11-22T15:56:56.388274+00:00 build TameRayBound
+Passed build TameRayBound in 33.7s
+2026-11-22T15:57:30.039217+00:00 build NineIntegralTower
+'RiemannReduction.GaussianTower.host_tower_nine' depends on axioms: [propext, Classical.choice, Quot.sound]
+'RiemannReduction.GaussianTower.ordinary_nine_input' depends on axioms: [propext, Classical.choice, Quot.sound]
+Passed build NineIntegralTower in 8.7s
+2026-11-22T15:57:38.720349+00:00 build CyclotomicEight
+'RiemannReduction.TameSigns.finite_ray_eight' depends on axioms: [propext, Classical.choice, Quot.sound]
+'RiemannReduction.TameSigns.host_eight' depends on axioms: [propext, Classical.choice, Quot.sound]
+'RiemannReduction.TameSigns.host_tower_three' depends on axioms: [propext, Classical.choice, Quot.sound]
+Passed build CyclotomicEight in 11.3s
+2026-11-22T15:57:50.001988+00:00 build CaseTwoAutomorphy
+'RiemannReduction.SymplecticTwo.automorphy_of_second_seed' depends on axioms: [propext, Classical.choice, Quot.sound]
+Passed build CaseTwoAutomorphy in 76.2s
+2026-11-22T15:59:06.163283+00:00 build SymplecticTwoData
+Passed build SymplecticTwoData in 11.6s
+2026-11-22T15:59:17.786473+00:00 build PrincipalTowerFields
+Passed build PrincipalTowerFields in 9.2s
+2026-11-22T15:59:27.031043+00:00 build PrincipalMinusSum
+Passed build PrincipalMinusSum in 8.0s
+2026-11-22T15:59:34.991232+00:00 build PrincipalMinusField
+Passed build PrincipalMinusField in 7.9s
+2026-11-22T15:59:42.842789+00:00 build PrincipalMinusResidues
+Passed build PrincipalMinusResidues in 8.2s
+2026-11-22T15:59:51.061108+00:00 build PrincipalConductorMinus
+Passed build PrincipalConductorMinus in 8.7s
+2026-11-22T15:59:59.740872+00:00 build PrincipalJointWindow
+Passed build PrincipalJointWindow in 12.5s
+2026-11-22T16:00:12.238488+00:00 build PrincipalCountWindow
+'RiemannReduction.ConductorOne.principal_window_from_counts' depends on axioms: [propext, Classical.choice, Quot.sound]
+Passed build PrincipalCountWindow in 8.6s
+2026-11-22T16:00:20.832724+00:00 build PrincipalHostCharacters
+Passed build PrincipalHostCharacters in 7.1s
+2026-11-22T16:00:27.886992+00:00 build PrincipalLocalCounts
+Checked RiemannReduction.LocalCases.sumInside at a single character.
+Checked RiemannReduction.LocalCases.sumOutside at a single character.
+Checked RiemannReduction.LocalCases.pointBound at a single character.
+Checked RiemannReduction.LocalCases.heightBound at a single character.
+Checked RiemannReduction.LocalCases.jointWindow at a single character.
+Passed build PrincipalLocalCounts in 9.3s
+2026-11-22T16:00:37.148040+00:00 build PrincipalTwoConductor
+Passed build PrincipalTwoConductor in 9.3s
+2026-11-22T16:00:46.484383+00:00 build SymplecticTwoCount
+Passed build SymplecticTwoCount in 75.4s
+2026-11-22T16:02:01.893741+00:00 build SecondSeedCount
+Passed build SecondSeedCount in 30.4s
+2026-11-22T16:02:32.314769+00:00 build AbelianLayerVanishing
+'RiemannReduction.CyclotomicLayer.vanish_at_abelian_field' depends on axioms: [propext, Classical.choice, Quot.sound]
+Passed build AbelianLayerVanishing in 8.1s
+2026-11-22T16:02:40.440359+00:00 build SevenCyclotomic
+'RiemannReduction.CyclotomicLayer.top_of_small_norm' depends on axioms: [propext, Classical.choice, Quot.sound]
+'RiemannReduction.CyclotomicLayer.class_number_seventh' depends on axioms: [propext, Classical.choice, Quot.sound]
+Passed build SevenCyclotomic in 3.8s
+2026-11-22T16:02:44.275950+00:00 build PrincipalTrivialLayer
+'RiemannReduction.ConductorOne.case_four_at_three' depends on axioms: [propext, Classical.choice, Quot.sound]
+'RiemannReduction.ConductorOne.case_four_at_seven' depends on axioms: [propext, Classical.choice, Quot.sound]
+Passed build PrincipalTrivialLayer in 7.1s
+2026-11-22T16:02:51.351400+00:00 build PrincipalInsideThree
+'RiemannReduction.PrincipalLayer.inside_three_without_layer' depends on axioms: [propext, Classical.choice, Quot.sound]
+Passed build PrincipalInsideThree in 11.1s
+2026-11-22T16:03:02.492229+00:00 build SevenLayerVanishing
+'RiemannReduction.CyclotomicLayer.length_at_seven' depends on axioms: [propext, Classical.choice, Quot.sound]
+'RiemannReduction.CyclotomicLayer.all_case_four_seven' depends on axioms: [propext, Classical.choice, Quot.sound]
+Passed build SevenLayerVanishing in 7.7s
+2026-11-22T16:03:10.240912+00:00 build PrincipalExceptionalPrimes
+Passed build PrincipalExceptionalPrimes in 5.7s
+2026-11-22T16:03:15.953749+00:00 build PrincipalOddPlus
+'RiemannReduction.PrincipalLayer.polynomial_odd_plus' depends on axioms: [propext, Classical.choice, Quot.sound]
+Passed build PrincipalOddPlus in 7.4s
+2026-11-22T16:03:23.386922+00:00 build DyadicGoodGrid
+'RiemannReduction.PrincipalLayer.dyadic_grid' depends on axioms: [propext, Classical.choice, Quot.sound]
+Passed build DyadicGoodGrid in 9.9s
+2026-11-22T16:03:33.310167+00:00 build PrincipalArchivedWindow
+Passed build PrincipalArchivedWindow in 58.7s
+2026-11-22T16:04:32.039266+00:00 build NoOddLayerWindow
+'RiemannReduction.PrincipalLayer.window_from_dyadic_grid' depends on axioms: [propext, Classical.choice, Quot.sound]
+Passed build NoOddLayerWindow in 57.1s
+2026-11-22T16:05:29.179598+00:00 build SingleTowerGrid
+'RiemannReduction.PrincipalLayer.single_tower_grid' depends on axioms: [propext, Classical.choice, Quot.sound]
+Passed build SingleTowerGrid in 11.4s
+2026-11-22T16:05:40.570599+00:00 build SecondSeedWindow
+'RiemannReduction.PrincipalLayer.window_from_second_seed' depends on axioms: [propext, Classical.choice, Quot.sound]
+Passed build SecondSeedWindow in 202.8s
+2026-11-22T16:09:03.415292+00:00 build CheckAlpogePrincipalRankBound
+RiemannGaussian.AlpogeWindow.boundedLiftRank_of_smallLevelRankEq depends on [propext, Classical.choice, Quot.sound]
+RiemannGaussian.AlpogeWindow.boundedLiftRank_of_source depends on [propext, Classical.choice, Quot.sound]
+RiemannGaussian.AlpogeWindow.boundedLiftRank_of_rowCover depends on [propext, Classical.choice, Quot.sound]
+RiemannGaussian.AlpogeWindow.divinN_of_bounded_rank depends on [propext, Classical.choice, Quot.sound]
+Passed build CheckAlpogePrincipalRankBound in 10.9s
+2026-11-22T16:09:14.365008+00:00 build AlpogePrimeWindows
+Passed build AlpogePrimeWindows in 10.1s
+2026-11-22T16:09:24.508735+00:00 build CheckAlpogePrincipalLevel
+RiemannGaussian.AlpogeWindow.principal_level_kept depends on [propext, Classical.choice, Quot.sound]
+RiemannGaussian.AlpogeWindow.principal_level_G depends on [propext, Classical.choice, Quot.sound]
+RiemannGaussian.AlpogeWindow.rh_of_principal_level_windows depends on [propext, Classical.choice, Quot.sound]
+Passed build CheckAlpogePrincipalLevel in 9.2s
+2026-11-22T16:09:33.757722+00:00 build CheckAlpogeTiedPrincipal
+RiemannGaussian.AlpogeWindow.rh_of_tied_principal_level depends on [propext, Classical.choice, Quot.sound]
+Passed build CheckAlpogeTiedPrincipal in 9.0s
+2026-11-22T16:09:42.718283+00:00 build CheckAlpogePrincipalFamily
+RiemannGaussian.AlpogeWindow.principal_family_connection_of_topG depends on [propext, Classical.choice, Quot.sound]
+RiemannGaussian.AlpogeWindow.rh_of_principal_connected_family depends on [propext, Classical.choice, Quot.sound]
+Passed build CheckAlpogePrincipalFamily in 10.3s
+2026-11-22T16:09:52.988596+00:00 build RiemannGaussian.AlpogeLatticeImage
+Passed build RiemannGaussian.AlpogeLatticeImage in 3.2s
+2026-11-22T16:09:56.149306+00:00 build CheckAlpogeLatticeLocalization
+Passed build CheckAlpogeLatticeLocalization in 13.3s
+2026-11-22T16:10:09.488341+00:00 build CheckAlpogePrincipalLattice
+RiemannGaussian.AlpogeWindow.principal_family_nuFull depends on [propext, Classical.choice, Quot.sound]
+RiemannGaussian.AlpogeWindow.ramified_dimension_bound depends on [propext, Classical.choice, Quot.sound]
+RiemannGaussian.AlpogeWindow.principal_family_muRank_of_norm_ranks depends on [propext, Classical.choice, Quot.sound]
+RiemannGaussian.AlpogeWindow.principal_level_gt_places depends on [propext, Classical.choice, Quot.sound]
+RiemannGaussian.AlpogeWindow.principal_ramified_share_of_local_norms depends on [propext, Classical.choice, Quot.sound]
+RiemannGaussian.AlpogeWindow.principal_family_muRank_of_local_norms depends on [propext, Classical.choice, Quot.sound]
+RiemannGaussian.AlpogeWindow.principal_family_muRank_of_rank_line depends on [propext, Classical.choice, Quot.sound]
+Passed build CheckAlpogePrincipalLattice in 13.2s
+2026-11-22T16:10:22.670676+00:00 build CheckAlpogePrincipalRounding
+RiemannGaussian.AlpogeWindow.principal_family_linkMu depends on [propext, Classical.choice, Quot.sound]
+Passed build CheckAlpogePrincipalRounding in 12.3s
+2026-11-22T16:10:34.930051+00:00 build CheckAlpogePrincipalDesigns
+RiemannGaussian.AlpogeWindow.rh_of_principal_designs depends on [propext, Classical.choice, Quot.sound]
+Passed build CheckAlpogePrincipalDesigns in 10.3s
+2026-11-22T16:10:45.245307+00:00 build CheckAlpogeAdelicClassProjection
+RiemannGaussian.AlpogeWindow.single_mem_unramified_forms depends on [propext, Classical.choice, Quot.sound]
+Passed build CheckAlpogeAdelicClassProjection in 10.6s
+2026-11-22T16:10:55.820051+00:00 build CheckAlpogePrincipalLevelCharacters
+RiemannGaussian.AlpogeWindow.principal_family_rank_and_share_of_free_classes depends on [propext,
+ Classical.choice,
+ Quot.sound]
+Passed build CheckAlpogePrincipalLevelCharacters in 11.9s
+2026-11-22T16:11:07.700390+00:00 build CheckAlpogePrincipalAdelicForms
+RiemannGaussian.AlpogeWindow.principal_family_rank_and_share_of_forms depends on [propext, Classical.choice, Quot.sound]
+Passed build CheckAlpogePrincipalAdelicForms in 10.3s
+2026-11-22T16:11:17.969392+00:00 build CheckAlpogePrincipalAdelicDesigns
+RiemannGaussian.AlpogeWindow.rh_of_principal_adelic_designs depends on [propext, Classical.choice, Quot.sound]
+Passed build CheckAlpogePrincipalAdelicDesigns in 10.2s
+2026-11-22T16:11:28.167122+00:00 build CheckAlpogePrincipalDesignLinks
+RiemannGaussian.AlpogeWindow.principal_design_group_and_hecke depends on [propext, Classical.choice, Quot.sound]
+RiemannGaussian.AlpogeWindow.principal_design_group_rank_and_share depends on [propext, Classical.choice, Quot.sound]
+RiemannGaussian.AlpogeWindow.rh_of_principal_group_designs depends on [propext, Classical.choice, Quot.sound]
+Passed build CheckAlpogePrincipalDesignLinks in 13.6s
+2026-11-22T16:11:41.815044+00:00 build CheckAlpogePrincipalArchivedBundleRank
+RiemannGaussian.AlpogeWindow.principal_lift_rank_of_archived_bundles depends on [propext, Classical.choice, Quot.sound]
+RiemannGaussian.AlpogeWindow.principal_links_of_archived_bundles depends on [propext, Classical.choice, Quot.sound]
+Passed build CheckAlpogePrincipalArchivedBundleRank in 26.1s
+2026-11-22T16:12:07.868409+00:00 build CheckAlpogePrincipalFrame
+RiemannGaussian.AlpogeWindow.principal_frame_of_forms depends on [propext, Classical.choice, Quot.sound]
+RiemannGaussian.AlpogeWindow.principal_global_of_points depends on [propext, Classical.choice, Quot.sound]
+Passed build CheckAlpogePrincipalFrame in 11.5s
+2026-11-22T16:12:19.344610+00:00 build CheckAlpogePrincipalCountingDesigns
+RiemannGaussian.AlpogeWindow.rh_of_principal_counting_designs depends on [propext, Classical.choice, Quot.sound]
+Passed build CheckAlpogePrincipalCountingDesigns in 9.9s
+2026-11-22T16:12:29.259368+00:00 build CheckAlpogePrincipalLevelSlopes
+RiemannGaussian.AlpogeWindow.rh_of_principal_level_lattice_designs depends on [propext, Classical.choice, Quot.sound]
+Passed build CheckAlpogePrincipalLevelSlopes in 12.9s
+2026-11-22T16:12:42.195364+00:00 build CheckAlpogePrincipalCharacterSlopes
+RiemannGaussian.AlpogeWindow.principal_level_estimates_of_congruence depends on [propext, Classical.choice, Quot.sound]
+RiemannGaussian.AlpogeWindow.rh_of_principal_character_designs depends on [propext, Classical.choice, Quot.sound]
+Passed build CheckAlpogePrincipalCharacterSlopes in 8.9s
+2026-11-22T16:12:51.065644+00:00 build CheckAlpogePrincipalColumnSlopes
+RiemannGaussian.AlpogeWindow.rh_of_principal_column_designs depends on [propext, Classical.choice, Quot.sound]
+Passed build CheckAlpogePrincipalColumnSlopes in 8.1s
+2026-11-22T16:12:59.120066+00:00 build CheckAlpogePrincipalSymmetricDesigns
+RiemannGaussian.AlpogeWindow.rh_of_principal_symmetric_comparisons depends on [propext, Classical.choice, Quot.sound]
+Passed build CheckAlpogePrincipalSymmetricDesigns in 8.0s
+2026-11-22T16:13:07.081473+00:00 build CheckAlpogePrincipalDimensionCounts
+RiemannGaussian.AlpogeWindow.principal_count_of_reference_ranks depends on [propext, Classical.choice, Quot.sound]
+Passed build CheckAlpogePrincipalDimensionCounts in 12.0s
+2026-11-22T16:13:19.092407+00:00 build CheckAlpogePrincipalSymmetricGeometry
+RiemannGaussian.AlpogeWindow.rh_of_principal_reference_bounds depends on [propext, Classical.choice, Quot.sound]
+Passed build CheckAlpogePrincipalSymmetricGeometry in 11.9s
+2026-11-22T16:13:31.042774+00:00 build CheckAlpogePrincipalTrueGeometry
+RiemannGaussian.AlpogeWindow.rh_of_principal_true_families depends on [propext, Classical.choice, Quot.sound]
+RiemannGaussian.AlpogeWindow.rh_of_principal_selected_families depends on [propext, Classical.choice, Quot.sound]
+Passed build CheckAlpogePrincipalTrueGeometry in 16.1s
+2026-11-22T16:13:47.130885+00:00 build CheckAlpogePrincipalConstructedClass
+RiemannGaussian.AlpogeWindow.rh_of_principal_constructed_class depends on [propext, Classical.choice, Quot.sound]
+Passed build CheckAlpogePrincipalConstructedClass in 16.5s
+2026-11-22T16:14:03.620194+00:00 build CheckAlpogePrincipalArchivedBundleChoice
+RiemannGaussian.AlpogeWindow.rh_of_principal_archived_bundle_choices depends on [propext, Classical.choice, Quot.sound]
+Passed build CheckAlpogePrincipalArchivedBundleChoice in 18.6s
+2026-11-22T16:14:22.213207+00:00 build CheckAlpogePrincipalArchivedBundleRows
+RiemannGaussian.AlpogeWindow.rh_of_principal_archived_bundle_rows depends on [propext, Classical.choice, Quot.sound]
+Passed build CheckAlpogePrincipalArchivedBundleRows in 26.8s
+2026-11-22T16:14:48.999206+00:00 build CheckAlpogePrincipalArchivedRowSelection
+RiemannGaussian.AlpogeWindow.principal_archived_row_selection depends on [propext, Classical.choice, Quot.sound]
+Passed build CheckAlpogePrincipalArchivedRowSelection in 18.0s
+2026-11-22T16:15:06.956668+00:00 build CheckAlpogeLocalThetaSupplier
+RiemannGaussian.AlpogeWindow.archive_local_theta_inputs depends on [propext, Classical.choice, Quot.sound]
+Passed build CheckAlpogeLocalThetaSupplier in 42.8s
+2026-11-22T16:15:49.762499+00:00 build PrincipalArchivedInputs
+Passed build PrincipalArchivedInputs in 166.3s
+2026-11-22T16:18:36.058091+00:00 build IntegratedSlopeShare
+'IntegratedSlopeShare.integrated_share' depends on axioms: [propext, Classical.choice, Quot.sound]
+'IntegratedSlopeShare.integral_threshold_count' depends on axioms: [propext, Classical.choice, Quot.sound]
+'IntegratedSlopeShare.rank_share_transfer' depends on axioms: [propext, Classical.choice, Quot.sound]
+'IntegratedSlopeShare.sharp_two_slopes' depends on axioms: [propext, Classical.choice, Quot.sound]
+Passed build IntegratedSlopeShare in 18.9s
+2026-11-22T16:18:54.914516+00:00 build FiniteSlopeShare
+'FiniteSlopeShare.finite_threshold_bound' depends on axioms: [propext, Classical.choice, Quot.sound]
+'FiniteSlopeShare.bound_of_negative_jumps' depends on axioms: [propext, Classical.choice, Quot.sound]
+'FiniteSlopeShare.rank_share_transfer' depends on axioms: [propext, Classical.choice, Quot.sound]
+Passed build FiniteSlopeShare in 20.7s
+2026-11-22T16:19:15.644166+00:00 build FiniteGeometricFrame
+'Formalism.HN.finite_frame_of' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Formalism.HN.finite_frame_compat_of' depends on axioms: [propext, Classical.choice, Quot.sound]
+Passed build FiniteGeometricFrame in 66.2s
+2026-11-22T16:20:21.850351+00:00 build ParameterizeSlope
+Passed build ParameterizeSlope in 3.0s
+2026-11-22T16:20:24.831321+00:00 build FiniteFrameRH
+Checked 16 declarations with Formalism.HN.theoremFSharp_of replaced by a parameter.
+Passed build FiniteFrameRH in 102.8s
+2026-11-22T16:22:07.677733+00:00 build TameEightWindowRH
+'RiemannReduction.ConductorOne.rh_from_tame_units' depends on axioms: [propext, Classical.choice, Quot.sound]
+Passed build TameEightWindowRH in 126.5s
+2026-11-22T16:24:14.224975+00:00 build AuditSlopeGraph
+Passed build AuditSlopeGraph in 2.0s
+2026-11-22T16:24:16.189304+00:00 kernel CyclotomicEight, TameEightWindowRH
+replaying TameEightWindowRH
+replaying CyclotomicEight
+Passed kernel CyclotomicEight, TameEightWindowRH in 254.0s

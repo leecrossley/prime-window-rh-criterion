@@ -8,7 +8,7 @@ on:
         description: Optional geometric proof replay
         type: choice
         default: none
-        options: [none, rank, window, proof, compare, mizusawa-units, mizusawa-rank, mizusawa]
+        options: [none, rank, window, proof, compare, mizusawa-units, mizusawa-rank, mizusawa, tame-eight, tame-eight-rh]
 permissions:
   contents: read
 jobs:
@@ -20,7 +20,7 @@ jobs:
           persist-credentials: false
       - run: sh verify-collection.sh
   geometric:
-    if: github.event_name == 'workflow_dispatch' && inputs.geometric_target != 'none' && inputs.geometric_target != 'compare'
+    if: github.event_name == 'workflow_dispatch' && inputs.geometric_target != 'none' && inputs.geometric_target != 'compare' && inputs.geometric_target != 'tame-eight-rh'
     needs: check
     runs-on: ubuntu-24.04
     timeout-minutes: 360
@@ -107,3 +107,28 @@ jobs:
           if-no-files-found: error
           overwrite: true
           retention-days: 30
+  unit-inputs:
+    if: github.event_name == 'workflow_dispatch' && inputs.geometric_target == 'tame-eight-rh'
+    needs: check
+    uses: ./.github/workflows/geometric-stage.yml
+    with:
+      target: tame-eight-rh
+      stage: build-inputs
+  unit-endpoint:
+    needs: unit-inputs
+    uses: ./.github/workflows/geometric-stage.yml
+    with:
+      target: tame-eight-rh
+      stage: build-endpoint
+      source: build-inputs
+  unit-verification:
+    needs: unit-endpoint
+    strategy:
+      fail-fast: false
+      matrix:
+        stage: [kernel-endpoint, audit-endpoint]
+    uses: ./.github/workflows/geometric-stage.yml
+    with:
+      target: tame-eight-rh
+      stage: ${{ matrix.stage }}
+      source: build-endpoint

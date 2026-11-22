@@ -24,6 +24,9 @@ TARGETS = {
     "window": ("AuditSecondSeedWindow",),
     "proof": ("AuditGeometricRH",),
     "compare": ("AuditGeometricRH", "AuditSecondSeedWindow", "AuditPrevious", "AuditPublished"),
+    "real-unit-rows": ("AuditRealUnitRows",),
+    "tame-eight": ("AuditTameEight",),
+    "tame-eight-rh": ("AuditTameEightRH",),
     "mizusawa-residues": ("AuditMizusawaResidue",),
     "mizusawa-units": ("AuditMizusawaUnits",),
     "mizusawa-rank": ("AuditMizusawaTower", "MizusawaSelector", "AuditDescent"),
@@ -36,6 +39,9 @@ AUDITS = {
     "AuditGeometricRH": "second-rh-names.txt",
     "AuditPrevious": "previous-rh-names.txt",
     "AuditPublished": "published-rh-names.txt",
+    "AuditRealUnitRows": "real-unit-row-names.txt",
+    "AuditTameEight": "tame-eight-names.txt",
+    "AuditTameEightRH": "tame-eight-rh-names.txt",
     "AuditMizusawaResidue": "root-of-unity-names.txt",
     "AuditMizusawaUnits": "unit-parity-names.txt",
     "AuditMizusawaTower": "mizusawa-rank-names.txt",
@@ -51,6 +57,13 @@ CHECK = {
     "proof": ("QuadraticSchreier", "QuadraticGenus", "BiquadraticDescent",
               "OrdinaryRayDescent", "NineIntegralTower", "CaseTwoAutomorphy",
               "SecondSeedCount", "SecondSeedWindow", "FiniteFrameRH", "SecondSeedRH"),
+    "tame-eight-rh": ("CyclotomicEight", "TameEightWindowRH"),
+    "real-unit-rows": ("RealCyclotomicUnit", "RealUnitFrobenius", "RealUnitResidueSigns",
+                       "RealUnitPrimeSigns", "RealUnitSignRows"),
+    "tame-eight": ("RealCyclotomicUnit", "RealUnitFrobenius", "RealUnitResidueSigns",
+                   "RealUnitPrimeSigns", "RealUnitSignRows", "RaySignPlaces", "LocalTameUnitSigns",
+                   "FiniteRayCharacter", "FiniteTameParity", "CofinalRayLayers", "TameUnitRelations",
+                   "RayLayerSites", "TameRayBound", "CyclotomicEight"),
     "mizusawa-residues": ("MizusawaUnitResidue",),
     "mizusawa-units": ("MizusawaUnitParity",),
     "mizusawa-rank": MIZUSAWA_MODULES,
@@ -156,7 +169,10 @@ def check_audit(name, work, evidence):
         if len(names) != 390211 or len(set(names)) != len(names):
             raise ValueError(f"Unexpected window dependency list: {len(names)} entries")
         return
-    if name.startswith("AuditMizusawa"):
+    if name in ("AuditRealUnitRows", "AuditTameEight", "AuditTameEightRH"):
+        graph = json.loads((HERE / "mizusawa/tame-signs/evidence/dependencies.json").read_text())[name]
+        count, expected = graph["count"], graph["sorted_sha256"]
+    elif name.startswith("AuditMizusawa"):
         filename, key = {
             "AuditMizusawaResidue": ("residues.json", "root_of_unity"),
             "AuditMizusawaUnits": ("units.json", "unit_parity"),
@@ -219,6 +235,24 @@ def comparison_stage(stage, sources, built):
         return set(), (), {audit}
     raise ValueError("Unknown comparison stage: " + stage)
 
+def unit_stage(stage, sources, built):
+    objects = sources.keys() - AUDITS.keys()
+    inputs = set(ordered_sources(("CyclotomicEight", "SecondSeedWindow")))
+    available = {".".join(f.relative_to(built).with_suffix("").parts) for f in built.rglob("*.olean")}
+    if stage == "build-inputs":
+        required, builds, kernels, audits = set(), inputs, (), set()
+    elif stage == "build-endpoint":
+        required, builds, kernels, audits = inputs, objects - inputs, (), set()
+    elif stage == "kernel-endpoint":
+        required, builds, kernels, audits = objects, set(), (CHECK["tame-eight-rh"],), set()
+    elif stage == "audit-endpoint":
+        required, builds, kernels, audits = objects, set(), (), {"AuditTameEightRH"}
+    else:
+        raise ValueError("Unknown unit proof stage: " + stage)
+    if available != required:
+        raise ValueError(f"{stage} received different modules: {sorted(available ^ required)}")
+    return builds, kernels, audits
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("target", choices=TARGETS)
@@ -227,12 +261,12 @@ def main():
     parser.add_argument("--archive", type=Path, action="append", default=[],
                         help="extracted .lake/build/lib/lean, repeat for a split local cache")
     parser.add_argument("--work", type=Path, help="parent directory for a fresh build and its audit reports")
-    parser.add_argument("--stage", help="run one stage of the hosted comparison")
+    parser.add_argument("--stage", help="run one stage of a hosted proof replay")
     parser.add_argument("--stage-objects", type=Path, help="object directory for that stage")
     parser.add_argument("--list", action="store_true", help="list the local source closure without building")
     args = parser.parse_args()
-    if bool(args.stage) != bool(args.stage_objects) or (args.stage and args.target != "compare"):
-        parser.error("--stage and --stage-objects go together with compare")
+    if bool(args.stage) != bool(args.stage_objects) or (args.stage and args.target not in ("compare", "tame-eight-rh")):
+        parser.error("--stage and --stage-objects go together with compare or tame-eight-rh")
     sources = ordered_sources(TARGETS[args.target])
     if args.list:
         for folder, path in sources.values():
@@ -240,7 +274,7 @@ def main():
         return
     if not all((args.lean_bin, args.mathlib, args.work)):
         parser.error("supply --lean-bin, --mathlib and --work")
-    if args.target != "mizusawa-residues" and not args.archive:
+    if args.target not in ("mizusawa-residues", "real-unit-rows") and not args.archive:
         parser.error("this target also needs the geometric proof --archive")
     bins, mathlib = args.lean_bin.resolve(), args.mathlib.resolve()
     archives = [path.resolve() for path in args.archive]
@@ -260,7 +294,9 @@ def main():
     print("Replay directory:", work, flush=True)
     built = args.stage_objects.resolve() if args.stage else work / "objects"
     built.mkdir(parents=True, exist_ok=bool(args.stage))
-    if args.stage:
+    if args.stage and args.target == "tame-eight-rh":
+        build_names, kernel_groups, audit_names = unit_stage(args.stage, sources, built)
+    elif args.stage:
         build_names, kernel_groups, audit_names = comparison_stage(args.stage, sources, built)
     else:
         build_names, audit_names = sources.keys() - AUDITS.keys(), sources.keys() & AUDITS.keys()

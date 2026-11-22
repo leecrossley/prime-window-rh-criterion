@@ -41,6 +41,8 @@ For all three endpoints in one run, use the following command. The final audit r
 python3 replay.py compare --lean-bin "$lean_bin" --mathlib "$inputs/mathlib4" --archive "$archive" --work "$inputs/runs"
 ```
 
+For the three-generator proof from unit signs, use `real-unit-rows` for the Mathlib calculation, `tame-eight` for the arithmetic tower bound and `tame-eight-rh` for its application in the geometric endpoint. [Commands and receipts](mizusawa/tame-signs/README.md#replay)
+
 To inspect the build order before downloading the archive, use `python3 replay.py proof --list`. The rank, window, proof and comparison targets contain 11, 37, 74 and 81 package modules respectively, including their audits. The runner checks the reference endpoints in separate Lean processes because they give different implementations of some declarations.
 
 Lean elaborates from source with `--trust=0` and warnings as errors. The standalone `leanchecker` checks the named modules against their compiled imports. The audit separately follows proof terms and types, checks Mathlib’s literal RH statement and the axiom set, and rejects any other reachable theorem with that literal type. The rank audit also excludes RH itself, Ferrero–Washington and the earlier tower estimates from the arithmetic calculation. The repository’s standard manifest check verifies package checksums. [Audit implementation](lean/AuditSlopeGraph.lean) · [Root-specific checks](lean/AuditGeometricRH.lean) · [Recorded runs](VERIFICATION.md)
@@ -53,4 +55,6 @@ The rank-three companion has three hosted targets. Choose `mizusawa-rank` for th
 
 For `compare`, the workflow builds 74 modules before compiling the three closed endpoints in separate jobs. Each endpoint has a standalone kernel check and a declaration audit. A fourth audit checks the conditional window. Each job reads the compiled objects from its predecessor, verifies their checksum and checks the recorded commit and workflow run. The final job compares the four lists with the published results and retains the stage transcripts. [Hosted stages](../../.github/workflows/geometric-stage.yml) [Comparison collector](collect-comparison.py)
 
-The standard Linux verification also runs the six-prime residue calculation, `mizusawa-residues`, using the pinned Lean toolchain and Mathlib alone. [Linux verifier](../../verify-linux.sh)
+Select `tame-eight` to check the arithmetic tower bound on Linux. For `tame-eight-rh`, the first job builds the unit bound and the second-seed window. A second job builds the remaining modules. The kernel replay and the declaration audit then use those compiled objects in separate jobs. The audit checks 1,477,044 names against the published hash. [Recorded counts and hypotheses](mizusawa/tame-signs/VERIFICATION.md)
+
+The standard Linux check runs both residue calculations, `mizusawa-residues` and `real-unit-rows`, with the pinned Lean toolchain and Mathlib. [Linux verifier](../../verify-linux.sh)
