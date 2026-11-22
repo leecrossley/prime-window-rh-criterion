@@ -21,6 +21,7 @@ STRICT_IMPLICITS = {
 }
 TARGETS = {
     "rank": ("AuditDescent", "DyadicHostBound"),
+    "window": ("AuditSecondSeedWindow",),
     "proof": ("AuditGeometricRH",),
     "compare": ("AuditGeometricRH", "AuditPrevious", "AuditPublished"),
     "mizusawa-residues": ("AuditMizusawaResidue",),
@@ -31,6 +32,7 @@ TARGETS = {
 }
 AUDITS = {
     "AuditDescent": "rank-names.txt",
+    "AuditSecondSeedWindow": "window-names.txt",
     "AuditGeometricRH": "second-rh-names.txt",
     "AuditPrevious": "previous-rh-names.txt",
     "AuditPublished": "published-rh-names.txt",
@@ -45,6 +47,7 @@ MIZUSAWA_MODULES = ("MizusawaCharacters", "MizusawaHostField", "MizusawaGenusFie
 CHECK = {
     "rank": ("QuadraticSchreier", "QuadraticGenus", "BiquadraticDescent",
              "OrdinaryRayDescent", "NineIntegralTower", "DyadicHostBound"),
+    "window": ("CaseTwoAutomorphy", "SecondSeedCount", "SecondSeedWindow"),
     "proof": ("QuadraticSchreier", "QuadraticGenus", "BiquadraticDescent",
               "OrdinaryRayDescent", "NineIntegralTower", "CaseTwoAutomorphy",
               "SecondSeedCount", "SecondSeedWindow", "FiniteFrameRH", "SecondSeedRH"),
@@ -53,7 +56,7 @@ CHECK = {
     "mizusawa-rank": MIZUSAWA_MODULES,
     "mizusawa": (*MIZUSAWA_MODULES, "MizusawaWindowRH", "MizusawaNineControl", "SecondSeedRH"),
 }
-CORE_IMPORT = re.compile(r"^(?:public )?import\s+([\w.]+)\s*(?:--.*)?$")
+IMPORT = re.compile(r"^(?:(?:public|meta)\s+)*import\s+([\w.']+)\s*(?:--.*)?$")
 
 def digest(path):
     value = hashlib.sha256()
@@ -61,6 +64,15 @@ def digest(path):
         for block in iter(lambda: source.read(2 ** 20), b""):
             value.update(block)
     return value.hexdigest()
+
+def direct_imports(path):
+    for raw in path.read_text().splitlines():
+        line = raw.strip()
+        if re.match(r"^(?:(?:public|meta)\s+)*import\b", line):
+            match = IMPORT.fullmatch(line)
+            if not match:
+                raise ValueError(f"Unsupported import in {path.name}: {line}")
+            yield match[1]
 
 def ordered_sources(roots):
     sources = {}
@@ -75,19 +87,40 @@ def ordered_sources(roots):
         if name in ordered:
             return
         folder, path = sources[name]
-        for line in path.read_text().splitlines():
-            if line.startswith(("import ", "public import ")):
-                match = CORE_IMPORT.fullmatch(line.strip())
-                if not match:
-                    raise ValueError(f"Unsupported import in {path.name}: {line}")
-                if match[1] in sources:
-                    visit(match[1])
+        for module in direct_imports(path):
+            if module in sources:
+                visit(module)
         ordered[name] = (folder, path)
     for root in roots:
         visit(root)
     return ordered
 
-def check_inputs(bins, mathlib, archives, sources, env):
+def check_archive_imports(sources, archives, packages, manifest):
+    hashes = {}
+    for line in manifest.read_text().splitlines():
+        expected, rel = line.split("  ", 1)
+        if rel in hashes or not re.fullmatch(r"[0-9a-f]{64}", expected):
+            raise ValueError("Invalid or duplicate archive hash: " + rel)
+        hashes[rel] = expected
+    external = {module for _, path in sources.values() for module in direct_imports(path)} - sources.keys()
+    search_path = [*archives, *packages]
+    for module in sorted(external):
+        rel = module.replace(".", "/") + ".olean"
+        package = module.split(".")[0]
+        # Lean 4.33 chooses the first directory containing the package root, even if the requested file is missing there.
+        base = next((path for path in search_path
+                     if (path / package).is_dir() or (path / (package + ".olean")).exists()), None)
+        if base is None or not (base / rel).is_file():
+            raise ValueError("Missing imported object: " + rel)
+        if base in archives:
+            if rel not in hashes:
+                raise ValueError("Missing archive hash: " + rel)
+            if digest(base / rel) != hashes[rel]:
+                raise ValueError("Archive object differs: " + rel)
+        elif rel in hashes:
+            raise ValueError("Expected an archive object: " + rel)
+
+def check_inputs(bins, mathlib, archives, env):
     version = subprocess.check_output([bins / "lean", "--version"], text=True, env=env)
     if LEAN_REV not in version:
         raise ValueError("Expected Lean 4.33.1 at " + LEAN_REV)
@@ -99,17 +132,6 @@ def check_inputs(bins, mathlib, archives, sources, env):
                 raise ValueError("Mathlib source differs: " + rel)
     if not all(path.is_dir() for path in archives):
         raise ValueError("Each archive path must be an extracted Lean library directory")
-    # Bind the directly imported archive modules to the upstream object manifest.
-    # The compressed archive itself is authenticated before extraction in REPLAY.md.
-    imports = {name.replace(".", "/") + ".olean" for _, path in sources.values()
-               for name in re.findall(r"^(?:public )?import\s+([\w.]+)", path.read_text(), re.MULTILINE)}
-    for line in (HERE / "evidence/archive-imports.sha256").read_text().splitlines():
-        expected, rel = line.split("  ", 1)
-        if rel not in imports:
-            continue
-        paths = [path / rel for path in archives if (path / rel).is_file()]
-        if not paths or digest(paths[0]) != expected:
-            raise ValueError("Archive object is missing or differs: " + rel)
 
 def checked_run(args, work, env, label):
     print(datetime.now(timezone.utc).isoformat(), label, flush=True)
@@ -123,6 +145,10 @@ def check_audit(name, work, evidence):
     if name == "AuditDescent":
         if len(names) != 77321:
             raise ValueError(f"Unexpected arithmetic dependency count: {len(names)}")
+        return
+    if name == "AuditSecondSeedWindow":
+        if len(names) != 390211 or len(set(names)) != len(names):
+            raise ValueError(f"Unexpected window dependency list: {len(names)} entries")
         return
     if name.startswith("AuditMizusawa"):
         filename, key = {
@@ -172,15 +198,17 @@ def main():
         env.pop(key, None)
     env["PATH"] = str(bins) + os.pathsep + env["PATH"]
     env["LEAN_NUM_THREADS"] = "1"
-    check_inputs(bins, mathlib, archives, sources, env)
+    check_inputs(bins, mathlib, archives, env)
+    base = subprocess.check_output([bins / "lake", "env", "printenv", "LEAN_PATH"],
+                                   cwd=mathlib, env=env, text=True).strip()
+    packages = [(mathlib / path).resolve() for path in base.split(os.pathsep) if path]
+    core = subprocess.check_output([bins / "lean", "--print-libdir"], env=env, text=True).strip()
+    check_archive_imports(sources, archives, [*packages, Path(core)], HERE / "evidence/archive-imports.sha256")
     args.work.mkdir(parents=True, exist_ok=True)
     work = Path(tempfile.mkdtemp(prefix=args.target + "-", dir=args.work.resolve()))
     print("Replay directory:", work, flush=True)
     built = work / "objects"
     built.mkdir()
-    base = subprocess.check_output([bins / "lake", "env", "printenv", "LEAN_PATH"],
-                                   cwd=mathlib, env=env, text=True).strip()
-    packages = [(mathlib / path).resolve() for path in base.split(os.pathsep) if path]
     env["LEAN_PATH"] = os.pathsep.join(map(str, [built, *archives, *packages]))
     flags = ["--trust=0", "-j1", "-DwarningAsError=true", "-DmaxRecDepth=100000",
              "-DmaxHeartbeats=6000000", "-DsynthInstance.maxHeartbeats=200000"]
