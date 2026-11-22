@@ -1,0 +1,22 @@
+Lean (version 4.33.1, arm64-apple-darwin24.6.0, commit 819816b2e0a3bf405af45ae5c7af2491d8f5bee6, Release)
+Replay directory: <fresh build directory>
+2026-11-22T13:58:45.700403+00:00 build MizusawaUnitResidue
+'RiemannReduction.UnitResidue.prime_counts' depends on axioms: [propext, Classical.choice, Quot.sound]
+'RiemannReduction.UnitResidue.root_of_unity_row' depends on axioms: [propext, Classical.choice, Quot.sound]
+Passed build MizusawaUnitResidue in 3.3s
+2026-11-22T13:58:48.999157+00:00 build AuditSlopeGraph
+Passed build AuditSlopeGraph in 1.0s
+2026-11-22T13:58:49.974212+00:00 kernel MizusawaUnitResidue
+replaying MizusawaUnitResidue
+Passed kernel MizusawaUnitResidue in 8.9s
+2026-11-22T13:58:58.888314+00:00 audit AuditMizusawaResidue
+RiemannReduction.UnitResidue.root_of_unity_row: 72596 reachable declarations; axioms [propext,
+ Classical.choice,
+ Quot.sound]; no previously closed RH theorem.
+Reachability of Formalism.HN.thmF_share: false
+Reachability of Formalism.HN.frameB_integral: false
+Reachability of Formalism.CorankShareLayerCake.FR.layer_cake_formula: false
+Reachability of IntegratedSlopeShare.shortfall_integral: false
+Reachability of IntegratedSlopeShare.rank_share_transfer: false
+Passed audit AuditMizusawaResidue in 5.1s
+AuditMizusawaResidue: 72,596 names, sorted SHA-256 dcdc91bcdef2b4d52a9e3bf56cdea64e34122f495c234c56d9d140e2f4547d81

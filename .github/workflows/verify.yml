@@ -29,4 +29,6 @@ jobs:
           sudo rm -rf /usr/share/dotnet /usr/local/lib/android /opt/ghc /opt/hostedtoolcache/CodeQL
           df -h /
       - name: Rebuild, replay and audit
+        env:
+          CHECK_CYCLOTOMIC_RESIDUES: '1'
         run: bash verify-linux.sh --jobs "$(nproc)"
