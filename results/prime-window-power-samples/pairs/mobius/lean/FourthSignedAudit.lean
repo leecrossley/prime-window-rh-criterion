@@ -28,10 +28,10 @@ run_cmd do
     if allNames.contains n then throwError "Unexpected dependency {n}"
   for n in allNames do
     if let some (.thmInfo t) := env.checked.get.find? n then
-      if t.type == .const `RiemannHypothesis [] then throwError "Closed RH theorem used: {n}"
+      if t.type == .const `RiemannHypothesis [] then throwError "Reachable theorem {n} has the literal type RiemannHypothesis"
   for n in [ns ++ `tenth_signed_peaks, ns ++ `tenth_peak_height, ns ++ `deficit_pair_error_two,
       ns ++ `square_root_bound_of_rh, ns ++ `unpairedTail, fm ++ `mass] do
     unless allNames.contains n do throwError "Missing expected dependency {n}"
   let pure := proofDependencies env [fm ++ `signed_mass_discrepancy]
   if pure.contains `RiemannHypothesis then throwError "RH in arithmetic discrepancy"
-  logInfo m!"Verified {roots.length} signed criterion and sampling statements with {allNames.toList.length} reachable declarations. No earlier closed RH theorem occurs."
+  logInfo m!"Verified {roots.length} signed criterion and sampling statements with {allNames.toList.length} reachable declarations. None of the reachable theorems has the literal type RiemannHypothesis."

@@ -46,8 +46,8 @@ def verify (root : Name) (need avoid : List Name) (bareRH : Bool)
       if let some (.thmInfo th) := e.find? n then
         if th.type == .const `RiemannHypothesis [] then otherRH := otherRH.push n
   if let some f := file then f.flush
-  unless otherRH.isEmpty do throwError "Other closed RH theorems used: {otherRH}"
-  logInfo m!"{root}: {reachable.size} reachable declarations; axioms {ax}; no previously closed RH theorem."
+  unless otherRH.isEmpty do throwError "Reachable theorems {otherRH} have the literal type RiemannHypothesis"
+  logInfo m!"{root} reaches {reachable.size} declarations with axioms {ax}. No other reachable theorem has the literal type RiemannHypothesis."
   for n in [`Formalism.HN.thmF_share,`Formalism.HN.frameB_integral,`Formalism.CorankShareLayerCake.FR.layer_cake_formula,
       `IntegratedSlopeShare.shortfall_integral,`IntegratedSlopeShare.rank_share_transfer] do
     logInfo m!"Reachability of {n}: {reachable.contains n}"
