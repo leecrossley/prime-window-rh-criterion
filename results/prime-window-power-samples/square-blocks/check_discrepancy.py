@@ -3,6 +3,9 @@
 import argparse
 from math import isqrt
 
+if not __debug__:
+    raise SystemExit("Square-block certificates require Python assertions. Disable optimisation.")
+
 from flint import arb, ctx
 
 

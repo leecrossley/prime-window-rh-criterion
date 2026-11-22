@@ -4,6 +4,9 @@ import argparse
 from itertools import product
 from math import isqrt
 
+if not __debug__:
+    raise SystemExit("Square-block certificates require Python assertions. Disable optimisation.")
+
 from flint import acb, arb, ctx, fmpz
 
 from check_discrepancy import primes_through

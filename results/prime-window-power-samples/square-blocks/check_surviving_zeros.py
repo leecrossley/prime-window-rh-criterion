@@ -4,6 +4,9 @@ import argparse
 from fractions import Fraction
 from itertools import product
 
+if not __debug__:
+    raise SystemExit("Square-block certificates require Python assertions. Disable optimisation.")
+
 from flint import acb, arb, ctx, fmpz
 
 
