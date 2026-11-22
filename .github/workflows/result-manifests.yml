@@ -48,7 +48,7 @@ jobs:
           if-no-files-found: warn
           retention-days: 30
   build-basis:
-    if: github.event_name == 'workflow_dispatch' && (inputs.geometric_target == 'compare' || inputs.geometric_target == 'mizusawa')
+    if: github.event_name == 'workflow_dispatch' && (inputs.geometric_target == 'compare' || inputs.geometric_target == 'mizusawa' || inputs.geometric_target == 'tame-eight-rh')
     needs: check
     uses: ./.github/workflows/geometric-stage.yml
     with:
@@ -152,20 +152,15 @@ jobs:
           if-no-files-found: error
           overwrite: true
           retention-days: 30
-  unit-inputs:
-    if: github.event_name == 'workflow_dispatch' && inputs.geometric_target == 'tame-eight-rh'
-    needs: check
-    uses: ./.github/workflows/geometric-stage.yml
-    with:
-      target: tame-eight-rh
-      stage: build-inputs
   unit-endpoint:
-    needs: unit-inputs
+    if: inputs.geometric_target == 'tame-eight-rh'
+    needs: [build-window, build-frame]
     uses: ./.github/workflows/geometric-stage.yml
     with:
       target: tame-eight-rh
-      stage: build-endpoint
-      source: build-inputs
+      stage: build-unit-proof
+      source: build-window
+      also: build-frame
   unit-verification:
     needs: unit-endpoint
     strategy:
@@ -176,7 +171,7 @@ jobs:
     with:
       target: tame-eight-rh
       stage: ${{ matrix.stage }}
-      source: build-endpoint
+      source: build-unit-proof
   rank-endpoints:
     if: inputs.geometric_target == 'mizusawa'
     needs: [build-window, build-frame]

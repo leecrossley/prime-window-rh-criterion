@@ -313,20 +313,33 @@ def rank_stage(stage, sources, built):
     return builds, kernels, audits
 
 
+def unit_checkpoints(sources):
+    plan, window, frame = geometry_checkpoints("CyclotomicEight")
+    shared = window | frame
+    terminal = "TameEightWindowRH"
+    if shared | {terminal} != sources.keys() - AUDITS.keys() or terminal in shared:
+        raise ValueError("The cyclotomic unit checkpoints differ from the local source closure")
+    plan["build-unit-proof"] = (shared, {terminal})
+    return plan
+
+
 def unit_stage(stage, sources, built):
     objects = sources.keys() - AUDITS.keys()
-    inputs = set(ordered_sources(("CyclotomicEight", "SecondSeedWindow")))
     available = {".".join(f.relative_to(built).with_suffix("").parts) for f in built.rglob("*.olean")}
-    if stage == "build-inputs":
-        required, builds, kernels, audits = set(), inputs, (), set()
-    elif stage == "build-endpoint":
-        required, builds, kernels, audits = inputs, objects - inputs, (), set()
+    if stage in ("build-inputs", "build-endpoint"):
+        inputs = set(ordered_sources(("CyclotomicEight", "SecondSeedWindow")))
+        required, builds = (set(), inputs) if stage == "build-inputs" else (inputs, objects - inputs)
+        kernels, audits = (), set()
     elif stage == "kernel-endpoint":
         required, builds, kernels, audits = objects, set(), (CHECK["tame-eight-rh"],), set()
     elif stage == "audit-endpoint":
         required, builds, kernels, audits = objects, set(), (), {"AuditTameEightRH"}
     else:
-        raise ValueError("Unknown unit proof stage: " + stage)
+        plan = unit_checkpoints(sources)
+        if stage not in plan:
+            raise ValueError("Unknown unit proof stage: " + stage)
+        required, builds = plan[stage]
+        kernels, audits = (), set()
     if available != required:
         raise ValueError(f"{stage} received different modules: {sorted(available ^ required)}")
     return builds, kernels, audits

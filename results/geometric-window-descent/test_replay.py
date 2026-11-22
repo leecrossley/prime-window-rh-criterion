@@ -2,7 +2,11 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from replay import AUDITS, CHECK, ENDPOINTS, RANK_ENDPOINTS, TARGETS, check_archive_imports, comparison_checkpoints, comparison_stage, digest, direct_imports, ordered_sources, rank_plan, rank_stage, unit_stage
+from replay import (
+    AUDITS, CHECK, ENDPOINTS, RANK_ENDPOINTS, TARGETS, check_archive_imports,
+    comparison_checkpoints, comparison_stage, digest, direct_imports, ordered_sources,
+    rank_plan, rank_stage, unit_checkpoints, unit_stage,
+)
 
 
 class ArchiveImports(unittest.TestCase):
@@ -187,6 +191,33 @@ class ComparisonStages(unittest.TestCase):
         self.object("OtherModule")
         with self.assertRaisesRegex(ValueError, "different modules"):
             rank_stage("build-basis", sources, self.objects)
+
+    def test_unit_checkpoints_cover_the_endpoint_imports(self):
+        sources = ordered_sources(TARGETS["tame-eight-rh"])
+        plan = unit_checkpoints(sources)
+        compiled = []
+        for stage, (required, builds) in plan.items():
+            with self.subTest(stage=stage):
+                for name in required:
+                    self.object(name)
+                self.assertEqual(unit_stage(stage, sources, self.objects), (builds, (), set()))
+                self.assertTrue(required.isdisjoint(builds))
+                for name in builds:
+                    imports = set(direct_imports(sources[name][1])) & sources.keys()
+                    self.assertTrue(imports <= (required | builds), name)
+                for path in self.objects.rglob("*.olean"):
+                    path.unlink()
+                compiled.extend(builds)
+        self.assertCountEqual(compiled, sources.keys() - AUDITS.keys())
+        window = set.union(*plan["build-window"])
+        frame = set.union(*plan["build-frame"])
+        self.assertEqual(window & frame, plan["build-basis"][1])
+        self.assertEqual(plan["build-unit-proof"], (window | frame, {"TameEightWindowRH"}))
+        with self.assertRaisesRegex(ValueError, "different modules"):
+            unit_stage("build-unit-proof", sources, self.objects)
+        self.object("Unrelated")
+        with self.assertRaisesRegex(ValueError, "different modules"):
+            unit_stage("build-basis", sources, self.objects)
 
     def test_unit_proof_stages(self):
         sources = ordered_sources(TARGETS["tame-eight-rh"])
