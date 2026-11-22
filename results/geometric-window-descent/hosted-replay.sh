@@ -7,7 +7,8 @@ case ${1:-} in
 esac
 stage=${2:-}
 source_stage=${3:-}
-if [[ -n "$stage" && "$target" != compare && "$target" != tame-eight-rh ]]; then exit 2; fi
+second_source=${4:-}
+if [[ -n "$stage" && "$target" != compare && "$target" != tame-eight-rh && "$target" != mizusawa ]]; then exit 2; fi
 note=$(cd "$(dirname "$0")" && pwd)
 inputs=$(mktemp -d "${RUNNER_TEMP:?}/geometric-inputs.XXXXXXXX")
 evidence="$RUNNER_TEMP/geometric-evidence"
@@ -56,11 +57,26 @@ free -h
 options=()
 if [[ -n "$stage" ]]; then
   mkdir "$inputs/objects"
-  if [[ -n "$source_stage" ]]; then
-    checkpoint="$RUNNER_TEMP/geometric-checkpoint"
-    test "$(cat "$checkpoint/revision")" = "$GITHUB_RUN_ID $GITHUB_SHA $source_stage"
+  restore_objects() {
+    local checkpoint=$1 expected=$2 destination=$3
+    test "$(cat "$checkpoint/revision")" = "$GITHUB_RUN_ID $GITHUB_SHA $expected"
     (cd "$checkpoint" && sha256sum -c objects.sha256)
-    tar --zstd -xf "$checkpoint/objects.tar.zst" -C "$inputs/objects"
+    tar --zstd -xf "$checkpoint/objects.tar.zst" -C "$destination"
+  }
+  if [[ -n "$source_stage" ]]; then
+    restore_objects "$RUNNER_TEMP/geometric-checkpoint" "$source_stage" "$inputs/objects"
+  fi
+  if [[ -n "$second_source" ]]; then
+    mkdir "$inputs/other-objects"
+    restore_objects "$RUNNER_TEMP/geometric-second-checkpoint" "$second_source" "$inputs/other-objects"
+    while IFS= read -r -d '' path; do
+      if [[ -f "$inputs/objects/$path" ]]; then
+        cmp "$inputs/other-objects/$path" "$inputs/objects/$path"
+      else
+        mkdir -p "$(dirname "$inputs/objects/$path")"
+        cp "$inputs/other-objects/$path" "$inputs/objects/$path"
+      fi
+    done < <(cd "$inputs/other-objects" && find . -type f -print0)
   fi
   options=(--stage "$stage" --stage-objects "$inputs/objects")
 fi

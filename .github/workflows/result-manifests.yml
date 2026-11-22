@@ -20,7 +20,7 @@ jobs:
           persist-credentials: false
       - run: sh verify-collection.sh
   geometric:
-    if: github.event_name == 'workflow_dispatch' && inputs.geometric_target != 'none' && inputs.geometric_target != 'compare' && inputs.geometric_target != 'tame-eight-rh'
+    if: github.event_name == 'workflow_dispatch' && inputs.geometric_target != 'none' && inputs.geometric_target != 'compare' && inputs.geometric_target != 'tame-eight-rh' && inputs.geometric_target != 'mizusawa'
     needs: check
     runs-on: ubuntu-24.04
     timeout-minutes: 360
@@ -132,3 +132,89 @@ jobs:
       target: tame-eight-rh
       stage: ${{ matrix.stage }}
       source: build-endpoint
+  rank-basis:
+    if: github.event_name == 'workflow_dispatch' && inputs.geometric_target == 'mizusawa'
+    needs: check
+    uses: ./.github/workflows/geometric-stage.yml
+    with:
+      target: mizusawa
+      stage: build-basis
+  rank-counts:
+    needs: rank-basis
+    uses: ./.github/workflows/geometric-stage.yml
+    with:
+      target: mizusawa
+      stage: build-counts
+      source: build-basis
+  rank-window:
+    needs: rank-counts
+    uses: ./.github/workflows/geometric-stage.yml
+    with:
+      target: mizusawa
+      stage: build-window
+      source: build-counts
+  rank-suppliers:
+    needs: rank-basis
+    uses: ./.github/workflows/geometric-stage.yml
+    with:
+      target: mizusawa
+      stage: build-suppliers
+      source: build-basis
+  rank-frame-inputs:
+    needs: rank-suppliers
+    uses: ./.github/workflows/geometric-stage.yml
+    with:
+      target: mizusawa
+      stage: build-frame-inputs
+      source: build-suppliers
+  rank-frame:
+    needs: rank-frame-inputs
+    uses: ./.github/workflows/geometric-stage.yml
+    with:
+      target: mizusawa
+      stage: build-frame
+      source: build-frame-inputs
+  rank-endpoints:
+    needs: [rank-window, rank-frame]
+    strategy:
+      fail-fast: false
+      matrix:
+        endpoint: [three, control, closed]
+    uses: ./.github/workflows/geometric-stage.yml
+    with:
+      target: mizusawa
+      stage: build-${{ matrix.endpoint }}
+      source: build-window
+      also: build-frame
+  rank-verification:
+    needs: rank-endpoints
+    strategy:
+      fail-fast: false
+      matrix:
+        endpoint: [three, control, closed]
+        operation: [kernel, audit]
+    uses: ./.github/workflows/geometric-stage.yml
+    with:
+      target: mizusawa
+      stage: ${{ matrix.operation }}-${{ matrix.endpoint }}
+      source: build-${{ matrix.endpoint }}
+  rank-comparison:
+    needs: rank-verification
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
+        with:
+          pattern: geometric-part-*-${{ github.sha }}
+          path: ${{ runner.temp }}/geometric-parts/
+      - name: Compare the five declaration lists
+        run: python3 -Bu results/geometric-window-descent/collect-rank.py "$RUNNER_TEMP/geometric-parts" "$RUNNER_TEMP/geometric-evidence" "$GITHUB_SHA"
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: geometric-mizusawa-${{ github.sha }}
+          path: ${{ runner.temp }}/geometric-evidence/
+          if-no-files-found: error
+          overwrite: true
+          retention-days: 30

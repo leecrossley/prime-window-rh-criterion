@@ -235,6 +235,56 @@ def comparison_stage(stage, sources, built):
         return set(), (), {audit}
     raise ValueError("Unknown comparison stage: " + stage)
 
+RANK_ENDPOINTS = {
+    "three": ("MizusawaWindowRH", "AuditMizusawaRH"),
+    "control": ("MizusawaNineControl", "AuditMizusawaControl"),
+    "closed": ("SecondSeedRH", "AuditGeometricRH"),
+}
+
+
+def rank_plan(sources):
+    """List the compiled inputs, new objects, kernel roots and audits for each rank job."""
+    def closure(*roots):
+        return set(ordered_sources(roots))
+
+    arithmetic = closure(*MIZUSAWA_MODULES, "NineIntegralTower", "AuditSlopeGraph")
+    window = closure("SecondSeedWindow")
+    frame = closure("FiniteFrameRH")
+    basis = arithmetic | (window & frame)
+    counts = basis | closure("SecondSeedCount")
+    suppliers = basis | closure("CheckAlpogePrincipalArchivedRowSelection", "CheckAlpogeLocalThetaSupplier")
+    window |= basis
+    frame |= basis
+    frame_inputs = frame - {"FiniteFrameRH"}
+    shared = window | frame
+    terminals = {module for module, _ in RANK_ENDPOINTS.values()}
+    if (shared | terminals != sources.keys() - AUDITS.keys() or shared & terminals
+            or not counts <= window or not suppliers <= frame_inputs):
+        raise ValueError("The rank stages differ from the local source closure")
+    plan = {
+        "build-basis": (set(), basis, (MIZUSAWA_MODULES,), {"AuditMizusawaTower", "AuditDescent"}),
+        "build-counts": (basis, counts - basis, (), set()),
+        "build-window": (counts, window - counts, (), set()),
+        "build-suppliers": (basis, suppliers - basis, (), set()),
+        "build-frame-inputs": (suppliers, frame_inputs - suppliers, (), set()),
+        "build-frame": (frame_inputs, frame - frame_inputs, (), set()),
+    }
+    for endpoint, (module, audit) in RANK_ENDPOINTS.items():
+        ready = shared | {module}
+        plan["build-" + endpoint] = (shared, {module}, (), set())
+        plan["kernel-" + endpoint] = (ready, set(), ((module,),), set())
+        plan["audit-" + endpoint] = (ready, set(), (), {audit})
+    return plan
+
+
+def rank_stage(stage, sources, built):
+    required, builds, kernels, audits = rank_plan(sources)[stage]
+    available = {".".join(f.relative_to(built).with_suffix("").parts) for f in built.rglob("*.olean")}
+    if available != required:
+        raise ValueError(f"{stage} received different modules: {sorted(available ^ required)}")
+    return builds, kernels, audits
+
+
 def unit_stage(stage, sources, built):
     objects = sources.keys() - AUDITS.keys()
     inputs = set(ordered_sources(("CyclotomicEight", "SecondSeedWindow")))
@@ -265,8 +315,8 @@ def main():
     parser.add_argument("--stage-objects", type=Path, help="object directory for that stage")
     parser.add_argument("--list", action="store_true", help="list the local source closure without building")
     args = parser.parse_args()
-    if bool(args.stage) != bool(args.stage_objects) or (args.stage and args.target not in ("compare", "tame-eight-rh")):
-        parser.error("--stage and --stage-objects go together with compare or tame-eight-rh")
+    if bool(args.stage) != bool(args.stage_objects) or (args.stage and args.target not in ("compare", "tame-eight-rh", "mizusawa")):
+        parser.error("--stage and --stage-objects require compare, tame-eight-rh or mizusawa")
     sources = ordered_sources(TARGETS[args.target])
     if args.list:
         for folder, path in sources.values():
@@ -294,7 +344,9 @@ def main():
     print("Replay directory:", work, flush=True)
     built = args.stage_objects.resolve() if args.stage else work / "objects"
     built.mkdir(parents=True, exist_ok=bool(args.stage))
-    if args.stage and args.target == "tame-eight-rh":
+    if args.stage and args.target == "mizusawa":
+        build_names, kernel_groups, audit_names = rank_stage(args.stage, sources, built)
+    elif args.stage and args.target == "tame-eight-rh":
         build_names, kernel_groups, audit_names = unit_stage(args.stage, sources, built)
     elif args.stage:
         build_names, kernel_groups, audit_names = comparison_stage(args.stage, sources, built)
@@ -325,7 +377,7 @@ def main():
     for name, cmd in audits.items():
         checked_run(cmd, work, env, "audit " + name)
         check_audit(name, work, evidence)
-    if args.target in ("mizusawa", "mizusawa-rank"):
+    if args.target in ("mizusawa", "mizusawa-rank") and not args.stage:
         options = ["--arithmetic-only"] if args.target == "mizusawa-rank" else []
         checked_run([sys.executable, HERE / "mizusawa/compare.py", work, work / "comparison",
                      "--check", HERE / "mizusawa/evidence", *options], work, env, "compare rank-three dependencies")

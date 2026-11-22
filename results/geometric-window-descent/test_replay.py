@@ -2,7 +2,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from replay import AUDITS, CHECK, ENDPOINTS, TARGETS, check_archive_imports, comparison_stage, digest, ordered_sources, unit_stage
+from replay import AUDITS, CHECK, ENDPOINTS, RANK_ENDPOINTS, TARGETS, check_archive_imports, comparison_stage, digest, direct_imports, ordered_sources, rank_plan, rank_stage, unit_stage
 
 
 class ArchiveImports(unittest.TestCase):
@@ -127,6 +127,37 @@ class ComparisonStages(unittest.TestCase):
             self.phase("audit-previous")
         with self.assertRaisesRegex(ValueError, "empty object directory"):
             self.phase("common")
+
+    def test_rank_stages_cover_the_full_replay(self):
+        sources = ordered_sources(TARGETS["mizusawa"])
+        plan = rank_plan(sources)
+        objects = sources.keys() - AUDITS.keys()
+        compiled, checked, audited = [], [], []
+        for required, builds, kernels, audits in plan.values():
+            for name in builds:
+                imports = set(direct_imports(sources[name][1])) & objects
+                self.assertTrue(imports <= (required | builds), name)
+            self.assertTrue(required.isdisjoint(builds))
+            compiled.extend(builds)
+            checked.extend(name for group in kernels for name in group)
+            audited.extend(audits)
+        self.assertCountEqual(compiled, objects)
+        self.assertCountEqual(checked, CHECK["mizusawa"])
+        self.assertCountEqual(audited, sources.keys() & AUDITS.keys())
+        window_inputs, window_builds, _, _ = plan["build-window"]
+        frame_inputs, frame_builds, _, _ = plan["build-frame"]
+        window, frame = window_inputs | window_builds, frame_inputs | frame_builds
+        self.assertEqual(window & frame, plan["build-basis"][1])
+        for endpoint in RANK_ENDPOINTS:
+            self.assertEqual(plan["build-" + endpoint][0], window | frame)
+
+    def test_rank_rejects_incomplete_and_foreign_objects(self):
+        sources = ordered_sources(TARGETS["mizusawa"])
+        with self.assertRaisesRegex(ValueError, "different modules"):
+            rank_stage("audit-three", sources, self.objects)
+        self.object("OtherModule")
+        with self.assertRaisesRegex(ValueError, "different modules"):
+            rank_stage("build-basis", sources, self.objects)
 
     def test_unit_proof_stages(self):
         sources = ordered_sources(TARGETS["tame-eight-rh"])
