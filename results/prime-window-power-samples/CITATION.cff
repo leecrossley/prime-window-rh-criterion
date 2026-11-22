@@ -12,6 +12,14 @@ doi: 10.5281/zenodo.24414757
 type: software
 references:
   - type: software
+    title: "Prime-counting errors on square samples"
+    authors:
+      - family-names: Crossley
+        given-names: Lee
+    version: "square-block-median-v1.0.3"
+    doi: 10.5281/zenodo.24438940
+    url: https://github.com/leecrossley/prime-window-rh-criterion/releases/tag/square-block-median-v1.0.3
+  - type: software
     title: "A fourth-power criterion for the negative part of a Möbius sum"
     authors:
       - family-names: Crossley
