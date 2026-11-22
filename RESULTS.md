@@ -15,6 +15,10 @@ The power-sampling result now also gives an $8/9$ upper bound for the mean squar
 
 The [square-sample median and pair-discrepancy results](results/prime-window-power-samples/square-blocks/) give an RH equivalence on shrinking blocks, a finite zero-exception range and a sharp lower limit for a weighted pair statistic. [All square-sample editions](https://github.com/leecrossley/prime-window-rh-criterion/releases?q=square-block-median) · [Hypotheses and verification (v1.0.2)](https://github.com/leecrossley/prime-window-rh-criterion/releases/tag/square-block-median-v1.0.2) · [Equation display fixes (v1.0.1)](https://github.com/leecrossley/prime-window-rh-criterion/releases/tag/square-block-median-v1.0.1) · [First edition (v1.0.0)](https://github.com/leecrossley/prime-window-rh-criterion/releases/tag/square-block-median-v1.0.0)
 
+## Geometric proof-engineering note
+
+The ordinary-character Lean proof lowers its generator bound for the prime-two tower from 24 to nine. Mizusawa proved in 2010 that its ordinary class module is free of rank three over the 2-adic integers. The Lean proof also uses the second automorphy case directly in the rank-four count and reaches Mathlib’s RH through the geometric argument. A direct arithmetic bound for the signed sum on arbitrarily late complete blocks remains open. [Mizusawa, Lemma 4.2](https://jtnb.centre-mersenne.org/item/10.5802/jtnb.707.pdf#page=13) [Note and prior work](results/geometric-window-descent/) [Lean source](results/geometric-window-descent/lean/SecondSeedRH.lean) [Replay and comparison](results/geometric-window-descent/REPLAY.md)
+
 ## Shared verification files
 
 Each entry in [the shared-file list](shared-files.json) names the source to edit and its replayable copies. After a change, run `python3 tools/shared_files.py --sync`, replay each affected result and update its manifest. Each result can still be checked from its own directory.

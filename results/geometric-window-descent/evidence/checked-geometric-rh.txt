@@ -1,0 +1,44 @@
+second-seed-build.log
+2026-11-22T02:47:51.872340+00:00 build CaseTwoAutomorphy
+'RiemannReduction.SymplecticTwo.automorphy_of_second_seed' depends on axioms: [propext, Classical.choice, Quot.sound]
+Passed CaseTwoAutomorphy in 23.3 s
+2026-11-22T02:48:15.211969+00:00 build SecondSeedCount
+Passed SecondSeedCount in 33.2 s
+2026-11-22T02:48:48.434659+00:00 build SecondSeedWindow
+'RiemannReduction.PrincipalLayer.window_from_second_seed' depends on axioms: [propext, Classical.choice, Quot.sound]
+Passed SecondSeedWindow in 36.8 s
+2026-11-22T02:49:25.235939+00:00 build SecondSeedRH
+'RiemannReduction.ConductorOne.rh_from_second_seed' depends on axioms: [propext, Classical.choice, Quot.sound]
+'RiemannReduction.ConductorOne.square_blocks_from_second_seed' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+Passed SecondSeedRH in 275.4 s
+
+kernel-final.log
+replaying CofinalRayLayers
+replaying SecondSeedRH
+2026-11-22T03:03:54.262785+00:00 Passed standalone kernel SecondSeedRH CofinalRayLayers
+
+audit-rh.log
+2026-11-22T02:56:10.318619+00:00 check AuditSecondSeedRH
+RiemannReduction.ConductorOne.rh_from_second_seed: 1476889 reachable declarations; axioms [propext,
+ Classical.choice,
+ Quot.sound]; no previously closed RH theorem.
+Reachability of Formalism.HN.thmF_share: false
+Reachability of Formalism.HN.frameB_integral: false
+Reachability of Formalism.CorankShareLayerCake.FR.layer_cake_formula: false
+Reachability of IntegratedSlopeShare.shortfall_integral: false
+Reachability of IntegratedSlopeShare.rank_share_transfer: false
+Passed AuditSecondSeedRH in 1501.9 s
+
+audit-window.log
+2026-11-22T02:51:39.207378+00:00 check AuditSecondSeedWindow
+RiemannReduction.PrincipalLayer.window_from_second_seed: 390211 reachable declarations; axioms [propext,
+ Classical.choice,
+ Quot.sound]; no previously closed RH theorem.
+Reachability of Formalism.HN.thmF_share: false
+Reachability of Formalism.HN.frameB_integral: false
+Reachability of Formalism.CorankShareLayerCake.FR.layer_cake_formula: false
+Reachability of IntegratedSlopeShare.shortfall_integral: false
+Reachability of IntegratedSlopeShare.rank_share_transfer: false
+Passed AuditSecondSeedWindow in 344.0 s

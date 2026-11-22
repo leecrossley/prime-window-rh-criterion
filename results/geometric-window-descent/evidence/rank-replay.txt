@@ -1,0 +1,53 @@
+Lean (version 4.33.1, arm64-apple-darwin24.6.0, commit 819816b2e0a3bf405af45ae5c7af2491d8f5bee6, Release)
+2026-11-22T06:44:01.356321+00:00 build QuadraticSchreier
+'RiemannReduction.QuadraticDescent.rank_le_twice_sub_one' depends on axioms: [propext, Classical.choice, Quot.sound]
+Passed build QuadraticSchreier in 32.2s
+2026-11-22T06:44:33.579696+00:00 build QuadraticGenus
+'RiemannReduction.QuadraticDescent.quadratic_genus_bound' depends on axioms: [propext, Classical.choice, Quot.sound]
+Passed build QuadraticGenus in 7.5s
+2026-11-22T06:44:41.110381+00:00 build BiquadraticDescent
+'RiemannReduction.QuadraticDescent.biquadratic_rank' depends on axioms: [propext, Classical.choice, Quot.sound]
+Passed build BiquadraticDescent in 7.6s
+2026-11-22T06:44:48.739765+00:00 build OrdinaryDyadicBase
+Passed build OrdinaryDyadicBase in 9.5s
+2026-11-22T06:44:58.268184+00:00 build SingleInertia
+'RiemannReduction.GaussianTower.core_is_two_group' depends on axioms: [propext, Classical.choice, Quot.sound]
+'RiemannReduction.GaussianTower.inertia_surjects' depends on axioms: [propext, Classical.choice, Quot.sound]
+Passed build SingleInertia in 2.5s
+2026-11-22T06:45:00.791763+00:00 build RationalDyadicInertia
+'RiemannReduction.GaussianTower.pure_rank_zero' depends on axioms: [propext, Classical.choice, Quot.sound]
+Passed build RationalDyadicInertia in 10.3s
+2026-11-22T06:45:11.060145+00:00 build OrdinaryRayDescent
+'RiemannReduction.GaussianTower.host_rank_nine' depends on axioms: [propext, Classical.choice, Quot.sound]
+'RiemannReduction.GaussianTower.host_rank_three_of_eight_ray_characters' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+Passed build OrdinaryRayDescent in 10.4s
+2026-11-22T06:45:21.419574+00:00 build NineIntegralTower
+'RiemannReduction.GaussianTower.host_tower_nine' depends on axioms: [propext, Classical.choice, Quot.sound]
+'RiemannReduction.GaussianTower.ordinary_nine_input' depends on axioms: [propext, Classical.choice, Quot.sound]
+Passed build NineIntegralTower in 8.5s
+2026-11-22T06:45:29.911943+00:00 build AuditSlopeGraph
+Passed build AuditSlopeGraph in 2.1s
+2026-11-22T06:45:32.033039+00:00 build DyadicHostBound
+'RiemannReduction.GaussianTower.host_rank_twenty_four' depends on axioms: [propext, Classical.choice, Quot.sound]
+'RiemannReduction.GaussianTower.host_tower_twenty_four' depends on axioms: [propext, Classical.choice, Quot.sound]
+Passed build DyadicHostBound in 7.9s
+2026-11-22T06:45:39.884258+00:00 kernel QuadraticSchreier, QuadraticGenus, BiquadraticDescent, OrdinaryRayDescent, NineIntegralTower, DyadicHostBound
+replaying DyadicHostBound
+replaying NineIntegralTower
+replaying OrdinaryRayDescent
+replaying BiquadraticDescent
+replaying QuadraticGenus
+replaying QuadraticSchreier
+Passed kernel QuadraticSchreier, QuadraticGenus, BiquadraticDescent, OrdinaryRayDescent, NineIntegralTower, DyadicHostBound in 220.2s
+2026-11-22T06:49:20.051825+00:00 audit AuditDescent
+RiemannReduction.GaussianTower.host_tower_nine: 77321 reachable declarations; axioms [propext,
+ Classical.choice,
+ Quot.sound]; no previously closed RH theorem.
+Reachability of Formalism.HN.thmF_share: false
+Reachability of Formalism.HN.frameB_integral: false
+Reachability of Formalism.CorankShareLayerCake.FR.layer_cake_formula: false
+Reachability of IntegratedSlopeShare.shortfall_integral: false
+Reachability of IntegratedSlopeShare.rank_share_transfer: false
+Passed audit AuditDescent in 16.9s

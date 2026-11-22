@@ -1,0 +1,122 @@
+{
+  "candidate_count": 1476889,
+  "candidate_sorted_sha256": "b13bdd252156bae867953398f17cb4c90fb704dbf33fb603d3c5fa5eb8a2bf72",
+  "comparisons": {
+    "published_principal": {
+      "count": 1477932,
+      "added": 237,
+      "dropped": 1280,
+      "net_fewer": 1043,
+      "sorted_sha256": "fe8f4bbbcae744c5faf261b2971f98f54023ecb191717033c5407e4e1e72b7a3"
+    },
+    "single_inertia": {
+      "count": 1477680,
+      "added": 51,
+      "dropped": 842,
+      "net_fewer": 791,
+      "sorted_sha256": "80c2d0d5542489e68494164c2f14f406588eecf5b74963c9c116013ccc4756c6"
+    }
+  },
+  "named_dependencies": {
+    "UpperTheory.V.HV.DescentVanishingReductions.sp4In0_alt": {
+      "candidate": false,
+      "published_principal": true,
+      "single_inertia": true
+    },
+    "UpperTheory.V.Cu.main4_alt": {
+      "candidate": false,
+      "published_principal": true,
+      "single_inertia": true
+    },
+    "UpperTheory.V.Cu.modularity_rank_four_of_promodularity_case_three": {
+      "candidate": false,
+      "published_principal": true,
+      "single_inertia": true
+    },
+    "UpperTheory.V.Cu.promodularity_case_three_of_chain_reduction": {
+      "candidate": false,
+      "published_principal": true,
+      "single_inertia": true
+    },
+    "UpperTheory.V.Cu.chainIV_alt": {
+      "candidate": false,
+      "published_principal": true,
+      "single_inertia": true
+    },
+    "UpperTheory.V.Z.Win.Birth.fourth_initial_of_prints_h": {
+      "candidate": false,
+      "published_principal": true,
+      "single_inertia": true
+    },
+    "UpperTheory.V.Two.baseRk": {
+      "candidate": false,
+      "published_principal": true,
+      "single_inertia": true
+    },
+    "UpperTheory.V.Two.quadStep": {
+      "candidate": false,
+      "published_principal": true,
+      "single_inertia": true
+    },
+    "UpperTheory.V.Two.idxTwo": {
+      "candidate": false,
+      "published_principal": true,
+      "single_inertia": true
+    },
+    "UpperTheory.V.Ws.proMod_of_pmEx_of_ctx2_of_kPair_of_star": {
+      "candidate": true,
+      "published_principal": true,
+      "single_inertia": true
+    },
+    "UpperTheory.V.Ws.exists_iwasawaRank_bound_of_ferreroWashington": {
+      "candidate": true,
+      "published_principal": true,
+      "single_inertia": true
+    },
+    "UpperTheory.V.FW.ferreroWashington": {
+      "candidate": true,
+      "published_principal": true,
+      "single_inertia": true
+    },
+    "UpperTheory.V.Win.partA": {
+      "candidate": true,
+      "published_principal": true,
+      "single_inertia": true
+    },
+    "GlobalTheory.T.even_theta_chain_spanned_params_of_value_independent": {
+      "candidate": true,
+      "published_principal": true,
+      "single_inertia": true
+    },
+    "GlobalTheory.T.theta_chain_last_step_intertwines_matched_hecke": {
+      "candidate": true,
+      "published_principal": true,
+      "single_inertia": true
+    },
+    "GlobalTheory.T.theta_chain_occurring_params_norm_half_rank_bound": {
+      "candidate": true,
+      "published_principal": true,
+      "single_inertia": true
+    },
+    "RiemannReduction.GaussianTower.host_tower_nine": {
+      "candidate": true,
+      "published_principal": false,
+      "single_inertia": false
+    },
+    "RiemannReduction.QuadraticDescent.quadratic_genus_bound": {
+      "candidate": true,
+      "published_principal": false,
+      "single_inertia": false
+    },
+    "RiemannReduction.QuadraticDescent.rank_le_twice_sub_one": {
+      "candidate": true,
+      "published_principal": false,
+      "single_inertia": false
+    },
+    "RiemannReduction.SymplecticTwo.automorphy_of_second_seed": {
+      "candidate": true,
+      "published_principal": false,
+      "single_inertia": false
+    }
+  }
+}

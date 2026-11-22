@@ -1,0 +1,15 @@
+kernel-root.log
+replaying SingleInertiaRH
+2026-11-22T02:11:25.321767+00:00 Passed standalone kernel SingleInertiaRH
+
+audit-root.log
+2026-11-22T02:05:21.363002+00:00 check AuditSingleInertia
+RiemannReduction.ConductorOne.rh_of_single_inertia: 1477680 reachable declarations; axioms [propext,
+ Classical.choice,
+ Quot.sound]; no previously closed RH theorem.
+Reachability of Formalism.HN.thmF_share: false
+Reachability of Formalism.HN.frameB_integral: false
+Reachability of Formalism.CorankShareLayerCake.FR.layer_cake_formula: false
+Reachability of IntegratedSlopeShare.shortfall_integral: false
+Reachability of IntegratedSlopeShare.rank_share_transfer: false
+Passed AuditSingleInertia in 1316.9 s
