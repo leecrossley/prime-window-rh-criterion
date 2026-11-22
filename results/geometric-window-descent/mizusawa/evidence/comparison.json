@@ -1,0 +1,28 @@
+{
+  "graphs": {
+    "literature_three": {
+      "count": 1476830,
+      "sorted_sha256": "bf8e9c927cdba5ed00197366f50347719d051a22a3c99172eee207e3e074d905"
+    },
+    "closed_nine": {
+      "count": 1476889,
+      "sorted_sha256": "b13bdd252156bae867953398f17cb4c90fb704dbf33fb603d3c5fa5eb8a2bf72"
+    },
+    "literature_nine": {
+      "count": 1476831,
+      "sorted_sha256": "a08cf9a7dbab00d06185118c04875368fa8e2f60c731762e77ca5e6342333422"
+    }
+  },
+  "comparisons": {
+    "closed_nine": {
+      "dropped": 100,
+      "added": 41,
+      "net_fewer": 59
+    },
+    "literature_nine": {
+      "dropped": 4,
+      "added": 3,
+      "net_fewer": 1
+    }
+  }
+}

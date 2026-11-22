@@ -1,0 +1,21 @@
+Lean (version 4.33.1, arm64-apple-darwin24.6.0, commit 819816b2e0a3bf405af45ae5c7af2491d8f5bee6, Release)
+Replay directory: <fresh build directory>
+2026-11-22T13:29:47.290181+00:00 build MizusawaUnitParity
+'RiemannReduction.UnitParity.global_unit_parity' depends on axioms: [propext, Classical.choice, Quot.sound]
+Passed build MizusawaUnitParity in 5.3s
+2026-11-22T13:29:52.615890+00:00 build AuditSlopeGraph
+Passed build AuditSlopeGraph in 1.0s
+2026-11-22T13:29:53.644523+00:00 kernel MizusawaUnitParity
+replaying MizusawaUnitParity
+Passed kernel MizusawaUnitParity in 23.8s
+2026-11-22T13:30:17.447510+00:00 audit AuditMizusawaUnits
+RiemannReduction.UnitParity.global_unit_parity: 96389 reachable declarations; axioms [propext,
+ Classical.choice,
+ Quot.sound]; no previously closed RH theorem.
+Reachability of Formalism.HN.thmF_share: false
+Reachability of Formalism.HN.frameB_integral: false
+Reachability of Formalism.CorankShareLayerCake.FR.layer_cake_formula: false
+Reachability of IntegratedSlopeShare.shortfall_integral: false
+Reachability of IntegratedSlopeShare.rank_share_transfer: false
+Passed audit AuditMizusawaUnits in 8.5s
+AuditMizusawaUnits: 96,389 names, sorted SHA-256 f1e728b1199caa11a8b2553c7c6d8c9ac77ff46ea8d2e4b2e526437719648b74

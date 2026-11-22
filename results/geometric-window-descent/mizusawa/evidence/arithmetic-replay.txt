@@ -1,0 +1,93 @@
+Lean (version 4.33.1, arm64-apple-darwin24.6.0, commit 819816b2e0a3bf405af45ae5c7af2491d8f5bee6, Release)
+Replay directory: <fresh build directory>
+2026-11-22T13:03:28.467571+00:00 build OrdinaryDyadicBase
+Passed build OrdinaryDyadicBase in 10.7s
+2026-11-22T13:03:39.155398+00:00 build MizusawaCharacters
+Passed build MizusawaCharacters in 11.5s
+2026-11-22T13:03:50.698699+00:00 build MizusawaHostField
+Passed build MizusawaHostField in 12.2s
+2026-11-22T13:04:02.905163+00:00 build MizusawaGenusField
+Passed build MizusawaGenusField in 11.5s
+2026-11-22T13:04:14.373682+00:00 build QuadraticSchreier
+'RiemannReduction.QuadraticDescent.rank_le_twice_sub_one' depends on axioms: [propext, Classical.choice, Quot.sound]
+Passed build QuadraticSchreier in 15.1s
+2026-11-22T13:04:29.434561+00:00 build QuadraticGenus
+'RiemannReduction.QuadraticDescent.quadratic_genus_bound' depends on axioms: [propext, Classical.choice, Quot.sound]
+Passed build QuadraticGenus in 10.7s
+2026-11-22T13:04:40.160974+00:00 build BiquadraticDescent
+'RiemannReduction.QuadraticDescent.biquadratic_rank' depends on axioms: [propext, Classical.choice, Quot.sound]
+Passed build BiquadraticDescent in 9.8s
+2026-11-22T13:04:49.972407+00:00 build SingleInertia
+'RiemannReduction.GaussianTower.core_is_two_group' depends on axioms: [propext, Classical.choice, Quot.sound]
+'RiemannReduction.GaussianTower.inertia_surjects' depends on axioms: [propext, Classical.choice, Quot.sound]
+Passed build SingleInertia in 3.0s
+2026-11-22T13:04:52.946030+00:00 build RationalDyadicInertia
+'RiemannReduction.GaussianTower.pure_rank_zero' depends on axioms: [propext, Classical.choice, Quot.sound]
+Passed build RationalDyadicInertia in 13.3s
+2026-11-22T13:05:06.275450+00:00 build OrdinaryRayDescent
+'RiemannReduction.GaussianTower.host_rank_nine' depends on axioms: [propext, Classical.choice, Quot.sound]
+'RiemannReduction.GaussianTower.host_rank_three_of_eight_ray_characters' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+Passed build OrdinaryRayDescent in 12.7s
+2026-11-22T13:05:18.988326+00:00 build NineIntegralTower
+'RiemannReduction.GaussianTower.host_tower_nine' depends on axioms: [propext, Classical.choice, Quot.sound]
+'RiemannReduction.GaussianTower.ordinary_nine_input' depends on axioms: [propext, Classical.choice, Quot.sound]
+Passed build NineIntegralTower in 12.8s
+2026-11-22T13:05:31.796215+00:00 build MizusawaTower
+'RiemannReduction.Mizusawa.host_rank_three' depends on axioms: [propext, Classical.choice, Quot.sound]
+'RiemannReduction.Mizusawa.ordinary_three_input' depends on axioms: [propext, Classical.choice, Quot.sound]
+Passed build MizusawaTower in 14.4s
+2026-11-22T13:05:46.189970+00:00 build AuditSlopeGraph
+Passed build AuditSlopeGraph in 2.9s
+2026-11-22T13:05:49.055693+00:00 build MizusawaSelector
+Passed build MizusawaSelector in 12.0s
+2026-11-22T13:06:01.019272+00:00 kernel MizusawaCharacters, MizusawaHostField, MizusawaGenusField, MizusawaTower, MizusawaSelector
+replaying MizusawaSelector
+replaying MizusawaTower
+replaying MizusawaGenusField
+replaying MizusawaHostField
+replaying MizusawaCharacters
+Passed kernel MizusawaCharacters, MizusawaHostField, MizusawaGenusField, MizusawaTower, MizusawaSelector in 394.4s
+2026-11-22T13:12:35.461282+00:00 audit AuditMizusawaTower
+RiemannReduction.Mizusawa.host_tower_three: 44073 reachable declarations; axioms [propext,
+ Classical.choice,
+ Quot.sound]; no previously closed RH theorem.
+Reachability of Formalism.HN.thmF_share: false
+Reachability of Formalism.HN.frameB_integral: false
+Reachability of Formalism.CorankShareLayerCake.FR.layer_cake_formula: false
+Reachability of IntegratedSlopeShare.shortfall_integral: false
+Reachability of IntegratedSlopeShare.rank_share_transfer: false
+Passed audit AuditMizusawaTower in 9.3s
+AuditMizusawaTower: 44,073 names, sorted SHA-256 7c132d555b27d1663351ebe39e0a65d6e16dbfa32c4701674e2002c7146372e2
+2026-11-22T13:12:44.756568+00:00 audit AuditDescent
+RiemannReduction.GaussianTower.host_tower_nine: 77321 reachable declarations; axioms [propext,
+ Classical.choice,
+ Quot.sound]; no previously closed RH theorem.
+Reachability of Formalism.HN.thmF_share: false
+Reachability of Formalism.HN.frameB_integral: false
+Reachability of Formalism.CorankShareLayerCake.FR.layer_cake_formula: false
+Reachability of IntegratedSlopeShare.shortfall_integral: false
+Reachability of IntegratedSlopeShare.rank_share_transfer: false
+Passed audit AuditDescent in 11.4s
+2026-11-22T13:12:56.208166+00:00 compare rank-three dependencies
+{
+  "graphs": {
+    "arithmetic_three": {
+      "count": 44073,
+      "sorted_sha256": "7c132d555b27d1663351ebe39e0a65d6e16dbfa32c4701674e2002c7146372e2"
+    },
+    "arithmetic_nine": {
+      "count": 77321,
+      "sorted_sha256": "7ca75eb185bed517dd520ddb7fd1897906385c4ebb4773d7e0ba6477bce2a1ab"
+    }
+  },
+  "comparisons": {
+    "arithmetic_nine": {
+      "dropped": 33544,
+      "added": 296,
+      "net_fewer": 33248
+    }
+  }
+}
+Passed compare rank-three dependencies in 0.3s
