@@ -42,3 +42,8 @@ lake env python3 "$repo/verify.py" "$source_dir" "$scratch/build" "$@" | tee "$s
 grep -E '^(Checked [0-9]+ upstream|Compiler commit:|Kernel replay passed:|Axioms for )' \
   "$scratch/check.log" > "$scratch/check.txt"
 diff -u "$repo/evidence/check.txt" "$scratch/check.txt"
+
+if [[ ${CHECK_CYCLOTOMIC_RESIDUES:-0} == 1 ]]; then
+  python3 "$repo/results/geometric-window-descent/replay.py" mizusawa-residues \
+    --lean-bin "$scratch/lean-4.33.1-linux/bin" --mathlib "$scratch/mathlib4" --work "$scratch/residue-check"
+fi
