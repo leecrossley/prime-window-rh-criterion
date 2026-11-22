@@ -2,7 +2,7 @@
 
 For primes $q\equiv 3\pmod 8$ and $d\equiv 7\pmod {16}$, put $k=\mathbb Q(\sqrt{-qd})$, $K=k(\sqrt q,\sqrt d)$ and $K_\infty=K\mathbb Q_\infty$, where $\mathbb Q_\infty$ is the real cyclotomic $\mathbb Z_2$-extension. Mizusawa proved that the Galois group $X(K_\infty)$ of the maximal everywhere-unramified abelian pro-2 extension is free of rank three over $\mathbb Z_2$. His result supplies the dyadic generator bound in the principal-character specialization of Alpöge’s announced geometric proof. [Mizusawa, Lemma 4.2, p. 126](https://www.numdam.org/item/10.5802/jtnb.707.pdf#page=13) · [Geometric proof](../README.md)
 
-The new Lean endpoint has the following type.
+The Lean endpoint that takes the literature result as a premise has the following type.
 
 ```lean
 RiemannReduction.Mizusawa.RankThree → RiemannHypothesis
@@ -53,7 +53,7 @@ Fix $n\ge4$ and write $K_n=\mathbb Q(\zeta_{2^n})$. For primes $q\equiv3\pmod8$ 
 
 The Lean formalisation uses Mathlib. The two residue degrees are $2^{n-2}$ and $2^{n-3}$, respectively. In each residue field $k$, the exact power of two dividing $|k|-1$ is $2^n$. Reduction preserves the order of the root of unity. A square in the cyclic group $k^\times$ cannot have that order. [Six-prime calculation](../lean/MizusawaUnitResidue.lean) [Conrad, Theorem 5.4, on the residue degrees](https://kconrad.math.uconn.edu/blurbs/galoistheory/cyclotomic.pdf#page=11)
 
-For a finite abelian extension of a totally imaginary number field, suppose ramification is confined to a finite set of places $S$. Evaluate a quadratic character on the local Artin symbols of any global integral unit. The sum of its values over $S$ is zero in $\mathbb F_2$. Lean derives this from global reciprocity and triviality of unit symbols at unramified places. To close the eight-character upper bound by this route, the remaining formal work includes the two independent sign rows from $1+\zeta+\zeta^{-1}$ and a conjugate, the identification of the local symbols with the tame inertia values, and descent to the infinite tower. [Unit parity](../lean/MizusawaUnitParity.lean) · [Dependency audit](../lean/AuditMizusawaUnits.lean)
+For a finite abelian extension of a totally imaginary number field, suppose ramification is confined to a finite set of places $S$. Evaluate a quadratic character on the local Artin symbols of any global integral unit. The sum of its values over $S$ is zero in $\mathbb F_2$. Lean derives this from global reciprocity and triviality of unit symbols at unramified places. The extension computes the two real-unit sign rows, identifies the local symbols with absolute tame inertia and uses cofinal descent to prove the eight-character upper bound. [Unconditional sign-row proof](tame-signs/README.md) [Unit parity](../lean/MizusawaUnitParity.lean) · [Dependency audit](../lean/AuditMizusawaUnits.lean)
 
 ## Replay
 
@@ -66,4 +66,4 @@ python3 replay.py mizusawa-units --lean-bin "$lean_bin" --mathlib "$inputs/mathl
 python3 replay.py mizusawa --lean-bin "$lean_bin" --mathlib "$inputs/mathlib4" --archive "$archive" --work "$inputs/runs"
 ```
 
-Proving `RiemannReduction.Mizusawa.RankThree` in Lean would close this route and make its complete dependency cost measurable. A shorter arithmetic proof could instead target the weaker conclusion the window actually uses, at most eight everywhere-unramified quadratic characters on every auxiliary host. [Exact input to the integral bound](../lean/NineIntegralTower.lean)
+The freeness assertion `RiemannReduction.Mizusawa.RankThree` is the literature input in this comparison. The unit proof supplies the upper bound the window uses directly. [Arithmetic theorem and dependency measurements](tame-signs/VERIFICATION.md) [Exact input to the integral bound](../lean/NineIntegralTower.lean)

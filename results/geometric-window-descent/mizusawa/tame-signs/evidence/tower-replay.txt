@@ -1,0 +1,111 @@
+Lean (version 4.33.1, arm64-apple-darwin24.6.0, commit 819816b2e0a3bf405af45ae5c7af2491d8f5bee6, Release)
+Replay directory: <fresh replay directory>
+2026-11-22T15:51:54.585557+00:00 build MizusawaUnitResidue
+'RiemannReduction.UnitResidue.prime_counts' depends on axioms: [propext, Classical.choice, Quot.sound]
+'RiemannReduction.UnitResidue.root_of_unity_row' depends on axioms: [propext, Classical.choice, Quot.sound]
+Passed build MizusawaUnitResidue in 10.8s
+2026-11-22T15:52:05.391894+00:00 build RealUnitFrobenius
+Passed build RealUnitFrobenius in 9.7s
+2026-11-22T15:52:15.044551+00:00 build RealUnitResidueSigns
+Passed build RealUnitResidueSigns in 9.6s
+2026-11-22T15:52:24.676625+00:00 build RealCyclotomicUnit
+'RiemannReduction.CyclotomicUnits.primitive_real_orbit_product' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'RiemannReduction.CyclotomicUnits.real_cyclotomic_factor_isUnit' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+Passed build RealCyclotomicUnit in 6.3s
+2026-11-22T15:52:30.928133+00:00 build RealUnitPrimeSigns
+Passed build RealUnitPrimeSigns in 6.6s
+2026-11-22T15:52:37.574016+00:00 build RealUnitSignRows
+Passed build RealUnitSignRows in 8.0s
+2026-11-22T15:52:45.593912+00:00 build RaySignPlaces
+Passed build RaySignPlaces in 15.5s
+2026-11-22T15:53:01.101786+00:00 build MizusawaUnitParity
+'RiemannReduction.UnitParity.global_unit_parity' depends on axioms: [propext, Classical.choice, Quot.sound]
+Passed build MizusawaUnitParity in 15.2s
+2026-11-22T15:53:16.330295+00:00 build LocalTameUnitSigns
+Passed build LocalTameUnitSigns in 18.9s
+2026-11-22T15:53:35.255220+00:00 build FiniteTameParity
+Passed build FiniteTameParity in 17.2s
+2026-11-22T15:53:52.437357+00:00 build QuadraticSchreier
+'RiemannReduction.QuadraticDescent.rank_le_twice_sub_one' depends on axioms: [propext, Classical.choice, Quot.sound]
+Passed build QuadraticSchreier in 25.7s
+2026-11-22T15:54:18.133306+00:00 build QuadraticGenus
+'RiemannReduction.QuadraticDescent.quadratic_genus_bound' depends on axioms: [propext, Classical.choice, Quot.sound]
+Passed build QuadraticGenus in 17.1s
+2026-11-22T15:54:35.198346+00:00 build BiquadraticDescent
+'RiemannReduction.QuadraticDescent.biquadratic_rank' depends on axioms: [propext, Classical.choice, Quot.sound]
+Passed build BiquadraticDescent in 13.8s
+2026-11-22T15:54:49.007650+00:00 build OrdinaryDyadicBase
+Passed build OrdinaryDyadicBase in 12.1s
+2026-11-22T15:55:01.145849+00:00 build SingleInertia
+'RiemannReduction.GaussianTower.core_is_two_group' depends on axioms: [propext, Classical.choice, Quot.sound]
+'RiemannReduction.GaussianTower.inertia_surjects' depends on axioms: [propext, Classical.choice, Quot.sound]
+Passed build SingleInertia in 3.5s
+2026-11-22T15:55:04.641483+00:00 build RationalDyadicInertia
+'RiemannReduction.GaussianTower.pure_rank_zero' depends on axioms: [propext, Classical.choice, Quot.sound]
+Passed build RationalDyadicInertia in 13.8s
+2026-11-22T15:55:18.468605+00:00 build OrdinaryRayDescent
+'RiemannReduction.GaussianTower.host_rank_nine' depends on axioms: [propext, Classical.choice, Quot.sound]
+'RiemannReduction.GaussianTower.host_rank_three_of_eight_ray_characters' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+Passed build OrdinaryRayDescent in 14.2s
+2026-11-22T15:55:32.678514+00:00 build AtCharacter
+Passed build AtCharacter in 2.0s
+2026-11-22T15:55:34.705578+00:00 build CofinalRayLayers
+'RiemannReduction.GaussianTower.host_rank_of_cofinal_finite_ray' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+Passed build CofinalRayLayers in 18.3s
+2026-11-22T15:55:53.033753+00:00 build TameUnitRelations
+'RiemannReduction.GaussianTower.host_rank_three_of_cofinal_unit_relations' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+Passed build TameUnitRelations in 11.6s
+2026-11-22T15:56:04.591094+00:00 build FiniteRayCharacter
+Passed build FiniteRayCharacter in 8.2s
+2026-11-22T15:56:12.798030+00:00 build RayLayerSites
+Passed build RayLayerSites in 10.6s
+2026-11-22T15:56:23.430779+00:00 build TameRayBound
+Passed build TameRayBound in 33.6s
+2026-11-22T15:56:56.982551+00:00 build NineIntegralTower
+'RiemannReduction.GaussianTower.host_tower_nine' depends on axioms: [propext, Classical.choice, Quot.sound]
+'RiemannReduction.GaussianTower.ordinary_nine_input' depends on axioms: [propext, Classical.choice, Quot.sound]
+Passed build NineIntegralTower in 7.0s
+2026-11-22T15:57:03.959787+00:00 build CyclotomicEight
+'RiemannReduction.TameSigns.finite_ray_eight' depends on axioms: [propext, Classical.choice, Quot.sound]
+'RiemannReduction.TameSigns.host_eight' depends on axioms: [propext, Classical.choice, Quot.sound]
+'RiemannReduction.TameSigns.host_tower_three' depends on axioms: [propext, Classical.choice, Quot.sound]
+Passed build CyclotomicEight in 8.1s
+2026-11-22T15:57:12.086290+00:00 build AuditSlopeGraph
+Passed build AuditSlopeGraph in 1.2s
+2026-11-22T15:57:13.259771+00:00 kernel RealCyclotomicUnit, RealUnitFrobenius, RealUnitResidueSigns, RealUnitPrimeSigns, RealUnitSignRows, RaySignPlaces, LocalTameUnitSigns, FiniteRayCharacter, FiniteTameParity, CofinalRayLayers, TameUnitRelations, RayLayerSites, TameRayBound, CyclotomicEight
+replaying CyclotomicEight
+replaying TameRayBound
+replaying RayLayerSites
+replaying TameUnitRelations
+replaying CofinalRayLayers
+replaying FiniteTameParity
+replaying FiniteRayCharacter
+replaying LocalTameUnitSigns
+replaying RaySignPlaces
+replaying RealUnitSignRows
+replaying RealUnitPrimeSigns
+replaying RealUnitResidueSigns
+replaying RealUnitFrobenius
+replaying RealCyclotomicUnit
+Passed kernel RealCyclotomicUnit, RealUnitFrobenius, RealUnitResidueSigns, RealUnitPrimeSigns, RealUnitSignRows, RaySignPlaces, LocalTameUnitSigns, FiniteRayCharacter, FiniteTameParity, CofinalRayLayers, TameUnitRelations, RayLayerSites, TameRayBound, CyclotomicEight in 651.0s
+2026-11-22T16:08:04.269055+00:00 audit AuditTameEight
+RiemannReduction.TameSigns.host_tower_three: 100303 reachable declarations; axioms [propext,
+ Classical.choice,
+ Quot.sound]; no previously closed RH theorem.
+Reachability of Formalism.HN.thmF_share: false
+Reachability of Formalism.HN.frameB_integral: false
+Reachability of Formalism.CorankShareLayerCake.FR.layer_cake_formula: false
+Reachability of IntegratedSlopeShare.shortfall_integral: false
+Reachability of IntegratedSlopeShare.rank_share_transfer: false
+Passed audit AuditTameEight in 19.8s
+AuditTameEight: 100,303 names, sorted SHA-256 456a285842b6de828ecd2de88e8d35218ee1c75c367b682ef6abcad56fde8e4c

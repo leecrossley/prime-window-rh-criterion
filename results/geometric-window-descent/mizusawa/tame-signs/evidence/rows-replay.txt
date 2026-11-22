@@ -1,0 +1,42 @@
+Lean (version 4.33.1, arm64-apple-darwin24.6.0, commit 819816b2e0a3bf405af45ae5c7af2491d8f5bee6, Release)
+Replay directory: <fresh replay directory>
+2026-11-22T15:51:54.615028+00:00 build MizusawaUnitResidue
+'RiemannReduction.UnitResidue.prime_counts' depends on axioms: [propext, Classical.choice, Quot.sound]
+'RiemannReduction.UnitResidue.root_of_unity_row' depends on axioms: [propext, Classical.choice, Quot.sound]
+Passed build MizusawaUnitResidue in 11.3s
+2026-11-22T15:52:05.948229+00:00 build RealUnitFrobenius
+Passed build RealUnitFrobenius in 9.1s
+2026-11-22T15:52:15.060592+00:00 build RealUnitResidueSigns
+Passed build RealUnitResidueSigns in 9.9s
+2026-11-22T15:52:24.927120+00:00 build RealCyclotomicUnit
+'RiemannReduction.CyclotomicUnits.primitive_real_orbit_product' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'RiemannReduction.CyclotomicUnits.real_cyclotomic_factor_isUnit' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+Passed build RealCyclotomicUnit in 6.0s
+2026-11-22T15:52:30.933295+00:00 build RealUnitPrimeSigns
+Passed build RealUnitPrimeSigns in 6.7s
+2026-11-22T15:52:37.673778+00:00 build RealUnitSignRows
+Passed build RealUnitSignRows in 7.8s
+2026-11-22T15:52:45.495018+00:00 build AuditSlopeGraph
+Passed build AuditSlopeGraph in 2.9s
+2026-11-22T15:52:48.380320+00:00 kernel RealCyclotomicUnit, RealUnitFrobenius, RealUnitResidueSigns, RealUnitPrimeSigns, RealUnitSignRows
+replaying RealUnitSignRows
+replaying RealUnitPrimeSigns
+replaying RealUnitResidueSigns
+replaying RealUnitFrobenius
+replaying RealCyclotomicUnit
+Passed kernel RealCyclotomicUnit, RealUnitFrobenius, RealUnitResidueSigns, RealUnitPrimeSigns, RealUnitSignRows in 160.1s
+2026-11-22T15:55:28.530040+00:00 audit AuditRealUnitRows
+RiemannReduction.UnitSigns.row_counts: 72843 reachable declarations; axioms [propext,
+ Classical.choice,
+ Quot.sound]; no previously closed RH theorem.
+Reachability of Formalism.HN.thmF_share: false
+Reachability of Formalism.HN.frameB_integral: false
+Reachability of Formalism.CorankShareLayerCake.FR.layer_cake_formula: false
+Reachability of IntegratedSlopeShare.shortfall_integral: false
+Reachability of IntegratedSlopeShare.rank_share_transfer: false
+Passed audit AuditRealUnitRows in 9.1s
+AuditRealUnitRows: 72,843 names, sorted SHA-256 3e2f5249c3902a0811595036e2a5a5ea5691528c2e5f4b24a67494c8910e4ebd
