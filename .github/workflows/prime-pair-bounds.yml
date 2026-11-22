@@ -38,6 +38,19 @@ jobs:
           "$python" -B check_odd_mean_square.py --bits 256 --mesh 8000
           "$python" -B check_odd_density_integrals.py
 
+      - name: Check square-block certificates and their interpreter settings
+        working-directory: results/prime-window-power-samples/square-blocks
+        env:
+          PYTHON: ${{ runner.temp }}/prime-pair-env/bin/python
+        run: |
+          for mode in 1 2; do
+            if output=$(PYTHONOPTIMIZE="$mode" sh replay.sh 2>&1); then
+              exit 1
+            fi
+            test "$output" = "Square-block certificates require Python assertions. Disable optimisation."
+          done
+          sh replay.sh
+
   lean:
     name: Replay the power-sampling Lean proofs
     runs-on: ubuntu-24.04

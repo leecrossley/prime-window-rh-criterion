@@ -23,7 +23,7 @@ The tent and an earlier square-sampling principle are due to bramble_trace. Stec
 
 ## Verification
 
-From this directory run the following with Python 3.12 and python-flint 0.9.0.
+Run the replay from this directory with Python 3.12, python-flint 0.9.0 and assertions enabled. The wrapper and each certificate program stop before checking any data if Python optimisation is on.
 
 ~~~sh
 sh replay.sh
