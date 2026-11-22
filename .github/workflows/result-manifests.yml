@@ -8,7 +8,7 @@ on:
         description: Optional geometric proof replay
         type: choice
         default: none
-        options: [none, rank, window, proof, compare]
+        options: [none, rank, window, proof, compare, mizusawa-units, mizusawa-rank, mizusawa]
 permissions:
   contents: read
 jobs:

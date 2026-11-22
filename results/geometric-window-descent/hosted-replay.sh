@@ -2,7 +2,7 @@
 set -euo pipefail
 
 case ${1:-} in
-  rank|window|proof|compare) target=$1 ;;
+  rank|window|proof|compare|mizusawa-units|mizusawa-rank|mizusawa) target=$1 ;;
   *) exit 2 ;;
 esac
 note=$(cd "$(dirname "$0")" && pwd)
@@ -41,7 +41,7 @@ git init -q mathlib4
 git -C mathlib4 fetch --quiet --depth 1 https://github.com/leanprover-community/mathlib4.git 0df444a360eaa60ab8c11dca51a86af692955474
 git -C mathlib4 checkout --quiet --detach FETCH_HEAD
 (cd mathlib4 && lake exe cache get)
-if [[ "$target" != rank ]]; then
+if [[ "$target" != rank && "$target" != mizusawa-rank && "$target" != mizusawa-units ]]; then
   sudo fallocate -l 40G extra.swap
   sudo chmod 600 extra.swap
   sudo mkswap extra.swap
