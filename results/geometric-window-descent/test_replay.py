@@ -2,7 +2,11 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from replay import check_archive_imports, digest
+from replay import (
+    AUDITS, CHECK, ENDPOINTS, RANK_ENDPOINTS, TARGETS, check_archive_imports,
+    comparison_checkpoints, comparison_stage, digest, direct_imports, ordered_sources,
+    rank_plan, rank_stage, unit_checkpoints, unit_stage,
+)
 
 
 class ArchiveImports(unittest.TestCase):
@@ -74,6 +78,166 @@ class ArchiveImports(unittest.TestCase):
         self.manifest.write_text(self.rows[0] + "\n")
         with self.assertRaisesRegex(ValueError, "Missing imported object: Other"):
             self.check()
+
+
+class ComparisonStages(unittest.TestCase):
+    def setUp(self):
+        temp = tempfile.TemporaryDirectory()
+        self.addCleanup(temp.cleanup)
+        self.objects = Path(temp.name)
+        self.sources = ordered_sources(TARGETS["compare"])
+
+    def phase(self, stage):
+        return comparison_stage(stage, self.sources, self.objects)
+
+    def object(self, name):
+        path = self.objects.joinpath(*name.split(".")).with_suffix(".olean")
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.touch()
+        return path
+
+    def test_all_builds_kernels_and_audits(self):
+        common, kernels, audits = self.phase("common")
+        self.assertEqual((len(common), kernels, audits), (74, (), set()))
+        for name in common:
+            self.object(name)
+        compiled, checked, audited = set(common), [], []
+        for endpoint, (terminal, _) in ENDPOINTS.items():
+            if terminal:
+                names, groups, reports = self.phase("build-" + endpoint)
+                self.assertEqual((names, groups, reports), ({terminal}, (), set()))
+                self.assertNotIn(terminal, compiled)
+                compiled.update(names)
+                obj = self.object(terminal)
+                names, groups, reports = self.phase("kernel-" + endpoint)
+                self.assertFalse(names or reports)
+                checked.extend(groups)
+            names, groups, reports = self.phase("audit-" + endpoint)
+            self.assertFalse(names or groups)
+            audited.extend(reports)
+            if terminal:
+                obj.unlink()
+        self.assertEqual(compiled, self.sources.keys() - AUDITS.keys())
+        self.assertCountEqual(checked, [CHECK["proof"], ("SingleInertiaRH",), ("CheckAlpogePrincipalArchivedGeometryRH",)])
+        self.assertCountEqual(audited, self.sources.keys() & AUDITS.keys())
+
+    def test_missing_or_wrong_checkpoint(self):
+        with self.assertRaisesRegex(ValueError, "different modules"):
+            self.phase("kernel-published")
+        common, _, _ = self.phase("common")
+        for name in common | {"SecondSeedRH"}:
+            self.object(name)
+        with self.assertRaisesRegex(ValueError, "different modules"):
+            self.phase("audit-previous")
+        with self.assertRaisesRegex(ValueError, "empty object directory"):
+            self.phase("common")
+
+    def test_comparison_checkpoints_cover_the_common_objects_once(self):
+        plan = comparison_checkpoints(self.sources)
+        original, _, _ = self.phase("common")
+        compiled = []
+        for stage, (required, builds) in plan.items():
+            with self.subTest(stage=stage):
+                for name in required:
+                    self.object(name)
+                self.assertEqual(self.phase(stage), (builds, (), set()))
+                self.assertTrue(required.isdisjoint(builds))
+                for name in builds:
+                    imports = set(direct_imports(self.sources[name][1])) & self.sources.keys()
+                    self.assertTrue(imports <= (required | builds), name)
+                for path in self.objects.rglob("*.olean"):
+                    path.unlink()
+                compiled.extend(builds)
+        self.assertCountEqual(compiled, original)
+        window = set.union(*plan["build-single-window"])
+        frame = set.union(*plan["build-frame"])
+        self.assertEqual(window & frame, plan["build-basis"][1])
+        self.assertEqual(window | frame, original)
+
+    def test_comparison_checkpoints_reject_missing_and_extra_modules(self):
+        with self.assertRaisesRegex(ValueError, "different modules"):
+            self.phase("build-counts")
+        self.object("Unrelated")
+        with self.assertRaisesRegex(ValueError, "different modules"):
+            self.phase("build-basis")
+
+    def test_rank_stages_cover_the_full_replay(self):
+        sources = ordered_sources(TARGETS["mizusawa"])
+        plan = rank_plan(sources)
+        objects = sources.keys() - AUDITS.keys()
+        compiled, checked, audited = [], [], []
+        for required, builds, kernels, audits in plan.values():
+            for name in builds:
+                imports = set(direct_imports(sources[name][1])) & objects
+                self.assertTrue(imports <= (required | builds), name)
+            self.assertTrue(required.isdisjoint(builds))
+            compiled.extend(builds)
+            checked.extend(name for group in kernels for name in group)
+            audited.extend(audits)
+        self.assertCountEqual(compiled, objects)
+        self.assertCountEqual(checked, CHECK["mizusawa"])
+        self.assertCountEqual(audited, sources.keys() & AUDITS.keys())
+        window_inputs, window_builds, _, _ = plan["build-window"]
+        frame_inputs, frame_builds, _, _ = plan["build-frame"]
+        window, frame = window_inputs | window_builds, frame_inputs | frame_builds
+        self.assertEqual(window & frame, plan["build-basis"][1])
+        for endpoint in RANK_ENDPOINTS:
+            self.assertEqual(plan["build-" + endpoint][0], window | frame)
+
+    def test_rank_rejects_incomplete_and_foreign_objects(self):
+        sources = ordered_sources(TARGETS["mizusawa"])
+        with self.assertRaisesRegex(ValueError, "different modules"):
+            rank_stage("audit-three", sources, self.objects)
+        self.object("OtherModule")
+        with self.assertRaisesRegex(ValueError, "different modules"):
+            rank_stage("build-basis", sources, self.objects)
+
+    def test_unit_checkpoints_cover_the_endpoint_imports(self):
+        sources = ordered_sources(TARGETS["tame-eight-rh"])
+        plan = unit_checkpoints(sources)
+        compiled = []
+        for stage, (required, builds) in plan.items():
+            with self.subTest(stage=stage):
+                for name in required:
+                    self.object(name)
+                self.assertEqual(unit_stage(stage, sources, self.objects), (builds, (), set()))
+                self.assertTrue(required.isdisjoint(builds))
+                for name in builds:
+                    imports = set(direct_imports(sources[name][1])) & sources.keys()
+                    self.assertTrue(imports <= (required | builds), name)
+                for path in self.objects.rglob("*.olean"):
+                    path.unlink()
+                compiled.extend(builds)
+        self.assertCountEqual(compiled, sources.keys() - AUDITS.keys())
+        window = set.union(*plan["build-window"])
+        frame = set.union(*plan["build-frame"])
+        self.assertEqual(window & frame, plan["build-basis"][1])
+        self.assertEqual(plan["build-unit-proof"], (window | frame, {"TameEightWindowRH"}))
+        with self.assertRaisesRegex(ValueError, "different modules"):
+            unit_stage("build-unit-proof", sources, self.objects)
+        self.object("Unrelated")
+        with self.assertRaisesRegex(ValueError, "different modules"):
+            unit_stage("build-basis", sources, self.objects)
+
+    def test_unit_proof_stages(self):
+        sources = ordered_sources(TARGETS["tame-eight-rh"])
+        inputs, kernels, audits = unit_stage("build-inputs", sources, self.objects)
+        self.assertTrue({"SecondSeedWindow", "CyclotomicEight"} <= inputs)
+        self.assertFalse(kernels or audits)
+        with self.assertRaisesRegex(ValueError, "different modules"):
+            unit_stage("build-endpoint", sources, self.objects)
+        for name in inputs:
+            self.object(name)
+        remaining, kernels, audits = unit_stage("build-endpoint", sources, self.objects)
+        self.assertFalse(kernels or audits or inputs & remaining)
+        self.assertEqual(inputs | remaining, sources.keys() - AUDITS.keys())
+        for name in remaining:
+            self.object(name)
+        self.assertEqual(unit_stage("kernel-endpoint", sources, self.objects), (set(), (CHECK["tame-eight-rh"],), set()))
+        self.assertEqual(unit_stage("audit-endpoint", sources, self.objects), (set(), (), {"AuditTameEightRH"}))
+        self.object("SecondSeedRH")
+        with self.assertRaisesRegex(ValueError, "different modules"):
+            unit_stage("audit-endpoint", sources, self.objects)
 
 
 if __name__ == "__main__":

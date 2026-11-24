@@ -64,3 +64,7 @@ This checks the [SHA-256 manifest](SHA256SUMS), downloads the pinned dependencie
 ## Related result
 
 [The forward direction under RH, at this and every wider width](https://github.com/leecrossley/prime-window-all-widths#which-primes-count) · [v1.0.0 source](https://github.com/leecrossley/prime-window-all-widths/tree/v1.0.0)
+
+## Licences
+
+The original paper and accompanying material use CC BY 4.0. The 31 Lean files copied from D. B. Sanftenberg and the file that adapts his principal-character argument use Apache 2.0. [CC BY 4.0](LICENSE) [Copied sources](results/geometric-window-descent/upstream/) [Adapted source](results/geometric-window-descent/lean/PrincipalArchivedInputs.lean) [Apache licence and copyright](results/geometric-window-descent/upstream/LICENSE)

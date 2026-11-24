@@ -1,5 +1,5 @@
 cff-version: 1.2.0
-message: If you use this work, please cite it as below.
+message: "Cite the original window criteria as below. The files in results/geometric-window-descent/upstream/ and the adaptation in results/geometric-window-descent/lean/PrincipalArchivedInputs.lean use Apache-2.0. See the reference to RiemannGaussian for their source."
 title: "Window criteria for the Riemann hypothesis"
 abstract: "Riemann hypothesis criteria from weighted prime windows, dyadic filters, Dirichlet-family transfer and sampling at perfect powers."
 authors:
@@ -27,3 +27,11 @@ references:
     version: "fourth-power-mobius-v1.0.0"
     doi: 10.5281/zenodo.24426583
     url: https://github.com/leecrossley/prime-window-rh-criterion/releases/tag/fourth-power-mobius-v1.0.0
+  - type: software
+    title: RiemannGaussian
+    authors:
+      - family-names: Sanftenberg
+        given-names: David
+    repository-code: https://github.com/dbsanfte/RiemannGaussian
+    commit: 0755e6518416ac74bbb0e7f986f8610c7b7ed347
+    license: Apache-2.0
